@@ -1,6 +1,5 @@
-package com.bocweb.home.ui.fmt;
+package com.bocweb.home.ui.fmt.main.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -8,14 +7,12 @@ import com.bocweb.home.R;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 
-import me.jessyan.autosize.utils.LogUtils;
-
 /**
  * @author libingjun
  * @date 2019/4/8
  */
-@Route(path = RouterHub.HOME_INFO)
-public class MainInfoFragment  extends BaseFluxFragment {
+@Route(path = RouterHub.HOME_ACTIVITY)
+public class MainActivityFragment extends BaseFluxFragment {
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -23,6 +20,6 @@ public class MainInfoFragment  extends BaseFluxFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.home_fragment_info;
+        return R.layout.home_fragment_activity;
     }
 }

@@ -1,4 +1,4 @@
-package com.bocweb.home.ui.adapter;
+package com.bocweb.home.ui.fmt.main.selected;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bocweb.home.R;
+import com.bocweb.home.ui.adapter.ChildPagerAdapter;
+import com.bocweb.home.ui.adapter.IDelegateAdapter;
 import com.bocweb.home.ui.bean.MainSelectedItem;
 
 import androidx.annotation.NonNull;
@@ -16,12 +18,12 @@ import androidx.viewpager.widget.ViewPager;
  * @author libingjun
  * @date 2019/4/10
  */
-public class MainSelectedActivityRecyclerAdapter implements IDelegateAdapter<MainSelectedItem> {
+public class JustNowActivityAdapter implements IDelegateAdapter<MainSelectedItem> {
 
     private Context mContext;
     private LayoutInflater mInflater;
 
-    public MainSelectedActivityRecyclerAdapter(Context context) {
+    public JustNowActivityAdapter(Context context) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
     }

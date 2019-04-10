@@ -1,4 +1,4 @@
-package com.bocweb.home.ui.adapter;
+package com.bocweb.home.ui.fmt.main.selected;
 
 import android.content.Context;
 import android.util.Log;
@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bocweb.home.R;
+import com.bocweb.home.ui.adapter.IDelegateAdapter;
 import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.njh.common.utils.LogUtil;
@@ -23,12 +24,12 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author libingjun
  * @date 2019/4/9
  */
-public class MainSelectedInfoRecyclerAdapter implements IDelegateAdapter<MainSelectedItem> {
+public class JustNowInfoAdapter implements IDelegateAdapter<MainSelectedItem> {
 
     private Context mContext;
     private LayoutInflater mInflate;
 
-    public MainSelectedInfoRecyclerAdapter(Context context) {
+    public JustNowInfoAdapter(Context context) {
         mContext = context;
         mInflate = LayoutInflater.from(mContext);
     }

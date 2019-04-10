@@ -3,9 +3,6 @@ package com.bocweb.home.ui.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
-import com.bocweb.home.ui.bean.MainSelectedItem;
-import com.njh.common.utils.LogUtil;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,16 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author libingjun
  * @date 2019/4/10
  */
-public class SuperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public  class SuperAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<IDelegateAdapter> mAdapterList = new ArrayList<>();
 
     private Context mContext;
-    private List<MainSelectedItem> mSelectedItemList;
+    private List<T> mList;
 
-    public SuperAdapter(Context context, List<MainSelectedItem> selectedItemList) {
+    public SuperAdapter(Context context, List<T> list) {
         mContext = context;
-        mSelectedItemList = selectedItemList;
+        mList = list;
     }
 
     public void addDelegate(IDelegateAdapter delegateAdapter) {
@@ -43,14 +40,14 @@ public class SuperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         int viewType = holder.getItemViewType();
         IDelegateAdapter delegateAdapter = mAdapterList.get(viewType);
-        delegateAdapter.onBindViewHolder(holder, position, mSelectedItemList.get(position));
+        delegateAdapter.onBindViewHolder(holder, position, mList.get(position));
     }
 
     @Override
     public int getItemViewType(int position) {
-        MainSelectedItem mainSelectedItem = mSelectedItemList.get(position);
+        T item = mList.get(position);
         for (IDelegateAdapter adapter : mAdapterList) {
-            if (adapter.isForViewType(mainSelectedItem)) {
+            if (adapter.isForViewType(item)) {
                 return mAdapterList.indexOf(adapter);
             }
         }
@@ -59,6 +56,6 @@ public class SuperAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return mSelectedItemList == null ? 0 : mSelectedItemList.size();
+        return mList == null ? 0 : mList.size();
     }
 }

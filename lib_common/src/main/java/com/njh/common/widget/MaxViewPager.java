@@ -1,4 +1,4 @@
-package com.bocweb.home.ui.adapter;
+package com.njh.common.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -10,13 +10,13 @@ import androidx.viewpager.widget.ViewPager;
  * @author libingjun
  * @date 2019/4/10
  */
-public class MyViewPager extends ViewPager {
+public class MaxViewPager extends ViewPager {
 
-    public MyViewPager(Context context) {
+    public MaxViewPager(Context context) {
         super(context);
     }
 
-    public MyViewPager(Context context, AttributeSet attrs) {
+    public MaxViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

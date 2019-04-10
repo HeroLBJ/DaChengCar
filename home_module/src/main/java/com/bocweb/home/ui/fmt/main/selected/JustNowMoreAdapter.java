@@ -1,16 +1,18 @@
-package com.bocweb.home.ui.adapter;
+package com.bocweb.home.ui.fmt.main.selected;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.allen.library.CircleImageView;
 import com.bocweb.home.R;
+import com.bocweb.home.ui.adapter.IDelegateAdapter;
+import com.bocweb.home.ui.adapter.OneImageAdapter;
+import com.bocweb.home.ui.adapter.SpacesItemDecoration;
 import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
@@ -20,18 +22,19 @@ import com.njh.common.utils.time.TimeUtil;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @author libingjun
  * @date 2019/4/9
  */
-public class OneJustNowAdapter implements IDelegateAdapter<MainSelectedItem> {
+public class JustNowMoreAdapter implements IDelegateAdapter<MainSelectedItem> {
 
     private Context mContext;
     private LayoutInflater mInflate;
 
-    public OneJustNowAdapter(Context context) {
+    public JustNowMoreAdapter(Context context) {
         mContext = context;
         mInflate = LayoutInflater.from(mContext);
     }
@@ -47,20 +50,20 @@ public class OneJustNowAdapter implements IDelegateAdapter<MainSelectedItem> {
             if (photoArr == null) {
                 return false;
             }
-            return photoArr.size() == 1;
+            return photoArr.size() >= 3;
         }
         return false;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layout = mInflate.inflate(R.layout.home_adapter_just_now_one, parent, false);
-        return new OneJustNowAdapter.ViewHolder(layout);
+        View layout = mInflate.inflate(R.layout.home_adapter_just_now_more, null,false);
+        return new JustNowMoreAdapter.ViewHolder(layout);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, MainSelectedItem mainSelectedItem) {
-        OneJustNowAdapter.ViewHolder viewHolder = (OneJustNowAdapter.ViewHolder) holder;
+        JustNowMoreAdapter.ViewHolder viewHolder = (JustNowMoreAdapter.ViewHolder) holder;
         TargetInfo targetInfo = mainSelectedItem.getTargetInfo();
         if (targetInfo == null) {
             return;
@@ -71,10 +74,10 @@ public class OneJustNowAdapter implements IDelegateAdapter<MainSelectedItem> {
         viewHolder.tvZan.setText(targetInfo.getLikes());
         viewHolder.tvTime.setText(TimeUtil.stampToDate(targetInfo.getTimeline()));
 
-        List<String> photoArr = targetInfo.getPhotoArr();
-        if (photoArr != null && photoArr.size() > 0) {
-            GlideUtils.getInstance().loadImg(mContext, targetInfo.getPhotoArr().get(0), viewHolder.ivPhoto);
-        }
+        GridLayoutManager glm = new GridLayoutManager(mContext, 3);
+        viewHolder.nineView.addItemDecoration(new SpacesItemDecoration(10));
+        viewHolder.nineView.setLayoutManager(glm);
+        viewHolder.nineView.setAdapter(new OneImageAdapter(mContext,targetInfo.getPhotoArr()));
 
         UserInfo userInfo = targetInfo.getUserInfo();
         if (userInfo != null) {
@@ -106,7 +109,7 @@ public class OneJustNowAdapter implements IDelegateAdapter<MainSelectedItem> {
         TextView tvSee;
         TextView tvSay;
         TextView tvZan;
-        ImageView ivPhoto;
+        RecyclerView nineView;
         CircleImageView civPhoto;
         TextView tvName;
         TextView tvAdd;
@@ -118,7 +121,7 @@ public class OneJustNowAdapter implements IDelegateAdapter<MainSelectedItem> {
             tvSee = itemView.findViewById(R.id.tv_see);
             tvSay = itemView.findViewById(R.id.tv_say);
             tvZan = itemView.findViewById(R.id.tv_zan);
-            ivPhoto = itemView.findViewById(R.id.iv_photo);
+            nineView = itemView.findViewById(R.id.nine_recycler_view);
             tvTime = itemView.findViewById(R.id.tv_time);
             civPhoto = itemView.findViewById(R.id.civ_photo);
             tvName = itemView.findViewById(R.id.tv_nickname);

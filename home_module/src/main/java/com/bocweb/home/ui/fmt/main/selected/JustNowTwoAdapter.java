@@ -1,4 +1,4 @@
-package com.bocweb.home.ui.adapter;
+package com.bocweb.home.ui.fmt.main.selected;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.allen.library.CircleImageView;
 import com.bocweb.home.R;
+import com.bocweb.home.ui.adapter.IDelegateAdapter;
 import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
@@ -26,12 +27,12 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author libingjun
  * @date 2019/4/9
  */
-public class TwoJustNowAdapter implements IDelegateAdapter<MainSelectedItem> {
+public class JustNowTwoAdapter implements IDelegateAdapter<MainSelectedItem> {
 
     private Context mContext;
     private LayoutInflater mInflate;
 
-    public TwoJustNowAdapter(Context context) {
+    public JustNowTwoAdapter(Context context) {
         mContext = context;
         mInflate = LayoutInflater.from(mContext);
     }
@@ -55,12 +56,12 @@ public class TwoJustNowAdapter implements IDelegateAdapter<MainSelectedItem> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View layout = mInflate.inflate(R.layout.home_adapter_just_now_two, parent, false);
-        return new TwoJustNowAdapter.ViewHolder(layout);
+        return new JustNowTwoAdapter.ViewHolder(layout);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, MainSelectedItem mainSelectedItem) {
-        TwoJustNowAdapter.ViewHolder viewHolder = (TwoJustNowAdapter.ViewHolder) holder;
+        JustNowTwoAdapter.ViewHolder viewHolder = (JustNowTwoAdapter.ViewHolder) holder;
         TargetInfo targetInfo = mainSelectedItem.getTargetInfo();
         if (targetInfo == null) {
             return;

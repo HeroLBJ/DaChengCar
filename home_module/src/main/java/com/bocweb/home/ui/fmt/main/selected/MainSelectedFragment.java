@@ -1,20 +1,15 @@
-package com.bocweb.home.ui.fmt;
+package com.bocweb.home.ui.fmt.main.selected;
 
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bocweb.home.R;
 import com.bocweb.home.R2;
-import com.bocweb.home.ui.adapter.MainSelectedActivityRecyclerAdapter;
-import com.bocweb.home.ui.adapter.MainSelectedInfoRecyclerAdapter;
-import com.bocweb.home.ui.adapter.MoreJustNowAdapter;
-import com.bocweb.home.ui.adapter.OneJustNowAdapter;
 import com.bocweb.home.ui.adapter.SuperAdapter;
-import com.bocweb.home.ui.adapter.TwoJustNowAdapter;
+import com.bocweb.home.ui.api.MainAction;
+import com.bocweb.home.ui.api.MainStore;
 import com.bocweb.home.ui.bean.MainSelectedFlag;
 import com.bocweb.home.ui.bean.MainSelectedItem;
-import com.bocweb.home.ui.fmt.actions.MainSelectedAction;
-import com.bocweb.home.ui.fmt.stores.MainSelectedStore;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
@@ -36,7 +31,7 @@ import butterknife.BindView;
  * @date 2019/4/8
  */
 @Route(path = RouterHub.HOME_SELECTED)
-public class MainSelectedFragment extends BaseFluxFragment<MainSelectedStore, MainSelectedAction>
+public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction>
         implements OnRefreshLoadMoreListener {
 
     @BindView(R2.id.recycler_view)
@@ -59,24 +54,23 @@ public class MainSelectedFragment extends BaseFluxFragment<MainSelectedStore, Ma
     }
 
     private void initRequest() {
-        showLoading();
         actionsCreator().getSelectedFlag(this, "10", "1", "");
     }
 
     @Override
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
-        hideLoading();
         if (event.url.equals(ReqTag.REQ_TAG_GET_HOME_MOMENT_SELECTED_FLAG)) {
             MainSelectedFlag flag = (MainSelectedFlag) event.data;
             mMainSelectedItemList.clear();
             mMainSelectedItemList.addAll(flag.getList());
             mSuperAdapter = new SuperAdapter(getContext(), mMainSelectedItemList);
-            mSuperAdapter.addDelegate(new MainSelectedInfoRecyclerAdapter(getContext()));
-            mSuperAdapter.addDelegate(new MainSelectedActivityRecyclerAdapter(getContext()));
-            mSuperAdapter.addDelegate(new OneJustNowAdapter(getContext()));
-            mSuperAdapter.addDelegate(new TwoJustNowAdapter(getContext()));
-            mSuperAdapter.addDelegate(new MoreJustNowAdapter(getContext()));
+            mSuperAdapter.addDelegate(new JustNowInfoAdapter(getContext()));
+            mSuperAdapter.addDelegate(new JustNowActivityAdapter(getContext()));
+            mSuperAdapter.addDelegate(new JustNowOneAdapter(getContext()));
+            mSuperAdapter.addDelegate(new JustNowTwoAdapter(getContext()));
+            mSuperAdapter.addDelegate(new JustNowMoreAdapter(getContext()));
+            mSuperAdapter.addDelegate(new JustNowZeroAdapter(getContext()));
             mRecyclerView.setAdapter(mSuperAdapter);
         }
     }

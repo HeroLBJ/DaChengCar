@@ -3,10 +3,10 @@ package com.bocweb.home.ui.adapter;
 import android.view.ViewGroup;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bocweb.home.ui.fmt.MainActivityFragment;
-import com.bocweb.home.ui.fmt.MainDynamicFragment;
-import com.bocweb.home.ui.fmt.MainInfoFragment;
-import com.bocweb.home.ui.fmt.MainSelectedFragment;
+import com.bocweb.home.ui.fmt.main.activity.MainActivityFragment;
+import com.bocweb.home.ui.fmt.main.dynamic.MainDynamicFragment;
+import com.bocweb.home.ui.fmt.main.info.MainInfoFragment;
+import com.bocweb.home.ui.fmt.main.selected.MainSelectedFragment;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 
@@ -17,13 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
 /**
  * @author libingjun
  * @date 2019/4/8
  */
-public class HomeViewPagerAdapter extends FragmentPagerAdapter {
+public class HomeViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private List<BaseFluxFragment> fmtList = new ArrayList<>();
     private final String[] mTitles = {"精选", "动态", "活动", "资讯"};

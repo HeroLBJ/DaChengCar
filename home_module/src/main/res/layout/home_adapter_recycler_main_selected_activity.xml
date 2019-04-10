@@ -2,16 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clipChildren="false"
     android:paddingTop="30dp">
 
     <RelativeLayout
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
-        android:layout_height="wrap_content">
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -31,22 +30,22 @@
             android:textSize="12sp" />
     </RelativeLayout>
 
-    <com.bocweb.home.ui.adapter.MyViewPager
+    <com.bocweb.home.ui.adapter.MaxViewPager
         android:id="@+id/child_view_pager"
-        android:layout_below="@id/relativeLayout"
-        android:clipChildren="false"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativeLayout"
+        android:clipToPadding="false"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
         android:layout_below="@id/child_view_pager"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="22dp"
+        android:layout_marginRight="20dp"
         android:background="@color/res_line_bg" />
 
 </RelativeLayout>

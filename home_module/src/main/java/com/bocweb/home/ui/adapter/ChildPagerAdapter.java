@@ -60,17 +60,7 @@ public class ChildPagerAdapter extends PagerAdapter {
 
         SelectedActivity item = list.get(position);
 
-//        int screenWidth = ScreenUtils.getScreenWidth(mContext);
-//        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) ivPhoto.getLayoutParams();
-//        params.width = screenWidth * 4 / 5;
-//        params.height = screenWidth * 12 / 25;
-//        ivPhoto.setLayoutParams(params);
-
         GlideUtils.getInstance().loadImg(mContext, item.getCoverVal(), ivPhoto);
-
-//        LinearLayout.LayoutParams params2 = (LinearLayout.LayoutParams) tvTitle.getLayoutParams();
-//        params2.width = screenWidth * 4 / 5;
-//        tvTitle.setLayoutParams(params2);
 
         tvTitle.setText(item.getTitle());
         tvTime.setText("报名时间：" + TimeUtil.stampToDate(item.getApplyStart(), TimeUtil.PATTERN_DATA)
