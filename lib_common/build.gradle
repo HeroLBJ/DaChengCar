@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+    }
+
+    //指定构建版本
+    buildTypes {
+        //正式版本
+        release {
+            minifyEnabled false//不启用混淆
+            buildConfigField "boolean", "IS_DEBUG", "false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        //测试版本
+        debug {
+            minifyEnabled false//不启用混淆
+            buildConfigField "boolean", "IS_DEBUG", "true"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        pre.initWith(release)//拷贝了 release 这一构建类型的所有变量
+        //预发版本
+        pre {
+//            buildConfigField "boolean", "IS_DEBUG", "true"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    greendao {
+        schemaVersion 1//对应当前数据库版本
+        daoPackage 'com.njh.common.db.dao'//由GreenDao自动生成代码所在的包名，默认的是在项目包下面新建一个gen。
+        targetGenDir 'src/main/java'// 设置自动生成代码的目录。
+    }
+    resourcePrefix "common_" //给 Module 内的资源名增加前缀, 避免资源名冲突
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':lib_base')
+    api rootProject.ext.dependencies["eventbus"]
+    api rootProject.ext.dependencies["greendao"]
+    api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
+    api rootProject.ext.dependencies["SuperTextView"]
+    api rootProject.ext.dependencies["glide"]
+    api rootProject.ext.dependencies["hawk"]
+    api project(':lib_network')
+    api project(':lib_res')
+    api project(':lib_title')
+}

@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_main_name">Blocks</string>
+    <string name="skip_adv">跳过广告</string>
+    <string name="press_again_txt">再按一次退出</string>
+    <string name="home_tab_txt">精彩</string>
+    <string name="service_tab_ext">服务</string>
+    <string name="mall_tab_txt">商城</string>
+    <string name="community_tab_txt">福利</string>
+    <string name="mine_tab_txt">我的</string>
+</resources>

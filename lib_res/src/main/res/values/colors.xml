@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="res_colorPrimary">#FE5E10</color>
+    <color name="res_colorPrimaryDark">#FE5E10</color>
+    <color name="res_colorAccent">#FE5E10</color>
+
+    <color name="res_black">#333333</color>
+    <color name="res_black_2B">#2B2B2B</color>
+    <color name="res_black_00">#000000</color>
+    <color name="res_white">#ffffff</color>
+    <color name="res_bg">#fff7f7f7</color>
+    <color name="res_gray_1E8E8E93">#1E8E8E93</color>
+    <color name="res_gray_888">#888888</color>
+    <color name="res_gray_999">#999999</color>
+    <color name="res_gray_666">#666666</color>
+    <color name="res_gray_333">#333333</color>
+    <color name="res_gray_1a">#7318171a</color>
+    <color name="res_gray_73">#ff737373</color>
+    <color name="res_gray_ca">#ffcacaca</color>
+    <color name="res_gray_D8">#d8d8d8</color>
+    <color name="res_gray_C8">#c8c8c8</color>
+    <color name="res_gray_DDD">#DDDDDD</color>
+    <color name="res_gray_F5">#f5f5f5</color>
+    <color name="res_gray_EF">#efefef</color>
+    <color name="res_gray_EEE">#eeeeee</color>
+    <color name="res_gray_main_text">#BCBFC3</color>
+    <color name="res_red">#F60D0D</color>
+    <color name="res_line_bg">#ffeaeaea</color>
+    <color name="res_gray_A98464">#A98464</color>
+    <color name="res_gray_ff8e8f91">#ff8e8f91</color>
+
+    <color name="res_home_icon_0">#FFB15B</color>
+    <color name="res_home_middle_93">#FFA6A0</color>
+    <color name="res_home_middle_0">#FCB17B</color>
+    <color name="res_org_fff3e6">#FFF3E6</color>
+    <color name="res_green">#3ECA3C</color>
+    <color name="res_green_63">#00B863</color>
+    <color name="res_gray_c2">#C2C2C2</color>
+    <color name="res_blue_97">#0097FF</color>
+    <color name="res_red_277">#ffff3227</color>
+    
+    <color name="res_red_selected">#FF5900</color>
+    <color name="res_follow_start">#FFFF8340</color>
+    <color name="res_follow_end">#FFFF5900</color>
+</resources>

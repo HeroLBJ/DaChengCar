@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:titlebar="http://schemas.android.com/apk/res-auto"
+    xmlns:stv="http://schemas.android.com/apk/res-auto"
+    android:background="#F5F5F5"
+    android:orientation="vertical"
+    tools:context=".ui.act.SettingAct">
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        titlebar:centerText="设置"
+        titlebar:centerType="textView"
+        titlebar:leftType="imageButton"
+        android:layout_marginBottom="@dimen/dp_10"/>
+
+    <com.allen.library.SuperTextView
+        android:id="@+id/supTv_developer_options"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        stv:sDividerLineType="bottom"
+        stv:sLeftTextString="开发者选项"
+        android:visibility="gone"
+        android:background="@color/white"
+        stv:sRightIconRes="@drawable/res_icn_right_arrow" />
+</LinearLayout>

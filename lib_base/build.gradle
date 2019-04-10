@@ -1,0 +1,73 @@
+apply plugin: 'com.android.library'
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+    }
+
+    //指定构建版本
+    buildTypes {
+        //正式版本
+        release {
+            minifyEnabled false//不启用混淆
+            buildConfigField "boolean", "IS_DEBUG", "false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        //测试版本
+        debug {
+            minifyEnabled false//不启用混淆
+            buildConfigField "boolean", "IS_DEBUG", "true"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        pre.initWith(release)//拷贝了 release 这一构建类型的所有变量
+        //预发版本
+        pre {
+//            buildConfigField "boolean", "IS_DEBUG", "true"
+        }
+    }
+    resourcePrefix "base_" //给 Module 内的资源名增加前缀, 避免资源名冲突
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    //support
+    api(rootProject.ext.dependencies["support-v4"])
+    api(rootProject.ext.dependencies["appcompat-v7"])
+    api rootProject.ext.dependencies["design"]
+    api(rootProject.ext.dependencies["constraint-layout"])
+    api(rootProject.ext.dependencies["recyclerview-v7"])
+    api rootProject.ext.dependencies["annotations"]
+    //tools
+    api(rootProject.ext.dependencies["arouter-api"])
+    //multidex
+    api rootProject.ext.dependencies["multidex"]
+    //沉浸式状态栏兼容
+    api rootProject.ext.dependencies["immersionbar"]
+    //界面适配
+    api rootProject.ext.dependencies["autosize"]
+    api rootProject.ext.dependencies["rxlifecycle"]
+    api rootProject.ext.dependencies["rxlifecycle-components"]
+    api rootProject.ext.dependencies["rxjava"]
+    api rootProject.ext.dependencies["rxandroid"]
+    api rootProject.ext.dependencies["rxbinding"]
+    //加载控件
+    api rootProject.ext.dependencies["materialish-progress"]
+    api rootProject.ext.dependencies["butterknife"]
+    api rootProject.ext.dependencies["androidlifecycle"]
+    //日志
+    api rootProject.ext.dependencies["klog"]
+    api project(':lib_state_manager')
+    //点击任意位置关闭软件盘
+    api rootProject.ext.dependencies["autohideime"]
+}

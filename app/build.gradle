@@ -1,0 +1,108 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.butterknife'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        applicationId rootProject.ext.android["applicationId"]
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner rootProject.ext.dependencies["androidJUnitRunner"]
+        //64k
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+            }
+        }
+    }
+    //签名配置
+    signingConfigs {
+        release {
+            storeFile file("../doc/blocks.jks")
+            storePassword "2019327"
+            keyAlias "blocks"
+            keyPassword "2019327"
+        }
+        debug {
+            storeFile file("../doc/blocks.jks")
+            storePassword "2019327"
+            keyAlias "blocks"
+            keyPassword "2019327"
+        }
+    }
+
+    buildTypes {
+        //正式版本
+        release {
+            //混淆开关
+            minifyEnabled true
+            //是否支持本地化整理
+            pseudoLocalesEnabled true
+            //是否zip对齐
+            zipAlignEnabled true
+            //是否打开debuggable开关
+            debuggable false
+            //是否打开jniDebuggable开关
+            jniDebuggable false
+            //混淆配置文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.release
+        }
+        //测试版本
+        debug {
+            minifyEnabled false//不启用混淆
+            versionNameSuffix "-debug"
+            //是否zip对齐
+            zipAlignEnabled false
+            shrinkResources false
+            //混淆配置文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名配置
+            signingConfig signingConfigs.debug
+
+        }
+        pre.initWith(release)//拷贝了 release 这一构建类型的所有变量
+        //预发版本
+        pre {
+//            buildConfigField "String", "BASE_URL", "\"https://pre.api/\""
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //tools
+    //arouter 路由
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+    if (rootProject.ext.isBuildModule) {
+        implementation project(':lib_common')
+    } else {
+        implementation project(':lib_common')
+        implementation project(':home_module')
+        implementation project(':mine_module')
+        implementation project(':community_module')
+        implementation project(':mall_module')
+        implementation project(':service_module')
+    }
+    implementation rootProject.ext.dependencies["pager-bottom-tab-strip"]
+
+}

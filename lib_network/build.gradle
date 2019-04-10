@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+
+    }
+
+    //指定构建版本
+    buildTypes {
+        //正式版本
+        release {
+            minifyEnabled false//不启用混淆
+            buildConfigField "String", "BASE_URL", "\"https://club.dorcen.com/\""
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        //测试版本
+        debug {
+            minifyEnabled false//不启用混淆
+            buildConfigField "String", "BASE_URL", "\"https://demo2.yunmofo.cn/dacheng-api/index.php/\""
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        pre.initWith(release)//拷贝了 release 这一构建类型的所有变量
+        //预发版本
+        pre {
+//            buildConfigField "boolean", "IS_DEBUG", "true"
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    resourcePrefix "network_" //给 Module 内的资源名增加前缀, 避免资源名冲突
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    api rootProject.ext.dependencies["retrofit"]
+    api rootProject.ext.dependencies["okhttp"]
+    api rootProject.ext.dependencies["adapter-rxjava2"]
+    api rootProject.ext.dependencies["converter-fastjson-android"]
+    //动态切换域名
+    api rootProject.ext.dependencies["retrofit-url-manager"]
+    //日志拦截器
+    implementation rootProject.ext.dependencies["logging-interceptor"]
+    api rootProject.ext.dependencies["fastjson"]
+    api rootProject.ext.dependencies["hawk"]
+    implementation project(':lib_base')
+}
