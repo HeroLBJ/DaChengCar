@@ -12,6 +12,7 @@ import com.bocweb.home.R;
 import com.bocweb.home.ui.bean.SelectedActivity;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
+import com.njh.common.widget.RoundAngleImageView;
 import com.wuhenzhizao.titlebar.utils.ScreenUtils;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class ChildPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         View layout = mInflater.inflate(R.layout.home_adapter_main_selected_activity_child, container,false);
-        ImageView ivPhoto = layout.findViewById(R.id.iv_photo);
+        RoundAngleImageView ivPhoto = layout.findViewById(R.id.iv_photo);
         TextView tvTime = layout.findViewById(R.id.tv_time);
         TextView tvTitle = layout.findViewById(R.id.tv_title);
 

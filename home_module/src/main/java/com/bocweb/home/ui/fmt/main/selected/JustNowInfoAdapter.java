@@ -15,6 +15,7 @@ import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.img.GlideUtils;
+import com.njh.common.widget.RoundAngleImageView;
 import com.wuhenzhizao.titlebar.utils.ScreenUtils;
 
 import androidx.annotation.NonNull;
@@ -72,7 +73,7 @@ public class JustNowInfoAdapter implements IDelegateAdapter<MainSelectedItem> {
         TextView tvSee;
         TextView tvSay;
         TextView tvZan;
-        ImageView ivPhoto;
+        RoundAngleImageView ivPhoto;
 
         public InfoViewHolder(@NonNull View itemView) {
             super(itemView);

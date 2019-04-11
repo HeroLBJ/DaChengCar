@@ -30,7 +30,7 @@
             android:textSize="12sp" />
     </RelativeLayout>
 
-    <com.bocweb.home.ui.adapter.MaxViewPager
+    <com.njh.common.widget.MaxViewPager
         android:id="@+id/child_view_pager"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

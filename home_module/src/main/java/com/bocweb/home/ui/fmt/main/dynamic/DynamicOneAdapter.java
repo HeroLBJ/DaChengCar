@@ -16,6 +16,7 @@ import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
+import com.njh.common.widget.RoundAngleImageView;
 
 import java.util.List;
 
@@ -96,7 +97,7 @@ public class DynamicOneAdapter implements IDelegateAdapter<TargetInfo> {
         TextView tvSee;
         TextView tvSay;
         TextView tvZan;
-        ImageView ivPhoto;
+        RoundAngleImageView ivPhoto;
         CircleImageView civPhoto;
         TextView tvName;
         TextView tvAdd;

@@ -17,6 +17,7 @@ import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
+import com.njh.common.widget.RoundAngleImageView;
 
 import java.util.List;
 
@@ -108,8 +109,8 @@ public class JustNowTwoAdapter implements IDelegateAdapter<MainSelectedItem> {
         TextView tvSee;
         TextView tvSay;
         TextView tvZan;
-        ImageView ivPhoto1;
-        ImageView ivPhoto2;
+        RoundAngleImageView ivPhoto1;
+        RoundAngleImageView ivPhoto2;
         CircleImageView civPhoto;
         TextView tvName;
         TextView tvAdd;

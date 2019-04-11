@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="common_round_angle_image_view">
+        <attr name="common_radius" format="dimension" />
+        <attr name="common_radius_left_top" format="dimension" />
+        <attr name="common_radius_right_top" format="dimension" />
+        <attr name="common_radius_right_bottom" format="dimension" />
+        <attr name="common_radius_left_bottom" format="dimension" />
+    </declare-styleable>
+</resources>

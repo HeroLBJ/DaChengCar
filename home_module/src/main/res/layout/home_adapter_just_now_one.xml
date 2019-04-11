@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rl_layout"
     android:layout_height="wrap_content"
     android:paddingLeft="20dp"
@@ -23,9 +24,10 @@
         android:textColor="@color/res_gray_333"
         android:textSize="15sp" />
 
-    <ImageView
+    <com.njh.common.widget.RoundAngleImageView
         android:id="@+id/iv_photo"
         android:layout_width="match_parent"
+        app:common_radius="5dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_content"
         android:layout_marginBottom="25dp" />
