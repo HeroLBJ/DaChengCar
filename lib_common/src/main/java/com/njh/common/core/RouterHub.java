@@ -120,6 +120,5 @@ public interface RouterHub {
          * 个人中心
          */
         String MINE_FMT = MINE + "/mineFmt";
-
     }
 }

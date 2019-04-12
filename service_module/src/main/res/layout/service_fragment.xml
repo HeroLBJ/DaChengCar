@@ -1,7 +1,240 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#af00"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
     android:layout_height="match_parent">
+
+
+    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
+        android:id="@+id/titleBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp"
+        app:centerText="大乘服务"
+        app:centerTextColor="@color/res_black"
+        app:centerTextSize="18sp"
+        app:centerType="textView"
+        app:showBottomLine="false" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <RelativeLayout
+                    android:id="@+id/rl_maintain"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="1"
+                    android:background="#FFF74043">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="17dp"
+                        android:layout_marginBottom="22dp"
+                        android:text="预约保养"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_repair"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_marginLeft="6dp"
+                    android:layout_weight="1"
+                    android:background="#FFFF5900">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="17dp"
+                        android:layout_marginBottom="22dp"
+                        android:text="预约维修"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_call_rescue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginRight="20dp"
+                app:cardCornerRadius="3dp">
+
+                <TextView
+                    android:id="@+id/tv1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="21dp"
+                    android:text="一键救援"
+                    android:textColor="@color/res_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="快速拨打就近服务站热线"
+                    android:textColor="#FFBEBEBE"
+                    android:textSize="13sp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_call1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="67dp"
+                    app:backgroundTint="#FF00E18F"
+                    app:elevation="5dp"
+                    app:pressedTranslationZ="10dp"
+                    app:rippleColor="#4D00D084" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab_call2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="13dp"
+                    android:backgroundTint="#FFFF5900"
+                    app:elevation="5dp"
+                    app:pressedTranslationZ="10dp"
+                    app:rippleColor="#4DFF5900" />
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_call_110"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                app:cardCornerRadius="3dp">
+
+                <TextView
+                    android:id="@+id/tv2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="21dp"
+                    android:text="一键报案"
+                    android:textColor="@color/res_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginTop="48dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="各大紧急报案联系电话"
+                    android:textColor="#FFBEBEBE"
+                    android:textSize="13sp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="67dp"
+                    app:backgroundTint="#FF00E18F"
+                    app:elevation="5dp"
+                    app:pressedTranslationZ="10dp"
+                    app:rippleColor="#4D00D084" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginRight="13dp"
+                    android:backgroundTint="#FFFF5900"
+                    app:elevation="5dp"
+                    app:pressedTranslationZ="10dp"
+                    app:rippleColor="#4DFF5900" />
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="39dp"
+                android:paddingTop="31dp"
+                android:paddingBottom="17dp"
+                android:text="一键导航"
+                android:textColor="@color/res_gray_333"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/res_gray_main_text" />
+
+            <TextView
+                android:id="@+id/tv_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="39dp"
+                android:paddingTop="26dp"
+                android:paddingBottom="22dp"
+                android:text="配件查询"
+                android:textColor="@color/res_gray_333"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/res_gray_main_text" />
+
+            <TextView
+                android:id="@+id/tv_feedback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="39dp"
+                android:paddingTop="26dp"
+                android:paddingBottom="22dp"
+                android:text="投诉建议"
+                android:textColor="@color/res_gray_333"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/res_gray_main_text" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
