@@ -46,14 +46,12 @@ public interface RouterHub {
     String APP = "/app";//宿主 App 组件
     String MALL = "/Mall";//Mall
     String Home = "/home";//Home
-    String MINE = "/mine";//MINE
-    String COMMUNITY="/Community";//Community
+    String COMMUNITY = "/Community";//Community
     String SER = "/service";
     /**
      * 服务组件, 用于给每个组件暴露特有的服务
      */
     String SERVICE = "/service";
-
 
     /**
      * 宿主 App 分组
@@ -74,35 +72,60 @@ public interface RouterHub {
     String SERVICE_FMT = SER + "/ServiceFmt";
 
     /**
-     * 设置中心
-     */
-    String SETTING_ACT = MINE + "/settingAct";
-    /**
-     * 个人中心
-     */
-    String MINE_FMT = MINE + "/mineFmt";
-    /**
-     * 用户登录
-     */
-    String LOGIN_ACT = MINE + "/LoginAct";
-    /**
-     * 用户注册
-     */
-    String REGISTER_ACT = MINE + "/RegisterAct";
-    /**
-     * 用户忘记密码--验证手机号
-     */
-    String FORGET_PWD_SMS_ACT = MINE + "/ForgetPwdSmsAct";
-    /**
-     * 用户忘记密码
-     */
-    String FORGET_PWD_ACT = MINE + "/ForgetPwdAct";
-    /**
      * 商城
      */
-    String MALL_fmt=MALL+"/MallFmt";
+    String MALL_fmt = MALL + "/MallFmt";
     /**
      * 社区
      */
-    String COMMUNITY_FMT=COMMUNITY+"/CommunityFmt";
+    String COMMUNITY_FMT = COMMUNITY + "/CommunityFmt";
+
+
+
+
+    interface Mine{
+        String MINE = "/mine/";//MINE
+        String FANS = MINE + "Fans";
+        String FOLLOW = MINE + "Follow";
+        String SCORE = MINE + "Score";
+        String GROW = MINE + "Grow";
+        String ACTIVITY = MINE + "Activity";
+        String RELEASE = MINE + "Release";
+        String INFO = MINE + "Info";
+        String COLLECT = MINE + "Collect";
+        String SCORE_BILL = MINE + "ScoreBill";
+        String CAR_BILL = MINE + "CarBill";
+        String SERVICE_BILL = MINE + "ServiceBill";
+        String COMMENT = MINE + "Comment";
+        String SUPPORT = MINE + "Support";
+        String COMPLAIN = MINE + "Complain";
+        String MY_CAR = MINE + "MyCar";
+        String USER_CENTER = MINE + "UserCenter";
+
+        /**
+         * 用户登录
+         */
+        String LOGIN_ACT = MINE + "LoginAct";
+        /**
+         * 用户注册
+         */
+        String REGISTER_ACT = MINE + "RegisterAct";
+        /**
+         * 用户忘记密码--验证手机号
+         */
+        String FORGET_PWD_SMS_ACT = MINE + "ForgetPwdSmsAct";
+        /**
+         * 用户忘记密码
+         */
+        String FORGET_PWD_ACT = MINE + "ForgetPwdAct";
+        /**
+         * 设置中心
+         */
+        String SETTING_ACT = MINE + "settingAct";
+        /**
+         * 个人中心
+         */
+        String MINE_FMT = MINE + "/mineFmt";
+
+    }
 }

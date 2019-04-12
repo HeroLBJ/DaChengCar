@@ -19,7 +19,7 @@ import butterknife.BindView;
  * @author niejiahuan
  * 忘记密码界面
  */
-@Route(path = RouterHub.FORGET_PWD_SMS_ACT)
+@Route(path = RouterHub.Mine.FORGET_PWD_SMS_ACT)
 public class ForgetPwdSMSAct extends BaseFluxActivity {
 
     @BindView(R2.id.img_clear)
@@ -49,7 +49,7 @@ public class ForgetPwdSMSAct extends BaseFluxActivity {
             @Override
             public void onClick(View v) {
                 ArouterUtils.getInstance().navigation(getContext()
-                        ,RouterHub.FORGET_PWD_ACT);
+                        ,RouterHub.Mine.FORGET_PWD_ACT);
             }
         });
     }

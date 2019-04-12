@@ -28,7 +28,8 @@
         android:id="@+id/iv_photo"
         android:layout_width="match_parent"
         app:common_radius="5dp"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
+        android:scaleType="centerCrop"
         android:layout_below="@id/tv_content"
         android:layout_marginBottom="25dp" />
 

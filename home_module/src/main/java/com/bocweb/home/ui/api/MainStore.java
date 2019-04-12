@@ -22,7 +22,17 @@ public class MainStore extends Store {
     }
 
     @BindAction(ReqTag.REQ_TAG_GET_HOME_MOMENT_LIST)
-    public void getMonentList(HashMap<String, Object> data) {
+    public void getMomentList(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.REQ_TAG_GET_HOME_MOMENT_LIST, data);
+    }
+
+    @BindAction(ReqTag.REQ_TAG_GET_HOME_ACTIVITY_ACTIVITY_LIST)
+    public void getActivityList(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.REQ_TAG_GET_HOME_ACTIVITY_ACTIVITY_LIST, data);
+    }
+
+    @BindAction(ReqTag.REQ_TAG_GET_HOME_ACTIVITY_PREVIEWS_LIST)
+    public void getPreviewsList(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.REQ_TAG_GET_HOME_ACTIVITY_PREVIEWS_LIST, data);
     }
 }

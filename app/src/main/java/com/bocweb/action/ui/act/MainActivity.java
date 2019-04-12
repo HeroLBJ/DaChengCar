@@ -17,6 +17,7 @@ import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.stores.Store;
+import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -72,7 +73,7 @@ public class MainActivity extends BaseFluxActivity{
         this.mTestFragments.put(3,mallFmt);
 
         MineFmt mineFmt=(MineFmt)ARouter.getInstance()
-                .build(RouterHub.MINE_FMT)
+                .build(RouterHub.Mine.MINE_FMT)
                 .navigation();
         this.mTestFragments.put(4,mineFmt);
         initFragment();

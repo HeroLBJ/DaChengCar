@@ -8,6 +8,7 @@ import com.njh.common.flux.actions.ActionsCreator;
 import com.njh.common.flux.annotation.BindEvent;
 import com.njh.common.flux.dispatcher.Dispatcher;
 import com.njh.common.flux.stores.Store;
+import com.njh.common.utils.LogUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -93,6 +94,7 @@ public abstract class BaseFluxFragment<STORE extends Store,CREATER extends Actio
      */
     protected Class<?> getType(String name) {
         Type superclass = getClass().getGenericSuperclass();
+
         while (superclass != null && !(superclass instanceof ParameterizedType)) {
             superclass = ((Class) superclass).getGenericSuperclass();
         }

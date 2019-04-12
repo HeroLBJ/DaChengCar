@@ -42,6 +42,10 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
     private SuperAdapter mSuperAdapter;
     private List<MainSelectedItem> mMainSelectedItemList = new ArrayList<>();
 
+    private int currentPage = 1;
+    private int pageNum = 10;
+    private int maxNum;
+
     @Override
     public void initData(Bundle savedInstanceState) {
         initData();
@@ -51,27 +55,32 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
     private void initData() {
         LinearLayoutManager llm = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(llm);
+
+        mSuperAdapter = new SuperAdapter(getContext(), mMainSelectedItemList);
+        mSuperAdapter.addDelegate(new JustNowInfoAdapter(getContext()));
+        mSuperAdapter.addDelegate(new JustNowActivityAdapter(getContext()));
+        mSuperAdapter.addDelegate(new JustNowOneAdapter(getContext()));
+        mSuperAdapter.addDelegate(new JustNowTwoAdapter(getContext()));
+        mSuperAdapter.addDelegate(new JustNowMoreAdapter(getContext()));
+        mSuperAdapter.addDelegate(new JustNowZeroAdapter(getContext()));
+        mRecyclerView.setAdapter(mSuperAdapter);
     }
 
     private void initRequest() {
-        actionsCreator().getSelectedFlag(this, "10", "1", "");
+        showLoading();
+        actionsCreator().getSelectedFlag(this, "10",currentPage+"", "");
     }
 
     @Override
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
+        hideLoading();
         if (event.url.equals(ReqTag.REQ_TAG_GET_HOME_MOMENT_SELECTED_FLAG)) {
             MainSelectedFlag flag = (MainSelectedFlag) event.data;
             mMainSelectedItemList.clear();
             mMainSelectedItemList.addAll(flag.getList());
-            mSuperAdapter = new SuperAdapter(getContext(), mMainSelectedItemList);
-            mSuperAdapter.addDelegate(new JustNowInfoAdapter(getContext()));
-            mSuperAdapter.addDelegate(new JustNowActivityAdapter(getContext()));
-            mSuperAdapter.addDelegate(new JustNowOneAdapter(getContext()));
-            mSuperAdapter.addDelegate(new JustNowTwoAdapter(getContext()));
-            mSuperAdapter.addDelegate(new JustNowMoreAdapter(getContext()));
-            mSuperAdapter.addDelegate(new JustNowZeroAdapter(getContext()));
-            mRecyclerView.setAdapter(mSuperAdapter);
+            mSuperAdapter.notifyDataSetChanged();
+            maxNum = flag.getCount();
         }
     }
 
@@ -92,11 +101,15 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
 
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+        if (maxNum > currentPage * pageNum) {
+            currentPage++;
+            initRequest();
+        }
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
+        currentPage = 0;
+        initRequest();
     }
 }

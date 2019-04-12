@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  * @author niejiahuan
  * 注册界面
  */
-@Route(path = RouterHub.REGISTER_ACT)
+@Route(path = RouterHub.Mine.REGISTER_ACT)
 public class RegisterAct extends BaseFluxActivity {
 
 

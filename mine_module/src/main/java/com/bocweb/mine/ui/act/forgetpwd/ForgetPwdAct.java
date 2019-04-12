@@ -18,7 +18,7 @@ import butterknife.BindView;
  * @author niejiahuan
  * 忘记密码界面
  */
-@Route(path = RouterHub.FORGET_PWD_ACT)
+@Route(path = RouterHub.Mine.FORGET_PWD_ACT)
 public class ForgetPwdAct extends BaseFluxActivity {
 
     @BindView(R2.id.img_clear)

@@ -43,7 +43,7 @@ public class DynamicZeroAdapter implements IDelegateAdapter<TargetInfo> {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layout = mInflate.inflate(R.layout.home_adapter_just_now_one, parent, false);
+        View layout = mInflate.inflate(R.layout.home_adapter_just_now_zero, parent, false);
         return new DynamicZeroAdapter.ViewHolder(layout);
     }
 

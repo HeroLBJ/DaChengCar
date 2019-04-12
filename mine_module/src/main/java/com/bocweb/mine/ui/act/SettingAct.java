@@ -17,7 +17,7 @@ import butterknife.BindView;
 /**
  * @author niejiahuan
  */
-@Route(path = RouterHub.SETTING_ACT)
+@Route(path = RouterHub.Mine.SETTING_ACT)
 public class SettingAct extends BaseFluxActivity {
 
 

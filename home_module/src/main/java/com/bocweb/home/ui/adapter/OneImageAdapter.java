@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bocweb.home.R;
+import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.widget.RoundAngleImageView;
 
@@ -34,7 +35,7 @@ public class OneImageAdapter extends RecyclerView.Adapter<OneImageAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View layout = mInflater.inflate(R.layout.home_adapter_one_image, null, false);
+        View layout = mInflater.inflate(R.layout.home_adapter_one_image, parent, false);
         return new ViewHolder(layout);
     }
 

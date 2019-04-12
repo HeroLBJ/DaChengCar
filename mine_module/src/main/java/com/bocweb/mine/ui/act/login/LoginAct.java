@@ -27,7 +27,7 @@ import butterknife.BindView;
  * @author niejiahuan
  * 登录界面
  */
-@Route(path = RouterHub.LOGIN_ACT)
+@Route(path = RouterHub.Mine.LOGIN_ACT)
 public class LoginAct extends BaseFluxActivity<MineStore,MineAction> {
 
     @BindView(R2.id.edt_phone)
@@ -59,10 +59,10 @@ public class LoginAct extends BaseFluxActivity<MineStore,MineAction> {
         imgClear.setOnClickListener(v -> finish());
         tvRegister.setOnClickListener(v ->
                 ArouterUtils.getInstance().navigation(getContext()
-                        ,RouterHub.REGISTER_ACT));
+                        ,RouterHub.Mine.REGISTER_ACT));
         tvForgetPwd.setOnClickListener(v ->
                 ArouterUtils.getInstance().navigation(getContext()
-                        ,RouterHub.FORGET_PWD_SMS_ACT));
+                        ,RouterHub.Mine.FORGET_PWD_SMS_ACT));
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override

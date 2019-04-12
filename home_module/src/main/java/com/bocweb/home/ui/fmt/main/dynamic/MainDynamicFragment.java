@@ -54,12 +54,14 @@ public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
     }
 
     private void initRequest() {
-        actionsCreator().getMomentList(this, "10", "1");
+        showLoading();
+        actionsCreator().getMomentList(this, "1");
     }
 
     @Override
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
+        hideLoading();
         if (event.url.equals(ReqTag.REQ_TAG_GET_HOME_MOMENT_LIST)) {
             MainComentList item = (MainComentList) event.data;
             mMainSelectedItemList.clear();

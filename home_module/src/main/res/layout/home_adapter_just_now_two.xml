@@ -36,14 +36,16 @@
             app:common_radius="5dp"
             android:id="@+id/iv_photo1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
             android:layout_weight="1" />
 
         <com.njh.common.widget.RoundAngleImageView
             app:common_radius="5dp"
             android:id="@+id/iv_photo2"
+            android:scaleType="centerCrop"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginLeft="5dp"
             android:layout_weight="1" />
     </LinearLayout>
