@@ -47,11 +47,6 @@ public interface RouterHub {
     String MALL = "/Mall";//Mall
     String Home = "/home";//Home
     String COMMUNITY = "/Community";//Community
-    String SER = "/service";
-    /**
-     * 服务组件, 用于给每个组件暴露特有的服务
-     */
-    String SERVICE = "/service";
 
     /**
      * 宿主 App 分组
@@ -67,11 +62,6 @@ public interface RouterHub {
     String HOME_INFO = Home + "/info";
 
     /**
-     * 服务
-     */
-    String SERVICE_FMT = SER + "/ServiceFmt";
-
-    /**
      * 商城
      */
     String MALL_fmt = MALL + "/MallFmt";
@@ -81,6 +71,10 @@ public interface RouterHub {
     String COMMUNITY_FMT = COMMUNITY + "/CommunityFmt";
 
 
+    interface Service{
+        String SERVICE = "/service/";
+        String Root = SERVICE + "Root";
+    }
 
 
     interface Mine{

@@ -10,7 +10,7 @@ import com.njh.common.flux.base.BaseFluxFragment;
  * @author libingjun
  * @date 2019/4/8
  */
-@Route(path = RouterHub.SERVICE_FMT)
+@Route(path = RouterHub.Service.Root)
 public class ServiceFmt extends BaseFluxFragment {
     @Override
     public void initData(Bundle savedInstanceState) {
