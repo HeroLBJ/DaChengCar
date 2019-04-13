@@ -38,8 +38,6 @@ public class MainInfoFragment extends BaseFluxFragment<MainStore, MainAction>
     RecyclerView mRecyclerView;
     @BindView(R2.id.refresh_layout)
     SmartRefreshLayout mRefreshLayout;
-//    @BindView(R2.id.view_pager)
-//    MaxViewPager mViewPager;
 
     private PreviewsRecyclerAdapter mAdapter;
     private List<Previews> mList = new ArrayList<>();
@@ -57,7 +55,7 @@ public class MainInfoFragment extends BaseFluxFragment<MainStore, MainAction>
 
     private void initRequest() {
         showLoading();
-        actionsCreator().getPreviewsList(this,  "1", "");
+        actionsCreator().getPreviewsList(this, "1", "");
     }
 
     @Override
@@ -66,14 +64,14 @@ public class MainInfoFragment extends BaseFluxFragment<MainStore, MainAction>
         hideLoading();
         if (event.url.equals(ReqTag.REQ_TAG_GET_HOME_ACTIVITY_PREVIEWS_LIST)) {
             ActivityPreviewsList item = (ActivityPreviewsList) event.data;
+
             PreviewsItem data = item.getData();
-            if(data != null){
+            if (data != null) {
                 mList.clear();
                 mList.addAll(item.getData().getList());
+                mAdapter = new PreviewsRecyclerAdapter(getContext(), data.getList(), item.getFlag().getList());
+                mRecyclerView.setAdapter(mAdapter);
             }
-
-            mAdapter = new PreviewsRecyclerAdapter(mList);
-            mRecyclerView.setAdapter(mAdapter);
         }
     }
 

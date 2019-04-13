@@ -18,6 +18,7 @@ public class Previews implements Serializable {
     private String coverVal;
     private String iscollect;
     private String iszan;
+    private int sign;
 
     public Previews() {
     }
@@ -51,6 +52,14 @@ public class Previews implements Serializable {
                 ", iscollect='" + iscollect + '\'' +
                 ", iszan='" + iszan + '\'' +
                 '}';
+    }
+
+    public int getSign() {
+        return sign;
+    }
+
+    public void setSign(int sign) {
+        this.sign = sign;
     }
 
     public String getId() {

@@ -8,14 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--<com.njh.common.widget.MaxViewPager-->
-            <!--android:id="@+id/view_pager"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
+            android:paddingTop="25dp"
             android:layout_width="match_parent"
+            android:paddingBottom="25dp"
             android:layout_height="match_parent" />
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
