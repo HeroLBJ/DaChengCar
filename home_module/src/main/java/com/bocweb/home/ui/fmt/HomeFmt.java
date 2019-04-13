@@ -11,6 +11,7 @@ import com.bocweb.home.ui.adapter.HomeViewPagerAdapter;
 import com.bocweb.home.ui.util.CustomSlidingTablayout;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
+import com.tencent.smtt.sdk.QbSdk;
 
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;

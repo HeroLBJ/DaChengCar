@@ -3,7 +3,7 @@
     package="com.njh.base">
 
     <application>
-        <activity android:name=".ui.act.BaseAct"></activity>
+
     </application>
 
 </manifest>

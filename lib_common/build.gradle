@@ -9,7 +9,7 @@ android {
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
         versionName rootProject.ext.android["versionName"]
-
+        ndk { abiFilters "armeabi", "armeabi-v7a", "x86", "mips" }
     }
 
     //指定构建版本
@@ -54,7 +54,9 @@ dependencies {
     api rootProject.ext.dependencies["SuperTextView"]
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["hawk"]
+    api rootProject.ext.dependencies["PickerView"]
     api project(':lib_network')
     api project(':lib_res')
     api project(':lib_title')
+    api files('libs/tbs_sdk_thirdapp_v4.3.0.1020.jar')
 }

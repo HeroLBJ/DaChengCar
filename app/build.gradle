@@ -21,6 +21,9 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
             }
         }
+
+        ndk { abiFilters "armeabi", "armeabi-v7a", "x86", "mips" }
+
     }
     //签名配置
     signingConfigs {
@@ -87,7 +90,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     //tools
     //arouter 路由
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
@@ -104,5 +106,4 @@ dependencies {
         implementation project(':service_module')
     }
     implementation rootProject.ext.dependencies["pager-bottom-tab-strip"]
-
 }
