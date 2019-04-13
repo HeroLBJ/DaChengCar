@@ -7,6 +7,7 @@ import com.njh.common.CommonApp;
  */
 public class App extends CommonApp {
 
+
     @Override
     public void onCreate() {
         super.onCreate();

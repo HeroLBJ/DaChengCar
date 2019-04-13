@@ -2,6 +2,8 @@ package com.njh.base.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.DisplayMetrics;
+import android.view.WindowManager;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.njh.base.BuildConfig;
@@ -22,6 +24,10 @@ public class BaseApp extends Application implements IAppLife {
         return instance;
     }
 
+
+    public static int EXACT_SCREEN_HEIGHT;
+    public static int EXACT_SCREEN_WIDTH;
+
     public static void setInstance(BaseApp instance) {
         BaseApp.instance = instance;
     }
@@ -38,6 +44,15 @@ public class BaseApp extends Application implements IAppLife {
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         ARouter.init(this);
+        getDeviceDensity();
+    }
+
+    protected void getDeviceDensity() {
+        DisplayMetrics metrics = new DisplayMetrics();
+        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
+        wm.getDefaultDisplay().getMetrics(metrics);
+        EXACT_SCREEN_HEIGHT = metrics.heightPixels;
+        EXACT_SCREEN_WIDTH = metrics.widthPixels;
     }
 
     /**

@@ -14,6 +14,7 @@ import com.bocweb.home.R;
 import com.bocweb.home.ui.adapter.IDelegateAdapter;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
+import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
 import com.njh.common.widget.RoundAngleImageView;
@@ -66,6 +67,14 @@ public class DynamicTwoAdapter implements IDelegateAdapter<TargetInfo> {
             GlideUtils.getInstance().loadImg(mContext, photoArr.get(0), viewHolder.ivPhoto1);
             GlideUtils.getInstance().loadImg(mContext, photoArr.get(1), viewHolder.ivPhoto2);
         }
+
+        viewHolder.ivPhoto1.setOnClickListener(v -> {
+            new ShowImagesDialog(mContext, photoArr,0).show();
+        });
+
+        viewHolder.ivPhoto2.setOnClickListener(v -> {
+            new ShowImagesDialog(mContext, photoArr,1).show();
+        });
 
         UserInfo userInfo = item.getUserInfo();
         if (userInfo != null) {

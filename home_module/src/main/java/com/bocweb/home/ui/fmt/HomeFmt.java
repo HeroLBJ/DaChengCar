@@ -1,6 +1,7 @@
 package com.bocweb.home.ui.fmt;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -37,5 +38,4 @@ public class HomeFmt extends BaseFluxFragment {
     public int getLayoutId() {
         return R.layout.home_fragment;
     }
-
 }

@@ -4,10 +4,9 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.bocweb.home.R;
-import com.njh.common.utils.LogUtil;
+import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.widget.RoundAngleImageView;
 
@@ -42,6 +41,9 @@ public class OneImageAdapter extends RecyclerView.Adapter<OneImageAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         GlideUtils.getInstance().loadImg(mContext, mImageList.get(position), holder.ivImage);
+        holder.ivImage.setOnClickListener(v -> {
+            new ShowImagesDialog(mContext, mImageList,position).show();
+        });
     }
 
     @Override

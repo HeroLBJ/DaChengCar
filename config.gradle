@@ -86,6 +86,7 @@ ext {
             "SmartRefreshLayout"           : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-4",
             "SmartRefreshHeader"           : "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-4",
             "SCardView"                    : "io.github.meetsl:SCardView:1.0",
+            "PhotoView"                    : "com.github.chrisbanes:PhotoView:2.0.0",
     ]
 
 

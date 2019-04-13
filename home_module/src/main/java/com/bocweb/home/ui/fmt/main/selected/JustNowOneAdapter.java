@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +14,7 @@ import com.bocweb.home.ui.adapter.IDelegateAdapter;
 import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
+import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
 import com.njh.common.widget.RoundAngleImageView;
@@ -83,6 +83,11 @@ public class JustNowOneAdapter implements IDelegateAdapter<MainSelectedItem> {
             viewHolder.tvName.setText(userInfo.getNickname());
             GlideUtils.getInstance().loadImg(mContext, userInfo.getAvatar(), viewHolder.civPhoto);
         }
+
+        viewHolder.ivPhoto.setOnClickListener(v -> {
+            new ShowImagesDialog(mContext, photoArr).show();
+            Toast.makeText(mContext, "查看大圖", Toast.LENGTH_SHORT).show();
+        });
 
         viewHolder.civPhoto.setOnClickListener(v -> {
             Toast.makeText(mContext, "进入个人主页", Toast.LENGTH_SHORT).show();

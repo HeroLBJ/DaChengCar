@@ -14,10 +14,12 @@ import com.bocweb.home.R;
 import com.bocweb.home.ui.adapter.IDelegateAdapter;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
+import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
 import com.njh.common.widget.RoundAngleImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -72,6 +74,10 @@ public class DynamicOneAdapter implements IDelegateAdapter<TargetInfo> {
             viewHolder.tvName.setText(userInfo.getNickname());
             GlideUtils.getInstance().loadImg(mContext, userInfo.getAvatar(), viewHolder.civPhoto);
         }
+
+        viewHolder.ivPhoto.setOnClickListener(v -> {
+            new ShowImagesDialog(mContext, photoArr).show();
+        });
 
         viewHolder.civPhoto.setOnClickListener(v -> {
             Toast.makeText(mContext, "进入个人主页", Toast.LENGTH_SHORT).show();

@@ -16,6 +16,7 @@ import com.bocweb.home.ui.adapter.SpacesItemDecoration;
 import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
+import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
 
@@ -84,6 +85,10 @@ public class JustNowMoreAdapter implements IDelegateAdapter<MainSelectedItem> {
             viewHolder.tvName.setText(userInfo.getNickname());
             GlideUtils.getInstance().loadImg(mContext, userInfo.getAvatar(), viewHolder.civPhoto);
         }
+
+        viewHolder.nineView.setOnClickListener(v -> {
+            new ShowImagesDialog(mContext, targetInfo.getPhotoArr()).show();
+        });
 
         viewHolder.civPhoto.setOnClickListener(v -> {
             Toast.makeText(mContext, "进入个人主页", Toast.LENGTH_SHORT).show();

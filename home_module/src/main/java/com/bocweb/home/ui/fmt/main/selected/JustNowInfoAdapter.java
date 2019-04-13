@@ -8,15 +8,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bocweb.home.R;
 import com.bocweb.home.ui.adapter.IDelegateAdapter;
 import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.TargetInfo;
+import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.widget.RoundAngleImageView;
 import com.wuhenzhizao.titlebar.utils.ScreenUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -65,6 +70,12 @@ public class JustNowInfoAdapter implements IDelegateAdapter<MainSelectedItem> {
         viewHolder.ivPhoto.setLayoutParams(params);
 
         GlideUtils.getInstance().loadImg(mContext, targetInfo.getCoverVal(), viewHolder.ivPhoto);
+
+        viewHolder.ivPhoto.setOnClickListener(v -> {
+            List<String> list = new ArrayList<>();
+            list.add(targetInfo.getCoverVal());
+            new ShowImagesDialog(mContext, list).show();
+        });
     }
 
     class InfoViewHolder extends RecyclerView.ViewHolder {
