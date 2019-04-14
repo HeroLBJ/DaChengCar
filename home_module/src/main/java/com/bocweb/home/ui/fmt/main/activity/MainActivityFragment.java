@@ -29,7 +29,7 @@ import butterknife.BindView;
  * @author libingjun
  * @date 2019/4/8
  */
-@Route(path = RouterHub.HOME_ACTIVITY)
+@Route(path = RouterHub.Home.HOME_ACTIVITY)
 public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction>
         implements OnRefreshLoadMoreListener {
 

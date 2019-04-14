@@ -54,12 +54,12 @@ public class MainActivity extends BaseFluxActivity {
                 .build();
         this.mTestFragments = new SparseArray<>();
         HomeFmt homeFmt = (HomeFmt) ARouter.getInstance()
-                .build(RouterHub.HOME_FMT)
+                .build(RouterHub.Home.ROOT)
                 .navigation();
         this.mTestFragments.put(0, homeFmt);
 
         ServiceFmt serviceFmt = (ServiceFmt) ARouter.getInstance()
-                .build(RouterHub.Service.Root)
+                .build(RouterHub.Service.ROOT)
                 .navigation();
         mTestFragments.put(1, serviceFmt);
 

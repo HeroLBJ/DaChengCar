@@ -1,1 +1,1 @@
-include ':app', ':lib_base', ':lib_common', ':lib_res', ':lib_network', ':home_module', ':mine_module', ':lib_state_manager', ':lib_title', ':mall_module', ':community_module', ':service_module'
+include ':app', ':lib_base', ':lib_common', ':lib_res', ':lib_network', ':home_module', ':mine_module', ':lib_state_manager', ':lib_title', ':mall_module', ':community_module', ':service_module', ':lib_select_photo'

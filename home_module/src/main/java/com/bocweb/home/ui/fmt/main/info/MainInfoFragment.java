@@ -30,7 +30,7 @@ import butterknife.BindView;
  * @author libingjun
  * @date 2019/4/8
  */
-@Route(path = RouterHub.HOME_INFO)
+@Route(path = RouterHub.Home.HOME_INFO)
 public class MainInfoFragment extends BaseFluxFragment<MainStore, MainAction>
         implements OnRefreshLoadMoreListener {
 

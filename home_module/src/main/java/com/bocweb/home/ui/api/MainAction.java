@@ -3,6 +3,7 @@ package com.bocweb.home.ui.api;
 import com.njh.base.ui.view.BaseView;
 import com.njh.common.core.ReqTag;
 import com.njh.common.flux.actions.ActionsCreator;
+import com.njh.common.flux.base.BaseFluxActivity;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.dispatcher.Dispatcher;
 import com.njh.network.api.ServiceManager;
@@ -34,5 +35,15 @@ public class MainAction extends ActionsCreator {
     public void getPreviewsList(BaseFluxFragment act, String page, String city) {
         reqDate(ServiceManager.create(ApiHomeService.class).getPreviewsList("10", page, city),
                 act, false, ReqTag.REQ_TAG_GET_HOME_ACTIVITY_PREVIEWS_LIST);
+    }
+
+    public void getMomentMemberSearch(BaseFluxActivity act, int page, String keyword) {
+        reqDate(ServiceManager.create(ApiHomeService.class).getMomentMemberSearch("10", page+"", keyword),
+                act, false, ReqTag.REQ_TAG_GET_HOME_MOMENT_MEMBER_SEARCH);
+    }
+
+    public void postMomentPublish(BaseFluxActivity act, String content, String photo) {
+        reqDate(ServiceManager.create(ApiHomeService.class).postMomentPublish(content, photo),
+                act, false, ReqTag.REQ_TAG_POST_HOME_MOMENT_PUBLISH);
     }
 }

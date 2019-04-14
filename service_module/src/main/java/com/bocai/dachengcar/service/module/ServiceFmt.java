@@ -17,7 +17,7 @@ import butterknife.BindView;
  * @author libingjun
  * @date 2019/4/8
  */
-@Route(path = RouterHub.Service.Root)
+@Route(path = RouterHub.Service.ROOT)
 public class ServiceFmt extends BaseFluxFragment {
 
     @BindView(R2.id.titleBar)

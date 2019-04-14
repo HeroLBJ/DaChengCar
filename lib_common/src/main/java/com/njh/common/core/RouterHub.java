@@ -45,7 +45,6 @@ public interface RouterHub {
      */
     String APP = "/app";//宿主 App 组件
     String MALL = "/Mall";//Mall
-    String Home = "/home";//Home
     String COMMUNITY = "/Community";//Community
 
     /**
@@ -54,12 +53,6 @@ public interface RouterHub {
     String APP_SPLASHACTIVITY = APP + "/SplashActivity";
     String APP_MAINACTIVITY = APP + "/MainActivity";
 
-
-    String HOME_FMT = Home + "/home";
-    String HOME_SELECTED = Home + "/selected";
-    String HOME_DYNAMIC = Home + "/dynamic";
-    String HOME_ACTIVITY = Home + "/activity";
-    String HOME_INFO = Home + "/info";
 
     /**
      * 商城
@@ -71,13 +64,25 @@ public interface RouterHub {
     String COMMUNITY_FMT = COMMUNITY + "/CommunityFmt";
 
 
-    interface Service{
+    interface Home {
+        String Home = "/home/";//Home
+        String ADD_FRIEND = Home + "AddFriend";
+
+        String ROOT = Home + "Root";
+        String HOME_SELECTED = Home + "selected";
+        String HOME_DYNAMIC = Home + "dynamic";
+        String HOME_ACTIVITY = Home + "activity";
+        String HOME_INFO = Home + "info";
+        String SEND_DYNAMIC = Home + "SendDynamic";
+    }
+
+    interface Service {
         String SERVICE = "/service/";
-        String Root = SERVICE + "Root";
+        String ROOT = SERVICE + "Root";
     }
 
 
-    interface Mine{
+    interface Mine {
         String MINE = "/mine/";//MINE
         String FANS = MINE + "Fans";
         String FOLLOW = MINE + "Follow";
@@ -120,5 +125,12 @@ public interface RouterHub {
          * 个人中心
          */
         String MINE_FMT = MINE + "/mineFmt";
+    }
+
+    interface Photo{
+        String PHOTO = "/photo/";
+        String PREVIEW = PHOTO +  "Preview";
+        String CLIP_IMAGE = PHOTO + "ClickImage";
+        String IMAGE_SELECTOR = PHOTO + "ImageSelector";
     }
 }

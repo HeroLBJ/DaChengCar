@@ -31,16 +31,16 @@ public class HomeViewPagerAdapter extends FragmentStatePagerAdapter {
     public HomeViewPagerAdapter(FragmentManager fm) {
         super(fm);
         fmtList.add((MainSelectedFragment) ARouter.getInstance()
-                .build(RouterHub.HOME_SELECTED)
+                .build(RouterHub.Home.HOME_SELECTED)
                 .navigation());
         fmtList.add((MainDynamicFragment) ARouter.getInstance()
-                .build(RouterHub.HOME_DYNAMIC)
+                .build(RouterHub.Home.HOME_DYNAMIC)
                 .navigation());
         fmtList.add((MainActivityFragment) ARouter.getInstance()
-                .build(RouterHub.HOME_ACTIVITY)
+                .build(RouterHub.Home.HOME_ACTIVITY)
                 .navigation());
         fmtList.add((MainInfoFragment) ARouter.getInstance()
-                .build(RouterHub.HOME_INFO)
+                .build(RouterHub.Home.HOME_INFO)
                 .navigation());
     }
 

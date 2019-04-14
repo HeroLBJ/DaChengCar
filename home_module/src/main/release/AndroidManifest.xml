@@ -1,7 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bocweb.home" >
+    package="com.bocweb.home">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application>
 
+        <activity
+            android:name=".ui.activity.friend.AddFriendActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".ui.activity.dynamic.SendDynamicActivity" />
     </application>
 </manifest>

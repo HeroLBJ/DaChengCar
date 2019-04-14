@@ -7,6 +7,8 @@ import com.njh.common.flux.stores.Store;
 
 import java.util.HashMap;
 
+import butterknife.BindView;
+
 /**
  * @author libingjun
  * @date 2019/4/8
@@ -34,5 +36,15 @@ public class MainStore extends Store {
     @BindAction(ReqTag.REQ_TAG_GET_HOME_ACTIVITY_PREVIEWS_LIST)
     public void getPreviewsList(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.REQ_TAG_GET_HOME_ACTIVITY_PREVIEWS_LIST, data);
+    }
+
+    @BindAction(ReqTag.REQ_TAG_GET_HOME_MOMENT_MEMBER_SEARCH)
+    public void getMomentMemberSearch(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.REQ_TAG_GET_HOME_MOMENT_MEMBER_SEARCH, data);
+    }
+
+    @BindAction(ReqTag.REQ_TAG_POST_HOME_MOMENT_PUBLISH)
+    public void postMomentPublish(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.REQ_TAG_POST_HOME_MOMENT_PUBLISH, data);
     }
 }
