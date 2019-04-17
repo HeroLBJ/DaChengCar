@@ -83,7 +83,9 @@ public class DynamicMoreAdapter implements IDelegateAdapter<TargetInfo> {
         });
 
         viewHolder.tvAdd.setOnClickListener(v -> {
-            Toast.makeText(mContext, "关注和取消关注", Toast.LENGTH_SHORT).show();
+            if (onStatusListener != null) {
+                onStatusListener.onStatusClick(item.getAccountId());
+            }
         });
 
         viewHolder.rlRoot.setOnClickListener(v -> {
@@ -91,7 +93,9 @@ public class DynamicMoreAdapter implements IDelegateAdapter<TargetInfo> {
         });
 
         viewHolder.tvZan.setOnClickListener(v -> {
-            Toast.makeText(mContext, "点赞和取消赞", Toast.LENGTH_SHORT).show();
+            if (onStatusListener != null) {
+                onStatusListener.onZanClick(item.getAccountId());
+            }
         });
     }
 
@@ -121,5 +125,17 @@ public class DynamicMoreAdapter implements IDelegateAdapter<TargetInfo> {
             tvAdd = itemView.findViewById(R.id.tv_add);
             rlRoot = itemView.findViewById(R.id.rl_layout);
         }
+    }
+
+    private OnStatusListener onStatusListener;
+
+    public void setOnStatusListener(OnStatusListener onStatusListener) {
+        this.onStatusListener = onStatusListener;
+    }
+
+    interface OnStatusListener {
+        void onStatusClick(String id);
+
+        void onZanClick(String id);
     }
 }

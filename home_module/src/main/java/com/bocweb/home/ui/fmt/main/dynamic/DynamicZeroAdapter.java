@@ -69,7 +69,7 @@ public class DynamicZeroAdapter implements IDelegateAdapter<TargetInfo> {
 
         viewHolder.tvAdd.setOnClickListener(v -> {
             if (onStatusListener != null) {
-                onStatusListener.follow(item.getAccountId(), item.getUserInfo().getIsFollow());
+                onStatusListener.onStatusClick(item.getAccountId());
             }
         });
 
@@ -78,7 +78,9 @@ public class DynamicZeroAdapter implements IDelegateAdapter<TargetInfo> {
         });
 
         viewHolder.tvZan.setOnClickListener(v -> {
-            Toast.makeText(mContext, "点赞和取消赞", Toast.LENGTH_SHORT).show();
+            if (onStatusListener != null) {
+                onStatusListener.onZanClick(item.getAccountId());
+            }
         });
     }
 
@@ -115,6 +117,7 @@ public class DynamicZeroAdapter implements IDelegateAdapter<TargetInfo> {
     }
 
     interface OnStatusListener {
-        void follow(String id, int status);
+        void onStatusClick(String id);
+        void onZanClick(String id);
     }
 }

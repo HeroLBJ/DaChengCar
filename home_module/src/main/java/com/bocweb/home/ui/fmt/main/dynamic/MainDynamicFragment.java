@@ -9,7 +9,10 @@ import com.bocweb.home.ui.adapter.SuperAdapter;
 import com.bocweb.home.ui.api.MainAction;
 import com.bocweb.home.ui.api.MainStore;
 import com.bocweb.home.ui.bean.MainComentList;
+import com.bocweb.home.ui.bean.MainSelectedItem;
+import com.bocweb.home.ui.bean.StatusResponse;
 import com.bocweb.home.ui.bean.TargetInfo;
+import com.bocweb.home.ui.bean.UserInfo;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
@@ -36,7 +39,9 @@ import butterknife.BindView;
  */
 @Route(path = RouterHub.Home.HOME_DYNAMIC)
 public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
-        implements OnRefreshLoadMoreListener {
+        implements OnRefreshLoadMoreListener, DynamicZeroAdapter.OnStatusListener,
+        DynamicOneAdapter.OnStatusListener, DynamicTwoAdapter.OnStatusListener,
+        DynamicMoreAdapter.OnStatusListener {
 
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -66,16 +71,51 @@ public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
         hideLoading();
-        if (event.url.equals(ReqTag.REQ_TAG_GET_HOME_MOMENT_LIST)) {
-            MainComentList item = (MainComentList) event.data;
-            mMainSelectedItemList.clear();
-            mMainSelectedItemList.addAll(item.getList());
-            mSuperAdapter = new SuperAdapter(getContext(), mMainSelectedItemList);
-            mSuperAdapter.addDelegate(new DynamicZeroAdapter(getContext()));
-            mSuperAdapter.addDelegate(new DynamicOneAdapter(getContext()));
-            mSuperAdapter.addDelegate(new DynamicTwoAdapter(getContext()));
-            mSuperAdapter.addDelegate(new DynamicMoreAdapter(getContext()));
-            mRecyclerView.setAdapter(mSuperAdapter);
+        switch (event.url) {
+            case ReqTag.REQ_TAG_GET_HOME_MOMENT_LIST:
+                MainComentList item = (MainComentList) event.data;
+                mMainSelectedItemList.clear();
+                mMainSelectedItemList.addAll(item.getList());
+                mSuperAdapter = new SuperAdapter(getContext(), mMainSelectedItemList);
+                mSuperAdapter.addDelegate(new DynamicZeroAdapter(getContext()));
+                mSuperAdapter.addDelegate(new DynamicOneAdapter(getContext()));
+                mSuperAdapter.addDelegate(new DynamicTwoAdapter(getContext()));
+                mSuperAdapter.addDelegate(new DynamicMoreAdapter(getContext()));
+                mRecyclerView.setAdapter(mSuperAdapter);
+                break;
+            case ReqTag.REQ_TAG_POST_HOME_MOMENT_FOLLOW:
+                StatusResponse statusResponse = (StatusResponse) event.data;
+                int status = statusResponse.getStatus();
+
+                for (TargetInfo followItem : mMainSelectedItemList) {
+                    if (followItem == null) {
+                        continue;
+                    }
+                    UserInfo userInfo = followItem.getUserInfo();
+                    if (userInfo == null) {
+                        continue;
+                    }
+                    if (followId.equals(followItem.getAccountId())) {
+                        userInfo.setIsFollow(status);
+                    }
+                }
+                mSuperAdapter.notifyDataSetChanged();
+                break;
+            case ReqTag.REQ_TAG_GET_HOME_ACTIVITY_ACTIVITY_LIST:
+                StatusResponse zanResponse = (StatusResponse) event.data;
+                int zanStatus = zanResponse.getStatus();
+
+                for (TargetInfo zanItem : mMainSelectedItemList) {
+                    if (zanItem == null) {
+                        continue;
+                    }
+
+                    if (followId.equals(zanItem.getAccountId())) {
+                        zanItem.setIszan(zanStatus + "");
+                    }
+                }
+                mSuperAdapter.notifyDataSetChanged();
+                break;
         }
     }
 
@@ -104,9 +144,19 @@ public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
 
     }
 
-//    @Subscribe(threadMode = ThreadMode.MAIN)
-//    public void onEvent(Integer num) {
-//        //处理逻辑
-//        LogUtil.e("num:"+num);
-//    }
+    private String followId;
+
+    @Override
+    public void onStatusClick(String id) {
+        followId = id;
+        showLoading();
+        actionsCreator().postMomentFollow(this, id);
+    }
+
+    @Override
+    public void onZanClick(String id) {
+        followId = id;
+        showLoading();
+        actionsCreator().postActivityActivityZan(this, id);
+    }
 }

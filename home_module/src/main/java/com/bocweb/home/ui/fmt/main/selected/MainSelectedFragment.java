@@ -104,11 +104,11 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
                 for (MainSelectedItem item : mMainSelectedItemList) {
                     TargetInfo targetInfo = item.getTargetInfo();
                     if (targetInfo == null) {
-                        return;
+                        continue;
                     }
                     UserInfo userInfo = targetInfo.getUserInfo();
                     if (userInfo == null) {
-                        return;
+                        continue;
                     }
                     if (followId.equals(targetInfo.getAccountId())) {
                         userInfo.setIsFollow(status);
@@ -123,7 +123,7 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
                 for (MainSelectedItem item : mMainSelectedItemList) {
                     TargetInfo targetInfo = item.getTargetInfo();
                     if (targetInfo == null) {
-                        return;
+                        continue;
                     }
 
                     if (followId.equals(targetInfo.getAccountId())) {
