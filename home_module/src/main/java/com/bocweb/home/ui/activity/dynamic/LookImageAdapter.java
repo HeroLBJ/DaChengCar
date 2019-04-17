@@ -1,7 +1,6 @@
 package com.bocweb.home.ui.activity.dynamic;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,7 @@ import android.widget.Toast;
 
 import com.bocai.select.photo.util.ImageSelector;
 import com.bocweb.home.R;
-import com.njh.common.utils.LogUtil;
+import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.utils.img.GlideUtils;
 
 import java.util.ArrayList;
@@ -44,38 +43,31 @@ public class LookImageAdapter extends RecyclerView.Adapter<LookImageAdapter.View
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        if(mImages != null){
-            LogUtil.e("iamges.size = "+mImages.size() + ",  position:"+position);
-        }
 
         if (mImages == null || mImages.size() == 0) {
             holder.ivImage.setImageResource(R.drawable.res_add_photo);
         } else if (mImages.size() < 9) {
             if (position == mImages.size()) {
                 holder.ivImage.setImageResource(R.drawable.res_add_photo);
-            }else{
+            } else {
                 GlideUtils.getInstance().loadImg(mContext, mImages.get(position), holder.ivImage);
             }
         } else if (mImages.size() == 9) {
             GlideUtils.getInstance().loadImg(mContext, mImages.get(position), holder.ivImage);
         }
-        holder.ivImage.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return false;
-            }
-        });
 
         holder.ivImage.setOnClickListener(v -> {
             int size = mImages == null ? 0 : mImages.size();
-            if(mImages == null || (size < 9 && position == size)){
+            if (mImages == null || (size < 9 && position == size)) {
                 onOpenPhoto();
+            } else {
+                new ShowImagesDialog(mContext, mImages, position).show();
             }
         });
     }
 
     private void onOpenPhoto() {
-        Toast.makeText(mContext,"打开相册",Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, "打开相册", Toast.LENGTH_SHORT).show();
         ImageSelector.builder()
                 .useCamera(true)
                 .setSingle(false)

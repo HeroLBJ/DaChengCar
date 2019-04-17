@@ -112,7 +112,7 @@ public class ShowImagesDialog extends Dialog {
             mTitles.add(i + "");
 
             // 让小图保持原形，不充满全屏
-            photoView.setScaleType(ImageView.ScaleType.CENTER);
+//            photoView.setScaleType(ImageView.ScaleType.CENTER);
 //            photoView.setMinimumScale(0.8f);
 //            PhotoViewAttacher photoViewAttacher= photoView.getAttacher();
             //通过photoViewAttacher设置缩放大小

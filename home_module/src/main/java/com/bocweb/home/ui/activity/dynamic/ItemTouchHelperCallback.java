@@ -5,10 +5,15 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Vibrator;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.njh.common.utils.LogUtil;
+import com.bocweb.home.R;
+import com.bocweb.home.ui.widget.CustomPopWindow;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,14 +29,15 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author libingjun
  * @date 2019/4/8
  */
-public class ImageItemTouchHelper extends ItemTouchHelper.Callback {
+public class ItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     private Context mContext;
     private LookImageAdapter mAdapter;
     private ArrayList<String> images;
     private boolean haveAdd;
 
-    public ImageItemTouchHelper(Context context, LookImageAdapter lookImageAdapter, ArrayList<String> images) {
+
+    public ItemTouchHelperCallback(Context context, LookImageAdapter lookImageAdapter, ArrayList<String> images) {
         mAdapter = lookImageAdapter;
         mContext = context;
         this.images = images;
@@ -51,13 +57,17 @@ public class ImageItemTouchHelper extends ItemTouchHelper.Callback {
 
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+        // 得到原来的position
         int fromPosition = viewHolder.getAdapterPosition();
         //拿到当前拖拽到的item的viewHolder
         int toPosition = target.getAdapterPosition();
 
-        LogUtil.e(fromPosition + "-" + toPosition);
-        if (haveAdd) {
-            toPosition--;
+        if (images.size() == 0 || (images.size() < 9 && fromPosition == images.size())) {
+            return true;
+        }
+
+        if (haveAdd && toPosition == images.size()) {
+            return true;
         }
 
         if (fromPosition < toPosition) {
@@ -85,9 +95,6 @@ public class ImageItemTouchHelper extends ItemTouchHelper.Callback {
             //获取系统震动服务//震动70毫秒
             Vibrator vib = (Vibrator) mContext.getSystemService(Service.VIBRATOR_SERVICE);
             vib.vibrate(70);
-
-            // 从屏幕底部弹出popupWindow
-            Toast.makeText(mContext, "到这里来删除", Toast.LENGTH_SHORT).show();
         }
 
         if (ItemTouchHelper.ACTION_STATE_DRAG == actionState && dragListener != null) {
@@ -106,7 +113,7 @@ public class ImageItemTouchHelper extends ItemTouchHelper.Callback {
 
     @Override
     public boolean isLongPressDragEnabled() {
-        return true;
+        return false;
     }
 
     @Override
@@ -155,6 +162,7 @@ public class ImageItemTouchHelper extends ItemTouchHelper.Callback {
             dragListener.deleteState(false);
             dragListener.dragState(false);
         }
+        haveAdd = true;
         up = false;
     }
 

@@ -86,7 +86,6 @@ public class JustNowOneAdapter implements IDelegateAdapter<MainSelectedItem> {
 
         viewHolder.ivPhoto.setOnClickListener(v -> {
             new ShowImagesDialog(mContext, photoArr).show();
-            Toast.makeText(mContext, "查看大圖", Toast.LENGTH_SHORT).show();
         });
 
         viewHolder.civPhoto.setOnClickListener(v -> {

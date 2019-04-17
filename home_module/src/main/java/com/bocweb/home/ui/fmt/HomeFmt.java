@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bocweb.home.R;
@@ -61,7 +60,6 @@ public class HomeFmt extends BaseFluxFragment {
                 .setView(contentView)//显示的布局
                 .create()//创建PopupWindow
                 .showAsDropDown(ivAdd, 0, 10);//显示PopupWindow
-        popWindow.showAsDropDown(mSlidingTabLayout);
         ivAdd.setBackgroundResource(R.drawable.home_ic_del);
     }
 

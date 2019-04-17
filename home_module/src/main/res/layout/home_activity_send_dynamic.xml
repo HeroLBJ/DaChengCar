@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -22,30 +23,56 @@
         app:titleBarColor="@color/res_white" />
 
     <View
+        android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_below="@id/titleBar"
         android:background="@color/res_gray_main_text" />
 
-    <EditText
-        android:id="@+id/et_content"
+    <TextView
+        android:id="@+id/tv_delete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginRight="20dp"
-        android:background="@null"
-        android:gravity="top"
-        android:hint="分享此刻..."
-        android:maxLines="6"
-        android:minLines="6"
-        android:textSize="@dimen/sp_16" />
+        android:layout_alignParentBottom="true"
+        android:background="@color/res_red_277"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:visibility="gone"
+        android:text="拖动到此处删除"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_marginTop="20dp"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp" />
+        android:layout_above="@id/tv_delete"
+        android:layout_below="@id/view">
 
-</LinearLayout>
+        <EditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="分享此刻..."
+            android:maxLines="6"
+            android:minLines="6"
+            android:paddingLeft="20dp"
+            android:paddingTop="25dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:textSize="@dimen/sp_16" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:paddingLeft="20dp"
+            android:paddingTop="170dp"
+            android:paddingRight="20dp" />
+    </RelativeLayout>
+
+</RelativeLayout>
