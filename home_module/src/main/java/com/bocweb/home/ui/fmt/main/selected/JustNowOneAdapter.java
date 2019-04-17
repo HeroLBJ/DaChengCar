@@ -82,6 +82,7 @@ public class JustNowOneAdapter implements IDelegateAdapter<MainSelectedItem> {
         if (userInfo != null) {
             viewHolder.tvName.setText(userInfo.getNickname());
             GlideUtils.getInstance().loadImg(mContext, userInfo.getAvatar(), viewHolder.civPhoto);
+            setFollowStatus(viewHolder.tvAdd, userInfo.getIsFollow());
         }
 
         viewHolder.ivPhoto.setOnClickListener(v -> {
@@ -93,7 +94,9 @@ public class JustNowOneAdapter implements IDelegateAdapter<MainSelectedItem> {
         });
 
         viewHolder.tvAdd.setOnClickListener(v -> {
-            Toast.makeText(mContext, "关注和取消关注", Toast.LENGTH_SHORT).show();
+            if (onStatusListener != null) {
+                onStatusListener.onStatusClick(targetInfo.getAccountId());
+            }
         });
 
         viewHolder.rlRoot.setOnClickListener(v -> {
@@ -103,6 +106,16 @@ public class JustNowOneAdapter implements IDelegateAdapter<MainSelectedItem> {
         viewHolder.tvZan.setOnClickListener(v -> {
             Toast.makeText(mContext, "点赞和取消赞", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    public void setFollowStatus(TextView tvAdd, int status) {
+        if (status == 0) {
+            tvAdd.setText("+ 关注");
+            tvAdd.setBackgroundResource(R.drawable.home_follow_bg);
+        } else {
+            tvAdd.setText("已关注");
+            tvAdd.setBackgroundResource(R.drawable.home_no_follow_bg);
+        }
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -131,5 +144,15 @@ public class JustNowOneAdapter implements IDelegateAdapter<MainSelectedItem> {
             tvAdd = itemView.findViewById(R.id.tv_add);
             rlRoot = itemView.findViewById(R.id.rl_layout);
         }
+    }
+
+    private OnStatusListener onStatusListener;
+
+    public void setOnStatusListener(OnStatusListener onStatusListener) {
+        this.onStatusListener = onStatusListener;
+    }
+
+    public interface OnStatusListener {
+        void onStatusClick(String id);
     }
 }

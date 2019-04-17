@@ -16,9 +16,10 @@ import com.bocweb.home.ui.adapter.SpacesItemDecoration;
 import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
-import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -87,7 +88,7 @@ public class JustNowMoreAdapter implements IDelegateAdapter<MainSelectedItem> {
         }
 
         viewHolder.nineView.setOnClickListener(v -> {
-            new ShowImagesDialog(mContext, targetInfo.getPhotoArr()).show();
+            EventBus.getDefault().post(88888);
         });
 
         viewHolder.civPhoto.setOnClickListener(v -> {
@@ -95,7 +96,9 @@ public class JustNowMoreAdapter implements IDelegateAdapter<MainSelectedItem> {
         });
 
         viewHolder.tvAdd.setOnClickListener(v -> {
-            Toast.makeText(mContext, "关注和取消关注", Toast.LENGTH_SHORT).show();
+            if (onStatusListener != null) {
+                onStatusListener.onStatusClick(targetInfo.getAccountId());
+            }
         });
 
         viewHolder.rlRoot.setOnClickListener(v -> {
@@ -133,5 +136,15 @@ public class JustNowMoreAdapter implements IDelegateAdapter<MainSelectedItem> {
             tvAdd = itemView.findViewById(R.id.tv_add);
             rlRoot = itemView.findViewById(R.id.rl_layout);
         }
+    }
+
+    private OnStatusListener onStatusListener;
+
+    public void setOnStatusListener(OnStatusListener onStatusListener) {
+        this.onStatusListener = onStatusListener;
+    }
+
+    public interface OnStatusListener {
+        void onStatusClick(String id);
     }
 }

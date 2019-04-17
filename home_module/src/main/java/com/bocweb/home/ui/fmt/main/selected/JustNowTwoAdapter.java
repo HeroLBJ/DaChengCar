@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +18,8 @@ import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
 import com.njh.common.widget.RoundAngleImageView;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -99,7 +100,9 @@ public class JustNowTwoAdapter implements IDelegateAdapter<MainSelectedItem> {
         });
 
         viewHolder.tvAdd.setOnClickListener(v -> {
-            Toast.makeText(mContext, "关注和取消关注", Toast.LENGTH_SHORT).show();
+            if (onStatusListener != null) {
+                onStatusListener.onStatusClick(targetInfo.getAccountId());
+            }
         });
 
         viewHolder.rlRoot.setOnClickListener(v -> {
@@ -139,5 +142,15 @@ public class JustNowTwoAdapter implements IDelegateAdapter<MainSelectedItem> {
             tvAdd = itemView.findViewById(R.id.tv_add);
             rlRoot = itemView.findViewById(R.id.rl_layout);
         }
+    }
+
+    private OnStatusListener onStatusListener;
+
+    public void setOnStatusListener(OnStatusListener onStatusListener) {
+        this.onStatusListener = onStatusListener;
+    }
+
+    public interface OnStatusListener {
+        void onStatusClick(String id);
     }
 }

@@ -13,8 +13,6 @@ import com.gyf.barlibrary.ImmersionBar;
 import com.njh.base.ui.view.BaseView;
 import com.trello.rxlifecycle3.components.support.RxFragment;
 
-import org.loader.autohideime.HideIMEUtil;
-
 import androidx.annotation.Nullable;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -31,6 +29,7 @@ public abstract class BaseFmt extends RxFragment implements BaseView {
     protected OperateFmtCompatDelegate compatDelegate;
     private LoadingFragment loadingFragment;
     protected Unbinder unBinder;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -41,9 +40,9 @@ public abstract class BaseFmt extends RxFragment implements BaseView {
     @Override
     public View onCreateView(LayoutInflater inflater, @androidx.annotation.Nullable ViewGroup container,
                              @androidx.annotation.Nullable Bundle savedInstanceState) {
-        if (null==mContentView) {
+        if (null == mContentView) {
             mContentView = inflater.inflate(getLayoutId(), container, false);
-            unBinder = ButterKnife.bind(this,mContentView);
+            unBinder = ButterKnife.bind(this, mContentView);
         }
         super.onCreateView(inflater, container, savedInstanceState);
         return mContentView;
@@ -53,12 +52,13 @@ public abstract class BaseFmt extends RxFragment implements BaseView {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         //inject
         ARouter.getInstance().inject(this);
         //点击关闭软键盘
 //        HideIMEUtil.wrap(this);
-        compatDelegate=new OperateFmtCompatDelegate(this);
-        loadingFragment=new LoadingFragment();
+        compatDelegate = new OperateFmtCompatDelegate(this);
+        loadingFragment = new LoadingFragment();
         initStatusBar();
         initData(savedInstanceState);
         setListener();
@@ -66,6 +66,7 @@ public abstract class BaseFmt extends RxFragment implements BaseView {
 
     /**
      * 设置是否开启
+     *
      * @return
      */
     protected boolean isEnableStatusBar() {
@@ -74,7 +75,7 @@ public abstract class BaseFmt extends RxFragment implements BaseView {
 
     protected void initStatusBar() {
         if (isEnableStatusBar()) {
-            if (null==immersionBar) {
+            if (null == immersionBar) {
                 immersionBar = ImmersionBar.with(this);
             }
             immersionBar.statusBarDarkFont(true, 0.2f)
@@ -93,14 +94,14 @@ public abstract class BaseFmt extends RxFragment implements BaseView {
 
     @Override
     public void showLoading() {
-        if (!loadingFragment.isShowing()){
+        if (!loadingFragment.isShowing()) {
             loadingFragment.show(getChildFragmentManager(), "loging");
         }
     }
 
     @Override
     public void hideLoading() {
-        if (loadingFragment.isShowing()){
+        if (loadingFragment.isShowing()) {
             loadingFragment.dismiss();
         }
     }
@@ -108,7 +109,7 @@ public abstract class BaseFmt extends RxFragment implements BaseView {
     @Override
     public void onHiddenChanged(boolean hidden) {
         if (hidden) {
-            if (null!=immersionBar) {
+            if (null != immersionBar) {
                 immersionBar.init();
             }
         }
@@ -118,7 +119,7 @@ public abstract class BaseFmt extends RxFragment implements BaseView {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (null!=unBinder){
+        if (null != unBinder) {
             unBinder.unbind();
         }
     }

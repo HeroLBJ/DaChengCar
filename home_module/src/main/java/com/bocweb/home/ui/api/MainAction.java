@@ -46,4 +46,9 @@ public class MainAction extends ActionsCreator {
         reqDate(ServiceManager.create(ApiHomeService.class).postMomentPublish(content, photo),
                 act, false, ReqTag.REQ_TAG_POST_HOME_MOMENT_PUBLISH);
     }
+
+    public void postMomentFollow(BaseFluxFragment act, String mid) {
+        reqDate(ServiceManager.create(ApiHomeService.class).postMomentFollow(mid),
+                act, false, ReqTag.REQ_TAG_POST_HOME_MOMENT_FOLLOW);
+    }
 }

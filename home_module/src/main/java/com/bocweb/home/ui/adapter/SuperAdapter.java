@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * @author libingjun
  * @date 2019/4/10
  */
-public  class SuperAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SuperAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<IDelegateAdapter> mAdapterList = new ArrayList<>();
 

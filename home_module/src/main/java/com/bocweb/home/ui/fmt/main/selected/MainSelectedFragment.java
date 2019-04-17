@@ -8,12 +8,16 @@ import com.bocweb.home.R2;
 import com.bocweb.home.ui.adapter.SuperAdapter;
 import com.bocweb.home.ui.api.MainAction;
 import com.bocweb.home.ui.api.MainStore;
+import com.bocweb.home.ui.bean.StatusResponse;
 import com.bocweb.home.ui.bean.MainSelectedFlag;
 import com.bocweb.home.ui.bean.MainSelectedItem;
+import com.bocweb.home.ui.bean.TargetInfo;
+import com.bocweb.home.ui.bean.UserInfo;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.stores.Store;
+import com.njh.common.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -32,7 +36,9 @@ import butterknife.BindView;
  */
 @Route(path = RouterHub.Home.HOME_SELECTED)
 public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction>
-        implements OnRefreshLoadMoreListener {
+        implements OnRefreshLoadMoreListener, JustNowZeroAdapter.OnStatusListener
+        , JustNowOneAdapter.OnStatusListener, JustNowTwoAdapter.OnStatusListener
+        , JustNowMoreAdapter.OnStatusListener {
 
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -57,31 +63,61 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
         mRecyclerView.setLayoutManager(llm);
 
         mSuperAdapter = new SuperAdapter(getContext(), mMainSelectedItemList);
+        JustNowZeroAdapter zero = new JustNowZeroAdapter(getContext());
+        JustNowOneAdapter one = new JustNowOneAdapter(getContext());
+        JustNowTwoAdapter two = new JustNowTwoAdapter(getContext());
+        JustNowMoreAdapter more = new JustNowMoreAdapter(getContext());
         mSuperAdapter.addDelegate(new JustNowInfoAdapter(getContext()));
         mSuperAdapter.addDelegate(new JustNowActivityAdapter(getContext()));
-        mSuperAdapter.addDelegate(new JustNowOneAdapter(getContext()));
-        mSuperAdapter.addDelegate(new JustNowTwoAdapter(getContext()));
-        mSuperAdapter.addDelegate(new JustNowMoreAdapter(getContext()));
-        mSuperAdapter.addDelegate(new JustNowZeroAdapter(getContext()));
+        mSuperAdapter.addDelegate(zero);
+        mSuperAdapter.addDelegate(one);
+        mSuperAdapter.addDelegate(two);
+        mSuperAdapter.addDelegate(more);
         mRecyclerView.setAdapter(mSuperAdapter);
+        zero.setOnStatusListener(this);
+        one.setOnStatusListener(this);
+        two.setOnStatusListener(this);
+        more.setOnStatusListener(this);
     }
 
     private void initRequest() {
         showLoading();
-        actionsCreator().getSelectedFlag(this, "10",currentPage+"", "");
+        actionsCreator().getSelectedFlag(this, "10", currentPage + "", "");
     }
 
     @Override
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
         hideLoading();
-        if (event.url.equals(ReqTag.REQ_TAG_GET_HOME_MOMENT_SELECTED_FLAG)) {
-            MainSelectedFlag flag = (MainSelectedFlag) event.data;
-            mMainSelectedItemList.clear();
-            mMainSelectedItemList.addAll(flag.getList());
-            mSuperAdapter.notifyDataSetChanged();
-            maxNum = flag.getCount();
+        switch (event.url) {
+            case ReqTag.REQ_TAG_GET_HOME_MOMENT_SELECTED_FLAG:
+                MainSelectedFlag flag = (MainSelectedFlag) event.data;
+                mMainSelectedItemList.clear();
+                mMainSelectedItemList.addAll(flag.getList());
+                mSuperAdapter.notifyDataSetChanged();
+                maxNum = flag.getCount();
+                break;
+            case ReqTag.REQ_TAG_POST_HOME_MOMENT_FOLLOW:
+                StatusResponse statusResponse = (StatusResponse) event.data;
+                int status = statusResponse.getStatus();
+                LogUtil.e("status:" + status);
+                for (MainSelectedItem item : mMainSelectedItemList) {
+                    TargetInfo targetInfo = item.getTargetInfo();
+                    if (targetInfo == null) {
+                        return;
+                    }
+                    UserInfo userInfo = targetInfo.getUserInfo();
+                    if (userInfo == null) {
+                        return;
+                    }
+                    if (followId.equals(targetInfo.getAccountId())) {
+                        userInfo.setIsFollow(status);
+                    }
+                }
+                mSuperAdapter.notifyDataSetChanged();
+                break;
         }
+
     }
 
     @Override
@@ -111,5 +147,14 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         currentPage = 0;
         initRequest();
+    }
+
+    private String followId;
+
+    @Override
+    public void onStatusClick(String id) {
+        followId = id;
+        showLoading();
+        actionsCreator().postMomentFollow(this, id);
     }
 }

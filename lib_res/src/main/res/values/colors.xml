@@ -42,4 +42,6 @@
     <color name="res_red_selected">#FF5900</color>
     <color name="res_follow_start">#FFFF8340</color>
     <color name="res_follow_end">#FFFF5900</color>
+
+    <color name="res_no_follow_bg">#FFF8F8F9</color>
 </resources>

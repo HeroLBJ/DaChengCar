@@ -47,4 +47,14 @@ public class MainStore extends Store {
     public void postMomentPublish(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.REQ_TAG_POST_HOME_MOMENT_PUBLISH, data);
     }
+
+    @BindAction(ReqTag.REQ_TAG_POST_HOME_MOMENT_FOLLOW)
+    public void postMomentFollow(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.REQ_TAG_POST_HOME_MOMENT_FOLLOW, data);
+    }
+
+    @BindAction(ReqTag.REQ_TAG_POST_HOME_ACTIVITY_ACTIVITY_ZAN)
+    public void postActivityActivityZan(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.REQ_TAG_POST_HOME_ACTIVITY_ACTIVITY_ZAN, data);
+    }
 }

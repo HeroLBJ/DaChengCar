@@ -8,7 +8,7 @@ import com.njh.common.flux.actions.ActionsCreator;
 import com.njh.common.flux.annotation.BindEvent;
 import com.njh.common.flux.dispatcher.Dispatcher;
 import com.njh.common.flux.stores.Store;
-import com.njh.common.utils.LogUtil;
+
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -19,18 +19,20 @@ import java.lang.reflect.Type;
 /**
  * @author niejiahuan
  */
-public abstract class BaseFluxFragment<STORE extends Store,CREATER extends ActionsCreator>
+public abstract class BaseFluxFragment<STORE extends Store, CREATER extends ActionsCreator>
         extends BaseFmt {
     protected Dispatcher dispatcher;
     private STORE store;
     private CREATER actionCreater;
-    protected boolean flux(){
+
+    protected boolean flux() {
         return false;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(flux()) {
+        if (flux()) {
             dispatcher = Dispatcher.get(new EventBus());
             if (store() != null) {
                 dispatcher.start();
@@ -52,7 +54,8 @@ public abstract class BaseFluxFragment<STORE extends Store,CREATER extends Actio
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(flux() && store() != null) {
+        EventBus.getDefault().unregister(this);
+        if (flux() && store() != null) {
             dispatcher.stop();
             dispatcher.unregister(this);
             dispatcher.unregister(store());
@@ -60,33 +63,36 @@ public abstract class BaseFluxFragment<STORE extends Store,CREATER extends Actio
     }
 
     @BindEvent
-    public void onEvent(Store.StoreChangeEvent event){
+    public void onEvent(Store.StoreChangeEvent event) {
         updateView(event);
     }
 
     /**
      * store状态刷新view
+     *
      * @param event
      */
-    protected void updateView(Store.StoreChangeEvent event){
+    protected void updateView(Store.StoreChangeEvent event) {
 
     }
 
-    protected final STORE store(){
-        if(store == null){
+    protected final STORE store() {
+        if (store == null) {
             store = (STORE) newInstance(getType(Store.class.getName()),
                     new Class<?>[]{Dispatcher.class}, dispatcher);
         }
         return store;
     }
-    protected final CREATER actionsCreator(){
-        if(actionCreater == null){
-            actionCreater = (CREATER) newInstance(getType( ActionsCreator.class.getName()),
+
+    protected final CREATER actionsCreator() {
+        if (actionCreater == null) {
+            actionCreater = (CREATER) newInstance(getType(ActionsCreator.class.getName()),
                     new Class<?>[]{Dispatcher.class, BaseView.class},
-                    dispatcher,this);
+                    dispatcher, this);
         }
         return actionCreater;
     }
+
     /**
      * 获取子类的泛型参数
      *
@@ -101,26 +107,26 @@ public abstract class BaseFluxFragment<STORE extends Store,CREATER extends Actio
         if (superclass == null) {
             throw new RuntimeException("Missing type parameter.");
         }
-        Type[]types = ((ParameterizedType) superclass).getActualTypeArguments();
-        for(int i =0 ;i<types.length;i++){
+        Type[] types = ((ParameterizedType) superclass).getActualTypeArguments();
+        for (int i = 0; i < types.length; i++) {
             Class<?> cls = null;
-            if(types[i] instanceof Class){
+            if (types[i] instanceof Class) {
                 cls = (Class<?>) types[i];
-            }else {
+            } else {
                 Type t = types[i];
-                if(t instanceof ParameterizedType){
+                if (t instanceof ParameterizedType) {
                     cls = (Class<?>) ((ParameterizedType) t).getRawType();
                 }
             }
             if (cls == null) {
                 throw new RuntimeException("Missing type parameter.");
             }
-            if(cls.getName().equals(name)){
+            if (cls.getName().equals(name)) {
                 return cls;
             }
             Class c = cls;
-            while ((c = c.getSuperclass()) != null && !c.getName().equals("java.lang.Object")){
-                if(c.getName().equals(name)){
+            while ((c = c.getSuperclass()) != null && !c.getName().equals("java.lang.Object")) {
+                if (c.getName().equals(name)) {
                     return cls;
                 }
             }
@@ -128,7 +134,7 @@ public abstract class BaseFluxFragment<STORE extends Store,CREATER extends Actio
         return null;
     }
 
-    protected <T> T newInstance(Class<T> cls, Class<?>[]params, Object... args){
+    protected <T> T newInstance(Class<T> cls, Class<?>[] params, Object... args) {
         try {
             Constructor<?> constructor = cls.getDeclaredConstructor(params);
             constructor.setAccessible(true);
@@ -139,11 +145,12 @@ public abstract class BaseFluxFragment<STORE extends Store,CREATER extends Actio
         return null;
 
     }
+
     @Override
     public void onError(int code, String msg, String tag) {
-        if (code==114){
+        if (code == 114) {
             //TODO
-        }else {
+        } else {
             showToast(msg);
         }
     }

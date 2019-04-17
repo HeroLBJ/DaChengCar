@@ -17,6 +17,8 @@ import com.bocweb.home.ui.bean.UserInfo;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -80,7 +82,9 @@ public class JustNowZeroAdapter implements IDelegateAdapter<MainSelectedItem> {
         });
 
         viewHolder.tvAdd.setOnClickListener(v -> {
-            Toast.makeText(mContext, "关注和取消关注", Toast.LENGTH_SHORT).show();
+            if (onStatusListener != null) {
+                onStatusListener.onStatusClick(targetInfo.getAccountId());
+            }
         });
 
         viewHolder.rlRoot.setOnClickListener(v -> {
@@ -116,5 +120,15 @@ public class JustNowZeroAdapter implements IDelegateAdapter<MainSelectedItem> {
             tvAdd = itemView.findViewById(R.id.tv_add);
             rlRoot = itemView.findViewById(R.id.rl_layout);
         }
+    }
+
+    private OnStatusListener onStatusListener;
+
+    public void setOnStatusListener(OnStatusListener onStatusListener) {
+        this.onStatusListener = onStatusListener;
+    }
+
+    public interface OnStatusListener {
+        void onStatusClick(String id);
     }
 }

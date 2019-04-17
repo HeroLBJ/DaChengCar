@@ -3,6 +3,7 @@ package com.bocweb.home.ui.api;
 import com.bocweb.home.ui.bean.ActivityList;
 import com.bocweb.home.ui.bean.ActivityPreviewsList;
 import com.bocweb.home.ui.bean.CustomData;
+import com.bocweb.home.ui.bean.StatusResponse;
 import com.bocweb.home.ui.bean.Friend;
 import com.bocweb.home.ui.bean.MainComentList;
 import com.bocweb.home.ui.bean.MainSelectedFlag;
@@ -10,6 +11,7 @@ import com.njh.network.bean.ResponseBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
@@ -40,5 +42,15 @@ public interface ApiHomeService {
             @Query("limit") String limit, @Query("page") String page, @Query("keyword") String keyword);
 
     @POST("v1/moment/publish")
+    @FormUrlEncoded
     Observable<ResponseBean<Object>> postMomentPublish(@Field("content") String content, @Field("photo") String photo);
+
+    /**
+     * 关注与取消关注
+     *
+     * @param mid 被关注人的id
+     */
+    @POST("v1/moment/follow")
+    @FormUrlEncoded
+    Observable<ResponseBean<StatusResponse>> postMomentFollow(@Field("mid") String mid);
 }
