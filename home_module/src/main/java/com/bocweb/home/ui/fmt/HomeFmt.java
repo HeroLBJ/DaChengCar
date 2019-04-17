@@ -13,6 +13,7 @@ import com.bocweb.home.R2;
 import com.bocweb.home.ui.adapter.HomeViewPagerAdapter;
 import com.bocweb.home.ui.util.CustomSlidingTablayout;
 import com.bocweb.home.ui.widget.CustomPopWindow;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.utils.arouter.ArouterUtils;

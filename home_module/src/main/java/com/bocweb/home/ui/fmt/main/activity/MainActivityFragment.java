@@ -9,10 +9,13 @@ import com.bocweb.home.ui.api.MainAction;
 import com.bocweb.home.ui.api.MainStore;
 import com.bocweb.home.ui.bean.ActivityList;
 import com.bocweb.home.ui.bean.ActivityListItem;
+import com.bocweb.home.ui.util.TopSmoothScroller;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.stores.Store;
+import com.njh.common.utils.common.ScreenUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -22,6 +25,7 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
@@ -37,9 +41,12 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
     RecyclerView mRecyclerView;
     @BindView(R2.id.refresh_layout)
     SmartRefreshLayout mRefreshLayout;
+    @BindView(R2.id.fab_top)
+    FloatingActionButton fabTop;
 
     private ActivityAdapter mAdapter;
     private List<ActivityListItem> mList = new ArrayList<>();
+    private LinearLayoutManager llm;
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -48,7 +55,7 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
     }
 
     private void initData() {
-        LinearLayoutManager llm = new LinearLayoutManager(mContext);
+        llm = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(llm);
     }
 
@@ -70,9 +77,30 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
         }
     }
 
+    private int scrollDistance;
+
     @Override
     public void setListener() {
         mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        fabTop.setOnClickListener(v -> onTop());
+        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                scrollDistance += dy;
+                if (scrollDistance >= ScreenUtil.getScreenHeight(getContext())) {
+                    fabTop.show();
+                } else {
+                    fabTop.hide();
+                }
+            }
+        });
+    }
+
+    private void onTop() {
+        LinearSmoothScroller s1 = new TopSmoothScroller(getActivity());
+        s1.setTargetPosition(0);
+        llm.startSmoothScroll(s1);
     }
 
     @Override

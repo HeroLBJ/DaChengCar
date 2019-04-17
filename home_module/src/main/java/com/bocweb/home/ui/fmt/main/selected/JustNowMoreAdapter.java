@@ -19,8 +19,6 @@ import com.bocweb.home.ui.bean.UserInfo;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -88,7 +86,7 @@ public class JustNowMoreAdapter implements IDelegateAdapter<MainSelectedItem> {
         }
 
         viewHolder.nineView.setOnClickListener(v -> {
-            EventBus.getDefault().post(88888);
+
         });
 
         viewHolder.civPhoto.setOnClickListener(v -> {

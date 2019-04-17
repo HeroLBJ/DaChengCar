@@ -3,6 +3,8 @@ package com.bocweb.home.ui.adapter;
 import android.content.Context;
 import android.view.ViewGroup;
 
+import com.njh.common.utils.LogUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 

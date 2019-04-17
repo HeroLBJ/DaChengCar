@@ -9,14 +9,14 @@
     <com.wuhenzhizao.titlebar.widget.CommonTitleBar
         android:id="@+id/titleBar"
         android:layout_width="match_parent"
-        app:centerTextColor="@color/res_black"
-        app:centerTextSize="18sp"
-        app:showBottomLine="false"
-        app:centerType="textView"
+        android:layout_height="wrap_content"
         android:paddingTop="13dp"
         android:paddingBottom="13dp"
-        android:layout_height="wrap_content"
-        app:centerText="橙子俱乐部" />
+        app:centerText="橙子俱乐部"
+        app:centerTextColor="@color/res_black"
+        app:centerTextSize="18sp"
+        app:centerType="textView"
+        app:showBottomLine="false" />
 
     <com.bocweb.home.ui.util.CustomSlidingTablayout
         android:id="@+id/sliding_tab_layout"

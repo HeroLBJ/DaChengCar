@@ -110,13 +110,23 @@ public class JustNowOneAdapter implements IDelegateAdapter<MainSelectedItem> {
         });
     }
 
-    public void setFollowStatus(TextView tvAdd, int status) {
+    private void setFollowStatus(TextView tvAdd, int status) {
         if (status == 0) {
             tvAdd.setText("+ 关注");
             tvAdd.setBackgroundResource(R.drawable.home_follow_bg);
         } else {
             tvAdd.setText("已关注");
             tvAdd.setBackgroundResource(R.drawable.home_no_follow_bg);
+        }
+    }
+
+    private void setZanStatus(TextView tvZan, int status) {
+        if (status == 0) {
+            tvZan.setText("+ 关注");
+            tvZan.setBackgroundResource(R.drawable.home_follow_bg);
+        } else {
+            tvZan.setText("已关注");
+            tvZan.setBackgroundResource(R.drawable.home_no_follow_bg);
         }
     }
 
