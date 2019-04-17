@@ -53,4 +53,13 @@ public interface ApiHomeService {
     @POST("v1/moment/follow")
     @FormUrlEncoded
     Observable<ResponseBean<StatusResponse>> postMomentFollow(@Field("mid") String mid);
+
+    /**
+     * 活动的点赞
+     *
+     * @param id 被关注人的id
+     */
+    @POST("v2/activity/activity_zan")
+    @FormUrlEncoded
+    Observable<ResponseBean<StatusResponse>> postActivityActivityZan(@Field("mid") String id);
 }

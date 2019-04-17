@@ -116,6 +116,22 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
                 }
                 mSuperAdapter.notifyDataSetChanged();
                 break;
+            case ReqTag.REQ_TAG_GET_HOME_ACTIVITY_ACTIVITY_LIST:
+                StatusResponse zanResponse = (StatusResponse) event.data;
+                int zanStatus = zanResponse.getStatus();
+                LogUtil.e("zanStatus:" + zanStatus);
+                for (MainSelectedItem item : mMainSelectedItemList) {
+                    TargetInfo targetInfo = item.getTargetInfo();
+                    if (targetInfo == null) {
+                        return;
+                    }
+
+                    if (followId.equals(targetInfo.getAccountId())) {
+                        targetInfo.setIszan(zanStatus + "");
+                    }
+                }
+                mSuperAdapter.notifyDataSetChanged();
+                break;
         }
 
     }
@@ -156,5 +172,12 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
         followId = id;
         showLoading();
         actionsCreator().postMomentFollow(this, id);
+    }
+
+    @Override
+    public void onZanClick(String id) {
+        followId = id;
+        showLoading();
+        actionsCreator().postActivityActivityZan(this, id);
     }
 }

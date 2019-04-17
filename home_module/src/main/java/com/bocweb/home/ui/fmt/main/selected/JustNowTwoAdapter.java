@@ -110,7 +110,9 @@ public class JustNowTwoAdapter implements IDelegateAdapter<MainSelectedItem> {
         });
 
         viewHolder.tvZan.setOnClickListener(v -> {
-            Toast.makeText(mContext, "点赞和取消赞", Toast.LENGTH_SHORT).show();
+            if (onStatusListener != null) {
+                onStatusListener.onZanClick(targetInfo.getAccountId());
+            }
         });
     }
 
@@ -152,5 +154,6 @@ public class JustNowTwoAdapter implements IDelegateAdapter<MainSelectedItem> {
 
     public interface OnStatusListener {
         void onStatusClick(String id);
+        void onZanClick(String id);
     }
 }
