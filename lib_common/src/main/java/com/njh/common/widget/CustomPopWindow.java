@@ -1,4 +1,4 @@
-package com.bocweb.home.ui.widget;
+package com.njh.common.widget;
 
 import android.content.Context;
 import android.graphics.Color;

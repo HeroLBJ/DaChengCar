@@ -42,7 +42,7 @@ import butterknife.BindView;
 public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction>
         implements OnRefreshLoadMoreListener, JustNowZeroAdapter.OnStatusListener
         , JustNowOneAdapter.OnStatusListener, JustNowTwoAdapter.OnStatusListener
-        , JustNowMoreAdapter.OnStatusListener {
+        , JustNowMoreAdapter.OnStatusListener, JustNowFourAdapter.OnStatusListener {
 
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -62,6 +62,7 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
     @Override
     public void initData(Bundle savedInstanceState) {
         initData();
+        initAdapter();
         initRequest();
     }
 
@@ -70,21 +71,30 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
         llm = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(llm);
 
+
+    }
+
+    private void initAdapter() {
         mSuperAdapter = new SuperAdapter(getContext(), mMainSelectedItemList);
         JustNowZeroAdapter zero = new JustNowZeroAdapter(getContext());
         JustNowOneAdapter one = new JustNowOneAdapter(getContext());
         JustNowTwoAdapter two = new JustNowTwoAdapter(getContext());
+        JustNowFourAdapter four = new JustNowFourAdapter(getContext());
         JustNowMoreAdapter more = new JustNowMoreAdapter(getContext());
+
         mSuperAdapter.addDelegate(new JustNowInfoAdapter(getContext()));
         mSuperAdapter.addDelegate(new JustNowActivityAdapter(getContext()));
         mSuperAdapter.addDelegate(zero);
         mSuperAdapter.addDelegate(one);
         mSuperAdapter.addDelegate(two);
+        mSuperAdapter.addDelegate(four);
         mSuperAdapter.addDelegate(more);
         mRecyclerView.setAdapter(mSuperAdapter);
+
         zero.setOnStatusListener(this);
         one.setOnStatusListener(this);
         two.setOnStatusListener(this);
+        four.setOnStatusListener(this);
         more.setOnStatusListener(this);
     }
 

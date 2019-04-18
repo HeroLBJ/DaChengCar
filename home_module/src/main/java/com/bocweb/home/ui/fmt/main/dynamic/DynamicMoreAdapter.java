@@ -47,7 +47,7 @@ public class DynamicMoreAdapter implements IDelegateAdapter<TargetInfo> {
         if (photoArr == null) {
             return false;
         }
-        return photoArr.size() >= 3;
+        return photoArr.size() == 3 || photoArr.size() > 4;
     }
 
     @Override

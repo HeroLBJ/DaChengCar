@@ -18,6 +18,7 @@ import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.core.RouterHub;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
+import com.njh.common.widget.RoundAngleAndSquareImageView;
 import com.njh.common.widget.RoundAngleImageView;
 
 import java.util.List;
@@ -115,8 +116,8 @@ public class DynamicTwoAdapter implements IDelegateAdapter<TargetInfo> {
         TextView tvSee;
         TextView tvSay;
         TextView tvZan;
-        RoundAngleImageView ivPhoto1;
-        RoundAngleImageView ivPhoto2;
+        RoundAngleAndSquareImageView ivPhoto1;
+        RoundAngleAndSquareImageView ivPhoto2;
         CircleImageView civPhoto;
         TextView tvName;
         TextView tvAdd;

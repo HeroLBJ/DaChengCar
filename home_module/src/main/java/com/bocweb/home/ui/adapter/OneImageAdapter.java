@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import com.bocweb.home.R;
 import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.utils.img.GlideUtils;
-import com.njh.common.widget.RoundAngleImageView;
+import com.njh.common.widget.RoundAngleAndSquareImageView;
 
 import java.util.List;
 
@@ -53,7 +53,7 @@ public class OneImageAdapter extends RecyclerView.Adapter<OneImageAdapter.ViewHo
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        RoundAngleImageView ivImage;
+        RoundAngleAndSquareImageView ivImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

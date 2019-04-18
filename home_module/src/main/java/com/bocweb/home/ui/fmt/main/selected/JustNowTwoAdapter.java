@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,9 +20,7 @@ import com.bocweb.home.ui.image.ShowImagesDialog;
 import com.njh.common.core.RouterHub;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
-import com.njh.common.widget.RoundAngleImageView;
-
-import org.greenrobot.eventbus.EventBus;
+import com.njh.common.widget.RoundAngleAndSquareImageView;
 
 import java.util.List;
 
@@ -129,8 +128,8 @@ public class JustNowTwoAdapter implements IDelegateAdapter<MainSelectedItem> {
         TextView tvSee;
         TextView tvSay;
         TextView tvZan;
-        RoundAngleImageView ivPhoto1;
-        RoundAngleImageView ivPhoto2;
+        RoundAngleAndSquareImageView ivPhoto1;
+        RoundAngleAndSquareImageView ivPhoto2;
         CircleImageView civPhoto;
         TextView tvName;
         TextView tvAdd;

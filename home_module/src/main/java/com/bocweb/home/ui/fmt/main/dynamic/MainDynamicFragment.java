@@ -9,7 +9,6 @@ import com.bocweb.home.ui.adapter.SuperAdapter;
 import com.bocweb.home.ui.api.MainAction;
 import com.bocweb.home.ui.api.MainStore;
 import com.bocweb.home.ui.bean.MainComentList;
-import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.StatusResponse;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
@@ -19,14 +18,10 @@ import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.stores.Store;
-import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.common.ScreenUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
-
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +40,7 @@ import butterknife.BindView;
 public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
         implements OnRefreshLoadMoreListener, DynamicZeroAdapter.OnStatusListener,
         DynamicOneAdapter.OnStatusListener, DynamicTwoAdapter.OnStatusListener,
-        DynamicMoreAdapter.OnStatusListener {
+        DynamicMoreAdapter.OnStatusListener, DynamicFourAdapter.OnStatusListener {
 
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -55,18 +50,44 @@ public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
     FloatingActionButton fabTop;
 
     private SuperAdapter mSuperAdapter;
+
     private List<TargetInfo> mMainSelectedItemList = new ArrayList<>();
     private LinearLayoutManager llm;
 
     @Override
     public void initData(Bundle savedInstanceState) {
         initData();
+        initAdapter();
         initRequest();
     }
 
     private void initData() {
         llm = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(llm);
+    }
+
+    private void initAdapter() {
+        mSuperAdapter = new SuperAdapter(getContext(), mMainSelectedItemList);
+
+        DynamicZeroAdapter zero = new DynamicZeroAdapter(getContext());
+        DynamicOneAdapter one = new DynamicOneAdapter(getContext());
+        DynamicTwoAdapter two = new DynamicTwoAdapter(getContext());
+        DynamicFourAdapter four = new DynamicFourAdapter(getContext());
+        DynamicMoreAdapter more = new DynamicMoreAdapter(getContext());
+
+        mSuperAdapter.addDelegate(zero);
+        mSuperAdapter.addDelegate(one);
+        mSuperAdapter.addDelegate(two);
+        mSuperAdapter.addDelegate(four);
+        mSuperAdapter.addDelegate(more);
+
+        mRecyclerView.setAdapter(mSuperAdapter);
+
+        zero.setOnStatusListener(this);
+        one.setOnStatusListener(this);
+        two.setOnStatusListener(this);
+        four.setOnStatusListener(this);
+        more.setOnStatusListener(this);
     }
 
     private void initRequest() {
@@ -83,12 +104,7 @@ public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
                 MainComentList item = (MainComentList) event.data;
                 mMainSelectedItemList.clear();
                 mMainSelectedItemList.addAll(item.getList());
-                mSuperAdapter = new SuperAdapter(getContext(), mMainSelectedItemList);
-                mSuperAdapter.addDelegate(new DynamicZeroAdapter(getContext()));
-                mSuperAdapter.addDelegate(new DynamicOneAdapter(getContext()));
-                mSuperAdapter.addDelegate(new DynamicTwoAdapter(getContext()));
-                mSuperAdapter.addDelegate(new DynamicMoreAdapter(getContext()));
-                mRecyclerView.setAdapter(mSuperAdapter);
+                mSuperAdapter.notifyDataSetChanged();
                 break;
             case ReqTag.REQ_TAG_POST_HOME_MOMENT_FOLLOW:
                 StatusResponse statusResponse = (StatusResponse) event.data;
@@ -127,6 +143,7 @@ public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
     }
 
     private int scrollDistance;
+
     @Override
     public void setListener() {
         mRefreshLayout.setOnRefreshLoadMoreListener(this);

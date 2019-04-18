@@ -5,15 +5,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Vibrator;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.bocweb.home.R;
-import com.bocweb.home.ui.widget.CustomPopWindow;
 
 import java.util.ArrayList;
 import java.util.Collections;
