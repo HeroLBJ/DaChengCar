@@ -161,6 +161,7 @@
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:layout_width="40dp"
+                    android:id="@+id/fab_call3"
                     android:layout_height="40dp"
                     android:layout_gravity="center|right"
                     android:layout_marginRight="67dp"
