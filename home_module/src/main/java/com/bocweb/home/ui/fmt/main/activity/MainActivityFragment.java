@@ -72,7 +72,7 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
             ActivityList item = (ActivityList) event.data;
             mList.clear();
             mList.addAll(item.getList());
-            mAdapter = new ActivityAdapter(mList);
+            mAdapter = new ActivityAdapter(getContext(),mList);
             mRecyclerView.setAdapter(mAdapter);
         }
     }
