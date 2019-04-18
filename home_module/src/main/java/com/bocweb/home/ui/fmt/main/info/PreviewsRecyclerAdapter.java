@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bocweb.home.R;
 import com.bocweb.home.ui.bean.Previews;
+import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
 
@@ -53,8 +54,7 @@ public class PreviewsRecyclerAdapter extends RecyclerView.Adapter<PreviewsRecycl
         if (position == 0) {
             MyViewPagerAdapter adapter = new MyViewPagerAdapter(mContext, mFlagList);
             holder.viewPager.setAdapter(adapter);
-            holder.viewPager.setCurrentItem(1000);
-            holder.viewPager.setOffscreenPageLimit(5);
+            holder.viewPager.setCurrentItem(10000);
         } else {
             Previews previews = mDataList.get(position - 1);
             if (previews != null) {
@@ -73,15 +73,6 @@ public class PreviewsRecyclerAdapter extends RecyclerView.Adapter<PreviewsRecycl
         } else {
             return 1;
         }
-//        if (mFlagList == null) {
-//            return 2;
-//        } else {
-//            if (position == 0) {
-//                return 1;
-//            } else {
-//                return 2;
-//            }
-//        }
     }
 
     @Override

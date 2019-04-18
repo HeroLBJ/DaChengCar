@@ -17,8 +17,8 @@ public class MainAction extends ActionsCreator {
         super(dispatcher, baseView);
     }
 
-    public void getSelectedFlag(BaseFluxFragment act, String limit,String page, String city) {
-        reqDate(ServiceManager.create(ApiHomeService.class).getSelectedFlag(limit, page , city),
+    public void getSelectedFlag(BaseFluxFragment act, String limit, String page, String city) {
+        reqDate(ServiceManager.create(ApiHomeService.class).getSelectedFlag(limit, page, city),
                 act, false, ReqTag.REQ_TAG_GET_HOME_MOMENT_SELECTED_FLAG);
     }
 
@@ -38,7 +38,7 @@ public class MainAction extends ActionsCreator {
     }
 
     public void getMomentMemberSearch(BaseFluxActivity act, int page, String keyword) {
-        reqDate(ServiceManager.create(ApiHomeService.class).getMomentMemberSearch("10", page+"", keyword),
+        reqDate(ServiceManager.create(ApiHomeService.class).getMomentMemberSearch("10", page + "", keyword),
                 act, false, ReqTag.REQ_TAG_GET_HOME_MOMENT_MEMBER_SEARCH);
     }
 
@@ -55,5 +55,10 @@ public class MainAction extends ActionsCreator {
     public void postActivityActivityZan(BaseFluxFragment act, String id) {
         reqDate(ServiceManager.create(ApiHomeService.class).postActivityActivityZan(id),
                 act, false, ReqTag.REQ_TAG_POST_HOME_ACTIVITY_ACTIVITY_ZAN);
+    }
+
+    public void postActivityPreviewsZan(BaseFluxFragment act, String id, String type) {
+        reqDate(ServiceManager.create(ApiHomeService.class).postActivityPreviewsZan(id, type),
+                act, false, ReqTag.REQ_TAG_POST_HOME_ACTIVITY_PREVIEWS_ZAN);
     }
 }

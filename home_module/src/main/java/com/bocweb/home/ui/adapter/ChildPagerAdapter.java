@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bocweb.home.R;
 import com.bocweb.home.ui.bean.SelectedActivity;
+import com.njh.common.core.RouterHub;
 import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
@@ -17,6 +19,7 @@ import com.njh.common.widget.RoundAngleImageView;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.PagerAdapter;
 
@@ -76,6 +79,7 @@ public class ChildPagerAdapter extends PagerAdapter {
         RoundAngleImageView ivPhoto = layout.findViewById(R.id.iv_photo);
         TextView tvTime = layout.findViewById(R.id.tv_time);
         TextView tvTitle = layout.findViewById(R.id.tv_title);
+        CardView cardView = layout.findViewById(R.id.cardView);
 
         SelectedActivity item = list.get(position % size);
 
@@ -91,6 +95,14 @@ public class ChildPagerAdapter extends PagerAdapter {
             tvTime.setTextColor(ContextCompat.getColor(mContext, R.color.res_red_selected));
             indexDefault = -1;
         }
+
+        cardView.setOnClickListener(v -> {
+            ARouter.getInstance()
+                    .build(RouterHub.Web.WEB)
+                    .withString("url", "http://www.baidu.com")
+                    .withString("title", "活动详情页面")
+                    .navigation();
+        });
 
         container.addView(layout);
         return layout;

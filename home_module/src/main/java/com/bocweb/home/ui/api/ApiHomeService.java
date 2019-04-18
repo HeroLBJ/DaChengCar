@@ -61,5 +61,15 @@ public interface ApiHomeService {
      */
     @POST("v2/activity/activity_zan")
     @FormUrlEncoded
-    Observable<ResponseBean<StatusResponse>> postActivityActivityZan(@Field("mid") String id);
+    Observable<ResponseBean<StatusResponse>> postActivityActivityZan(@Field("id") String id);
+
+    /**
+     * 新闻评论和新闻点赞
+     *
+     * @param id   记录id
+     * @param type 0：点赞评论  1：点赞新闻
+     */
+    @POST("v2/activity/previews_zan")
+    @FormUrlEncoded
+    Observable<ResponseBean<StatusResponse>> postActivityPreviewsZan(@Field("id") String id, @Field("type") String type);
 }

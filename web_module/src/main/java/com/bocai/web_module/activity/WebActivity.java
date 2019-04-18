@@ -1,6 +1,7 @@
 package com.bocai.web_module.activity;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -8,8 +9,6 @@ import com.bocai.web_module.R;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;
 import com.njh.common.widget.X5WebView;
-
-import butterknife.BindView;
 
 /**
  * @author libingjun
@@ -19,6 +18,7 @@ import butterknife.BindView;
 public class WebActivity extends BaseFluxActivity {
 
     private X5WebView mWebView;
+    private TextView tvTitle;
 
     @Autowired
     String url;
@@ -28,7 +28,9 @@ public class WebActivity extends BaseFluxActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         mWebView = findViewById(R.id.webView);
+        tvTitle = findViewById(R.id.tv_title);
         mWebView.loadUrl(url);
+        tvTitle.setText(title);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.bocweb.home.ui.fmt.main.selected;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bocweb.home.R;
@@ -13,6 +14,7 @@ import com.bocweb.home.ui.bean.MainSelectedFlag;
 import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
+import com.bocweb.home.ui.util.CustomSlidingTablayout;
 import com.bocweb.home.ui.util.TopSmoothScroller;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.njh.common.core.ReqTag;
@@ -33,6 +35,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
+import me.jessyan.autosize.utils.LogUtils;
 
 /**
  * @author libingjun
@@ -42,7 +45,8 @@ import butterknife.BindView;
 public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction>
         implements OnRefreshLoadMoreListener, JustNowZeroAdapter.OnStatusListener
         , JustNowOneAdapter.OnStatusListener, JustNowTwoAdapter.OnStatusListener
-        , JustNowMoreAdapter.OnStatusListener, JustNowFourAdapter.OnStatusListener {
+        , JustNowMoreAdapter.OnStatusListener, JustNowFourAdapter.OnStatusListener
+        , JustNowInfoAdapter.OnStatusListener,JustNowActivityAdapter.OnStatusListener {
 
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -81,9 +85,10 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
         JustNowTwoAdapter two = new JustNowTwoAdapter(getContext());
         JustNowFourAdapter four = new JustNowFourAdapter(getContext());
         JustNowMoreAdapter more = new JustNowMoreAdapter(getContext());
+        JustNowActivityAdapter jnActivity = new JustNowActivityAdapter(getContext());
 
         mSuperAdapter.addDelegate(new JustNowInfoAdapter(getContext()));
-        mSuperAdapter.addDelegate(new JustNowActivityAdapter(getContext()));
+        mSuperAdapter.addDelegate(jnActivity);
         mSuperAdapter.addDelegate(zero);
         mSuperAdapter.addDelegate(one);
         mSuperAdapter.addDelegate(two);
@@ -96,6 +101,7 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
         two.setOnStatusListener(this);
         four.setOnStatusListener(this);
         more.setOnStatusListener(this);
+        jnActivity.setOnStatusListener(this);
     }
 
     private void initRequest() {
@@ -150,6 +156,9 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
                     }
                 }
                 mSuperAdapter.notifyDataSetChanged();
+                break;
+            case ReqTag.REQ_TAG_POST_HOME_ACTIVITY_PREVIEWS_ZAN:
+                LogUtils.e("新闻评论或点赞");
                 break;
         }
 
@@ -220,5 +229,20 @@ public class MainSelectedFragment extends BaseFluxFragment<MainStore, MainAction
         followId = id;
         showLoading();
         actionsCreator().postActivityActivityZan(this, id);
+    }
+
+    private String infoId;
+
+    @Override
+    public void onInfoZanClick(String id) {
+        // 新闻评论与点赞
+        showLoading();
+        actionsCreator().postActivityPreviewsZan(this, id, "1");
+    }
+
+    @Override
+    public void onGoActivityPage() {
+        CustomSlidingTablayout tabLayout = getActivity().findViewById(R.id.sliding_tab_layout);
+        tabLayout.setCurrentTab(3);
     }
 }

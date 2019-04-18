@@ -4,12 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bocweb.home.R;
 import com.bocweb.home.ui.adapter.ChildPagerAdapter;
 import com.bocweb.home.ui.adapter.IDelegateAdapter;
 import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.SelectedActivity;
+import com.njh.common.core.RouterHub;
+import com.njh.common.utils.LogUtil;
+import com.njh.common.utils.arouter.ArouterUtils;
 
 import java.util.List;
 
@@ -60,15 +64,33 @@ public class JustNowActivityAdapter implements IDelegateAdapter<MainSelectedItem
                 adapter.setCurrentPage(position);
             }
         });
+
+        viewHolder.tvMore.setOnClickListener(v -> {
+            if(onStatusListener != null){
+                onStatusListener.onGoActivityPage();
+            }
+        });
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         ViewPager viewPager;
+        TextView tvMore;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             viewPager = itemView.findViewById(R.id.child_view_pager);
+            tvMore = itemView.findViewById(R.id.tv_more);
         }
+    }
+
+    private OnStatusListener onStatusListener;
+
+    public void setOnStatusListener(OnStatusListener onStatusListener) {
+        this.onStatusListener = onStatusListener;
+    }
+
+    public interface OnStatusListener {
+        void onGoActivityPage();
     }
 }

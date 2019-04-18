@@ -1,21 +1,19 @@
 package com.bocweb.home.ui.fmt.main.selected;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bocweb.home.R;
 import com.bocweb.home.ui.adapter.IDelegateAdapter;
 import com.bocweb.home.ui.bean.MainSelectedItem;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.image.ShowImagesDialog;
-import com.njh.common.utils.LogUtil;
+import com.njh.common.core.RouterHub;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.widget.RoundAngleImageView;
 import com.wuhenzhizao.titlebar.utils.ScreenUtils;
@@ -76,6 +74,20 @@ public class JustNowInfoAdapter implements IDelegateAdapter<MainSelectedItem> {
             list.add(targetInfo.getCoverVal());
             new ShowImagesDialog(mContext, list).show();
         });
+
+        viewHolder.rlRoot.setOnClickListener(v -> {
+            ARouter.getInstance()
+                    .build(RouterHub.Web.WEB)
+                    .withString("url", "http://www.baidu.com")
+                    .withString("title", "咨询详情页面")
+                    .navigation();
+        });
+
+        viewHolder.tvZan.setOnClickListener(v -> {
+            if (onStatusListener != null) {
+                onStatusListener.onInfoZanClick(targetInfo.getAccountId());
+            }
+        });
     }
 
     class InfoViewHolder extends RecyclerView.ViewHolder {
@@ -85,6 +97,7 @@ public class JustNowInfoAdapter implements IDelegateAdapter<MainSelectedItem> {
         TextView tvSay;
         TextView tvZan;
         RoundAngleImageView ivPhoto;
+        RelativeLayout rlRoot;
 
         public InfoViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,6 +106,17 @@ public class JustNowInfoAdapter implements IDelegateAdapter<MainSelectedItem> {
             tvSay = itemView.findViewById(R.id.tv_say);
             tvZan = itemView.findViewById(R.id.tv_zan);
             ivPhoto = itemView.findViewById(R.id.iv_photo);
+            rlRoot = itemView.findViewById(R.id.rl_root);
         }
+    }
+
+    private OnStatusListener onStatusListener;
+
+    public void setOnStatusListener(OnStatusListener onStatusListener) {
+        this.onStatusListener = onStatusListener;
+    }
+
+    public interface OnStatusListener {
+        void onInfoZanClick(String id);
     }
 }
