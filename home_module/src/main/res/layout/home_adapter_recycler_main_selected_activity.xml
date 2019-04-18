@@ -32,7 +32,7 @@
 
     <com.njh.common.widget.MaxViewPager
         android:id="@+id/child_view_pager"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/relativeLayout"
         android:clipToPadding="false"

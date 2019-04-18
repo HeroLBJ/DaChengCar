@@ -9,6 +9,9 @@ import com.bocweb.home.R;
 import com.bocweb.home.ui.adapter.ChildPagerAdapter;
 import com.bocweb.home.ui.adapter.IDelegateAdapter;
 import com.bocweb.home.ui.bean.MainSelectedItem;
+import com.bocweb.home.ui.bean.SelectedActivity;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -44,8 +47,19 @@ public class JustNowActivityAdapter implements IDelegateAdapter<MainSelectedItem
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, MainSelectedItem mainSelectedItem) {
         ViewHolder viewHolder = (ViewHolder) holder;
 
-        ChildPagerAdapter adapter = new ChildPagerAdapter(mContext,mainSelectedItem.getTargetInfo().getList());
+        List<SelectedActivity> list = mainSelectedItem.getTargetInfo().getList();
+
+        ChildPagerAdapter adapter = new ChildPagerAdapter(mContext, list);
         viewHolder.viewPager.setAdapter(adapter);
+        viewHolder.viewPager.setCurrentItem(10000);
+
+        viewHolder.viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                adapter.setCurrentPage(position);
+            }
+        });
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
