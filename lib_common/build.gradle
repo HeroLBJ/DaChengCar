@@ -48,6 +48,10 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     api project(':lib_base')
+    api project(':lib_network')
+    api project(':lib_res')
+    api project(':lib_title')
+
     api rootProject.ext.dependencies["greendao"]
     api rootProject.ext.dependencies["eventbus"]
     api rootProject.ext.dependencies["BaseRecyclerViewAdapterHelper"]
@@ -55,8 +59,7 @@ dependencies {
     api rootProject.ext.dependencies["glide"]
     api rootProject.ext.dependencies["hawk"]
     api rootProject.ext.dependencies["PickerView"]
-    api project(':lib_network')
-    api project(':lib_res')
-    api project(':lib_title')
+
+    // 腾讯x5内核
     api files('libs/tbs_sdk_thirdapp_v4.3.0.1020.jar')
 }

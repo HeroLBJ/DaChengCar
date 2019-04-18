@@ -8,11 +8,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.CircleImageView;
 import com.bocweb.home.R;
 import com.bocweb.home.ui.adapter.IDelegateAdapter;
 import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
+import com.njh.common.core.RouterHub;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
 
@@ -74,7 +76,11 @@ public class DynamicZeroAdapter implements IDelegateAdapter<TargetInfo> {
         });
 
         viewHolder.rlRoot.setOnClickListener(v -> {
-            Toast.makeText(mContext, "进入详情页面+评论页面", Toast.LENGTH_SHORT).show();
+            ARouter.getInstance()
+                    .build(RouterHub.Web.WEB)
+                    .withString("url", "http://www.baidu.com")
+                    .withString("title", "活动详情页面")
+                    .navigation();
         });
 
         viewHolder.tvZan.setOnClickListener(v -> {

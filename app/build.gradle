@@ -104,6 +104,7 @@ dependencies {
         implementation project(':community_module')
         implementation project(':mall_module')
         implementation project(':service_module')
+        implementation project(':web_module')
     }
     implementation rootProject.ext.dependencies["pager-bottom-tab-strip"]
 }

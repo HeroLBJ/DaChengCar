@@ -63,7 +63,6 @@ public interface RouterHub {
      */
     String COMMUNITY_FMT = COMMUNITY + "/CommunityFmt";
 
-
     interface Home {
         String Home = "/home/";//Home
         String ADD_FRIEND = Home + "AddFriend";
@@ -124,13 +123,18 @@ public interface RouterHub {
         /**
          * 个人中心
          */
-        String MINE_FMT = MINE + "/mineFmt";
+        String MINE_FMT = MINE + "mineFmt";
     }
 
-    interface Photo{
+    interface Photo {
         String PHOTO = "/photo/";
-        String PREVIEW = PHOTO +  "Preview";
+        String PREVIEW = PHOTO + "Preview";
         String CLIP_IMAGE = PHOTO + "ClickImage";
         String IMAGE_SELECTOR = PHOTO + "ImageSelector";
+    }
+
+    interface Web {
+        String H5 = "/h5/";
+        String WEB = H5 + "Web";
     }
 }
