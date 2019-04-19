@@ -27,8 +27,8 @@ public class MainAction extends ActionsCreator {
                 act, false, ReqTag.REQ_TAG_GET_HOME_MOMENT_LIST);
     }
 
-    public void getActivityList(BaseFluxFragment act, String page, String city, String type) {
-        reqDate(ServiceManager.create(ApiHomeService.class).getActivityList("10", page, city, type),
+    public void getActivityList(BaseFluxFragment act, int page, String city, String type) {
+        reqDate(ServiceManager.create(ApiHomeService.class).getActivityList("10", page + "", city, type),
                 act, false, ReqTag.REQ_TAG_GET_HOME_ACTIVITY_ACTIVITY_LIST);
     }
 

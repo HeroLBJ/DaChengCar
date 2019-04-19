@@ -1,6 +1,7 @@
 package com.bocweb.home.ui.fmt.main.activity;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bocweb.home.R;
 import com.bocweb.home.ui.bean.ActivityListItem;
+import com.njh.common.city.CityHelper;
 import com.njh.common.core.RouterHub;
+import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.img.GlideUtils;
 import com.njh.common.utils.time.TimeUtil;
 import com.njh.common.widget.CustomPopWindow;
@@ -39,6 +45,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     private TextView tvTab1, tvTab2, tvTab3, tvTab4, tvTab5;
     private List<TextView> selectList = new ArrayList<>();
     private int selectNum = 0;
+    private String defaultCity = "杭州市";
 
     public ActivityAdapter(Context context, List<ActivityListItem> data) {
         this.context = context;
@@ -46,6 +53,7 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
         inflater = LayoutInflater.from(context);
 
         initPop();
+        initCity();
     }
 
     private void initPop() {
@@ -83,7 +91,34 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
                 textView.setTextColor(ContextCompat.getColor(context, R.color.res_gray_333));
             }
         }
+        if (onSelectListener != null) {
+            onSelectListener.onSelectTypeClick(select);
+        }
         popWindow.dissmiss();
+    }
+
+    private OptionsPickerView pickerView;
+
+    private void initCity() {
+        pickerView = new OptionsPickerBuilder(context, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+//                String tx = CityHelper.getProvinceList().get(options1) +
+//                        CityHelper.getCityList().get(options1).get(options2);
+                String cityName = CityHelper.getCityList().get(options1).get(options2);
+                defaultCity = cityName;
+                if (onSelectListener != null) {
+                    onSelectListener.onSelectCityClick(cityName);
+                }
+                notifyDataSetChanged();
+            }
+        }).setTitleText("城市选择")
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(20)
+                .build();
+        pickerView.setPicker(CityHelper.getProvinceList(), CityHelper.getCityList());
     }
 
     @NonNull
@@ -101,7 +136,9 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (position == 0) {
+            holder.tvCity.setText(defaultCity);
             holder.tvCity.setOnClickListener(v -> {
+                pickerView.show();
             });
             holder.ivSelect.setOnClickListener(v -> {
                 onSelect(selectNum);
@@ -174,6 +211,6 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
     public interface OnSelectListener {
         void onSelectCityClick(String city);
 
-        void onSelectTypeClick(String type);
+        void onSelectTypeClick(int type);
     }
 }

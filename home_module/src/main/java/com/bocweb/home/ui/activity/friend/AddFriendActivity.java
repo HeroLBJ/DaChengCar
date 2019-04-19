@@ -15,10 +15,12 @@ import com.bocweb.home.ui.api.MainAction;
 import com.bocweb.home.ui.api.MainStore;
 import com.bocweb.home.ui.bean.CustomData;
 import com.bocweb.home.ui.bean.Friend;
+import com.njh.common.city.CityHelper;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;
 import com.njh.common.flux.stores.Store;
+import com.njh.common.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -63,7 +65,6 @@ public class AddFriendActivity extends BaseFluxActivity<MainStore, MainAction>
         LinearLayoutManager llm = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(llm);
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
     private void initRequest() {

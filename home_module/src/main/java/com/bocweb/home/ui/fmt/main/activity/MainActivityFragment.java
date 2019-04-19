@@ -35,7 +35,7 @@ import butterknife.BindView;
  */
 @Route(path = RouterHub.Home.HOME_ACTIVITY)
 public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction>
-        implements OnRefreshLoadMoreListener {
+        implements OnRefreshLoadMoreListener, ActivityAdapter.OnSelectListener {
 
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
@@ -50,6 +50,7 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
 
     private String defaultCity = "杭州市";
     private String defaultType = "0";
+    private int currentPage = 1;
 
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -60,11 +61,13 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
     private void initData() {
         llm = new LinearLayoutManager(mContext);
         mRecyclerView.setLayoutManager(llm);
+        mAdapter = new ActivityAdapter(getContext(), mList);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     private void initRequest() {
         showLoading();
-        actionsCreator().getActivityList(this, "1", defaultCity, defaultCity);
+        actionsCreator().getActivityList(this, currentPage, defaultCity, defaultCity);
     }
 
     @Override
@@ -75,8 +78,7 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
             ActivityList item = (ActivityList) event.data;
             mList.clear();
             mList.addAll(item.getList());
-            mAdapter = new ActivityAdapter(getContext(), mList);
-            mRecyclerView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
         }
     }
 
@@ -98,6 +100,8 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
                 }
             }
         });
+
+        mAdapter.setOnSelectListener(this);
     }
 
     private void onTop() {
@@ -126,4 +130,15 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
 
     }
 
+    @Override
+    public void onSelectCityClick(String city) {
+        defaultCity = city;
+        initRequest();
+    }
+
+    @Override
+    public void onSelectTypeClick(int type) {
+        defaultType = type + "";
+        initRequest();
+    }
 }
