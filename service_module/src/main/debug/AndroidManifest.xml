@@ -1,2 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.bocai.dachengcar.service.module" />
+    package="com.bocai.service">
+
+    <application>
+        <!-- 百度地图 -->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="vdpM5QLG8hXgQQ0RNECAwc5z1Keg5Pma"></meta-data>
+        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service>
+        <activity
+            android:name=".ui.navigation.NavigationActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+    </application>
+</manifest>
+

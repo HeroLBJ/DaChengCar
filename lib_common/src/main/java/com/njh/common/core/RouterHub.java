@@ -78,6 +78,7 @@ public interface RouterHub {
     interface Service {
         String SERVICE = "/service/";
         String ROOT = SERVICE + "Root";
+        String NAVIGATION = SERVICE + "Navigation";
     }
 
 

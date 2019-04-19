@@ -1,5 +1,7 @@
 package com.bocweb.home.ui.fmt;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +16,10 @@ import com.bocweb.home.ui.adapter.HomeViewPagerAdapter;
 import com.bocweb.home.ui.util.CustomSlidingTablayout;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
+import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.arouter.ArouterUtils;
 import com.njh.common.widget.CustomPopWindow;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
@@ -37,6 +41,7 @@ public class HomeFmt extends BaseFluxFragment {
     public void initData(Bundle savedInstanceState) {
         mViewPager.setAdapter(new HomeViewPagerAdapter(getChildFragmentManager()));
         mSlidingTabLayout.setViewPager(mViewPager);
+
     }
 
     @Override

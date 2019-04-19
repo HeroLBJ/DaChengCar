@@ -2,8 +2,10 @@ package com.njh.common;
 
 import android.util.Log;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.njh.base.app.BaseApp;
 import com.njh.common.db.manager.GreenDaoManager;
+import com.njh.common.location.LocationService;
 import com.orhanobut.hawk.Hawk;
 import com.tencent.smtt.sdk.QbSdk;
 
@@ -11,6 +13,8 @@ import com.tencent.smtt.sdk.QbSdk;
  * @author niejiahuan
  */
 public class CommonApp extends BaseApp {
+
+    public LocationService locationService;
 
     @Override
     public void onCreate() {
@@ -20,6 +24,7 @@ public class CommonApp extends BaseApp {
         Hawk.init(this).build();
         setInitUIStutas();
         initX5();
+        initLocation();
     }
 
     private void initX5() {
@@ -36,6 +41,11 @@ public class CommonApp extends BaseApp {
             public void onCoreInitFinished() {
             }
         });
+    }
+
+    private void initLocation() {
+        locationService = new LocationService(getApplicationContext());
+        SDKInitializer.initialize(getApplicationContext());
     }
 
     public void setInitUIStutas() {

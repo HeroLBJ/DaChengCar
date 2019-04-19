@@ -24,7 +24,6 @@ public class BaseApp extends Application implements IAppLife {
         return instance;
     }
 
-
     public static int EXACT_SCREEN_HEIGHT;
     public static int EXACT_SCREEN_WIDTH;
 
