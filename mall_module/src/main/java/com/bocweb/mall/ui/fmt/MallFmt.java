@@ -4,8 +4,8 @@ package com.bocweb.mall.ui.fmt;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.bocweb.home.R;
-import com.bocweb.home.R2;
+import com.bocweb.mall.R;
+import com.bocweb.mall.R2;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.widget.X5WebView;

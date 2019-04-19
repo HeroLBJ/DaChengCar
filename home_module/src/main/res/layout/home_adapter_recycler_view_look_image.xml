@@ -5,7 +5,7 @@
     android:layout_gravity="center"
     android:layout_margin="1dp">
 
-    <com.bocweb.home.ui.widget.SquareImageView
+    <ImageView
         android:id="@+id/iv_image"
         android:layout_width="74dp"
         android:layout_height="74dp"

@@ -29,6 +29,14 @@ public interface ApiHomeService {
     Observable<ResponseBean<MainComentList>> getMomentList(
             @Query("limit") String limit, @Query("page") String page);
 
+    /**
+     * 获取活动列表
+     *
+     * @param limit 每页大小
+     * @param page 页码
+     * @param city 城市名称
+     * @param type  0-全部 1-未开始 2-报名中 3-活动中 4-已结束
+     */
     @GET("v2/activity/activity_list")
     Observable<ResponseBean<ActivityList>> getActivityList(
             @Query("limit") String limit, @Query("page") String page, @Query("city") String city, @Query("type") String type);

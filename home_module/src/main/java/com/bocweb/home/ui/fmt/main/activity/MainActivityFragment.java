@@ -48,6 +48,9 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
     private List<ActivityListItem> mList = new ArrayList<>();
     private LinearLayoutManager llm;
 
+    private String defaultCity = "杭州市";
+    private String defaultType = "0";
+
     @Override
     public void initData(Bundle savedInstanceState) {
         initData();
@@ -61,7 +64,7 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
 
     private void initRequest() {
         showLoading();
-        actionsCreator().getActivityList(this, "1", "", "");
+        actionsCreator().getActivityList(this, "1", defaultCity, defaultCity);
     }
 
     @Override
@@ -72,7 +75,7 @@ public class MainActivityFragment extends BaseFluxFragment<MainStore, MainAction
             ActivityList item = (ActivityList) event.data;
             mList.clear();
             mList.addAll(item.getList());
-            mAdapter = new ActivityAdapter(getContext(),mList);
+            mAdapter = new ActivityAdapter(getContext(), mList);
             mRecyclerView.setAdapter(mAdapter);
         }
     }

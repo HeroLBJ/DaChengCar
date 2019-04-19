@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
-import com.bocweb.home.R;
+import com.bocweb.community.R;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.utils.LogUtil;

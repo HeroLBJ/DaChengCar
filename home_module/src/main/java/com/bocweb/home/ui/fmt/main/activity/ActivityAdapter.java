@@ -164,4 +164,16 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
             ivSelect = itemView.findViewById(R.id.iv_select);
         }
     }
+
+    private OnSelectListener onSelectListener;
+
+    public void setOnSelectListener(OnSelectListener onSelectListener) {
+        this.onSelectListener = onSelectListener;
+    }
+
+    public interface OnSelectListener {
+        void onSelectCityClick(String city);
+
+        void onSelectTypeClick(String type);
+    }
 }

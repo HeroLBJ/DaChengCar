@@ -21,22 +21,22 @@
 #-renamesourcefileattribute SourceFile
 
 #arouter 混淆
--keep public class com.alibaba.android.arouter.routes.**{*;}
--keep public class com.alibaba.android.arouter.facade.**{*;}
--keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
+#-keep public class com.alibaba.android.arouter.routes.**{*;}
+#-keep public class com.alibaba.android.arouter.facade.**{*;}
+#-keep class * implements com.alibaba.android.arouter.facade.template.ISyringe{*;}
 
 # 如果使用了 byType 的方式获取 Service，需添加下面规则，保护接口
--keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
+#-keep interface * implements com.alibaba.android.arouter.facade.template.IProvider
 
 # 如果使用了 单类注入，即不定义接口实现 IProvider，需添加下面规则，保护实现
 # -keep class * implements com.alibaba.android.arouter.facade.template.IProvider
 
 #ImmersionBar
--keep class com.gyf.barlibrary.* {*;}
- -dontwarn com.gyf.barlibrary.**
+#-keep class com.gyf.barlibrary.* {*;}
+# -dontwarn com.gyf.barlibrary.**
  #versionchecklib
- -keepattributes Annotation
- -keepclassmembers class * {    @org.greenrobot.eventbus.Subscribe ;}
- -keep enum org.greenrobot.eventbus.ThreadMode { *; }
- -keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {    (java.lang.Throwable);}
- -keep class com.allenliu.versionchecklib.**{*;}
+# -keepattributes Annotation
+# -keepclassmembers class * {    @org.greenrobot.eventbus.Subscribe ;}
+# -keep enum org.greenrobot.eventbus.ThreadMode { *; }
+# -keepclassmembers class * extends org.greenrobot.eventbus.util.ThrowableFailureEvent {    (java.lang.Throwable);}
+# -keep class com.allenliu.versionchecklib.**{*;}
