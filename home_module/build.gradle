@@ -6,7 +6,5 @@ android {
 
 dependencies {
     api project(':lib_select_photo')
-    api rootProject.ext.dependencies["FlycoTabLayout_Lib"]
-    api rootProject.ext.dependencies["SmartRefreshLayout"]
     api rootProject.ext.dependencies["PhotoView"]
 }

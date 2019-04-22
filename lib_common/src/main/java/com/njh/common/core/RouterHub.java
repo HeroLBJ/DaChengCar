@@ -79,6 +79,9 @@ public interface RouterHub {
         String SERVICE = "/service/";
         String ROOT = SERVICE + "Root";
         String NAVIGATION = SERVICE + "Navigation";
+        String KEEP = SERVICE + "Keep";
+        String KEEP_FREE = SERVICE + "KeepFree";
+        String KEEP_MONEY = SERVICE + "KeepMoney";
     }
 
 

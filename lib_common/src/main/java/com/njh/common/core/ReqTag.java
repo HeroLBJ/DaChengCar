@@ -20,8 +20,10 @@ public interface ReqTag {
     String REQ_TAG_POST_HOME_ACTIVITY_PREVIEWS_ZAN = "REQ_TAG_POST_HOME_ACTIVITY_PREVIEWS_ZAN";
 
     interface Service {
-        // service/dealers
+        // v1/service/dealers
         String SERVICE_DEALERS = "SERVICE_DEALERS";
+        // v1/service/package
+        String SERVICE_PACKAGE = "SERVICE_PACKAGE";
     }
 
 }

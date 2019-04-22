@@ -1,4 +1,4 @@
-package com.bocweb.home.ui.util;
+package com.njh.common.utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -20,10 +20,10 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bocweb.home.R;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.flyco.tablayout.utils.UnreadMsgUtils;
 import com.flyco.tablayout.widget.MsgView;
+import com.njh.common.R;
 
 import java.util.ArrayList;
 import java.util.Collections;

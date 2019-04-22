@@ -4,6 +4,7 @@ import com.njh.base.ui.view.BaseView;
 import com.njh.common.core.ReqTag;
 import com.njh.common.flux.actions.ActionsCreator;
 import com.njh.common.flux.base.BaseFluxActivity;
+import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.dispatcher.Dispatcher;
 import com.njh.network.api.ServiceManager;
 
@@ -19,5 +20,10 @@ public class ServiceAction extends ActionsCreator {
     public void getServiceDealers(BaseFluxActivity act, int pageNo, double longitude, double latitude, String cityName, String keyword) {
         reqDate(ServiceManager.create(ApiServiceService.class).getServiceDealers(pageNo + "", "10", longitude + "", latitude + "", cityName, keyword),
                 act, false, ReqTag.Service.SERVICE_DEALERS);
+    }
+
+    public void getServicePackage(BaseFluxFragment act, int pageNo, String type) {
+        reqDate(ServiceManager.create(ApiServiceService.class).getServicePackage(pageNo + "", "10", type),
+                act, false, ReqTag.Service.SERVICE_PACKAGE);
     }
 }

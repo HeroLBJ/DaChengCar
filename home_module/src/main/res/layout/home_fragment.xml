@@ -18,7 +18,7 @@
         app:centerType="textView"
         app:showBottomLine="false" />
 
-    <com.bocweb.home.ui.util.CustomSlidingTablayout
+    <com.njh.common.utils.CustomSlidingTablayout
         android:id="@+id/sliding_tab_layout"
         android:layout_width="wrap_content"
         android:layout_height="50dp"

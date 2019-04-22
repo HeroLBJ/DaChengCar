@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.njh.common.utils.CustomSlidingTablayout
+        android:id="@+id/sliding_tab_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        app:tl_divider_padding="15dp"
+        app:tl_indicator_bounce_enable="true"
+        app:tl_indicator_color="@color/res_red_selected"
+        app:tl_indicator_height="2.5dp"
+        app:tl_indicator_width="18dp"
+        app:tl_tab_padding="15dp"
+        app:tl_textSelectColor="@color/res_red_selected"
+        app:tl_textUnselectColor="@color/res_gray_888"
+        app:tl_text_select_size="16sp"
+        app:tl_textsize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@id/sliding_tab_layout"
+        android:background="#FFEBEBEB"
+        android:paddingLeft="20dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="*公示价格为参考价，实际价格请以服务站结算价格为准。"
+        android:textSize="12sp" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rl_bottom"
+        android:layout_below="@id/sliding_tab_layout" />
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:paddingLeft="20dp">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="7dp"
+            android:text="参考总价"
+            android:textColor="#000"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="13dp"
+            android:layout_toRightOf="@id/tv1"
+            android:text="￥"
+            android:textColor="@color/res_follow_end"
+            android:textSize="10sp" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="5sp"
+            android:layout_toRightOf="@id/tv2"
+            android:text="4680.00"
+            android:textColor="@color/res_follow_end"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv1"
+            android:layout_marginTop="4dp"
+            android:text="(以进站报价为准)"
+            android:textColor="@color/res_gray_999"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv_next"
+            android:layout_width="163dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@color/res_follow_end"
+            android:gravity="center"
+            android:text="下一步"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+</RelativeLayout>

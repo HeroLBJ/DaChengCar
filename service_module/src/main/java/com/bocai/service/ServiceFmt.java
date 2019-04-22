@@ -80,7 +80,7 @@ public class ServiceFmt extends BaseFluxFragment {
         });
         tvMap.setOnClickListener(v -> {
             // 去一键导航页面
-            ArouterUtils.getInstance().navigation(getContext(),RouterHub.Service.NAVIGATION);
+            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Service.NAVIGATION);
         });
     }
 
@@ -94,6 +94,7 @@ public class ServiceFmt extends BaseFluxFragment {
         switch (flag) {
             case maintain:
                 // 去预约保养页面
+                ArouterUtils.getInstance().navigation(getContext(), RouterHub.Service.KEEP);
                 break;
             case repair:
                 // 去预约维修页面

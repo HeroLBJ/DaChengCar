@@ -20,4 +20,9 @@ public class ServiceStore extends Store {
     public void getServiceDealers(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.Service.SERVICE_DEALERS, data);
     }
+
+    @BindAction(ReqTag.Service.SERVICE_PACKAGE)
+    public void getServicePackage(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Service.SERVICE_PACKAGE, data);
+    }
 }

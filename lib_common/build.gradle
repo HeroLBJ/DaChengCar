@@ -59,6 +59,10 @@ dependencies {
     api rootProject.ext.dependencies["hawk"]
     api rootProject.ext.dependencies["PickerView"]
     api rootProject.ext.dependencies["rxpermission"]
+
+    api rootProject.ext.dependencies["FlycoTabLayout_Lib"]
+    api rootProject.ext.dependencies["SmartRefreshLayout"]
+
     // 腾讯x5内核
     api files('libs/tbs_sdk_thirdapp_v4.3.0.1020.jar')
     // 百度定位

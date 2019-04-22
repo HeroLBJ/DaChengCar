@@ -1,6 +1,7 @@
 package com.bocai.service.api;
 
 import com.bocai.service.bean.ServiceDealers;
+import com.bocai.service.bean.ServicePackage;
 import com.bocai.service.bean.SuperServiceBean;
 import com.njh.network.bean.ResponseBean;
 
@@ -25,9 +26,21 @@ public interface ApiServiceService {
      * @param keyword   关键字
      */
     @GET("v2/service/dealers")
-    Observable<ResponseBean<SuperServiceBean<ServiceDealers>>> getServiceDealers(@Query("pageNo") String pageNo, @Query("limit") String limit,
-                                                                                 @Query("longitude") String longitude, @Query("latitude") String latitude,
-                                                                                 @Query("cityName") String cityName, @Query("keyword") String keyword);
+    Observable<ResponseBean<SuperServiceBean<ServiceDealers>>>
+    getServiceDealers(@Query("pageNo") String pageNo, @Query("limit") String limit,
+                      @Query("longitude") String longitude, @Query("latitude") String latitude,
+                      @Query("cityName") String cityName, @Query("keyword") String keyword);
+
+    /**
+     * 保养套餐
+     *
+     * @param pageNo 页码
+     * @param limit  每页数量
+     * @param type   套餐类型 1:免费 2:自费
+     */
+    @GET("v1/service/package")
+    Observable<ResponseBean<SuperServiceBean<ServicePackage>>>
+    getServicePackage(@Query("pageNo") String pageNo, @Query("limit") String limit, @Query("type") String type);
 }
 
 
