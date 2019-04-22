@@ -35,16 +35,24 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bocai.service.R;
 import com.bocai.service.R2;
+import com.bocai.service.api.ServiceAction;
+import com.bocai.service.api.ServiceStore;
+import com.bocai.service.bean.ServiceDealers;
+import com.bocai.service.bean.SuperServiceBean;
 import com.njh.common.city.CityHelper;
+import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;
+import com.njh.common.flux.stores.Store;
 import com.njh.common.location.LocationService;
 import com.njh.common.simple.SimplePoiSearchListener;
 import com.njh.common.utils.LogUtil;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 
@@ -53,7 +61,7 @@ import butterknife.BindView;
  * @date 2019/4/19
  */
 @Route(path = RouterHub.Service.NAVIGATION)
-public class NavigationActivity extends BaseFluxActivity {
+public class NavigationActivity extends BaseFluxActivity<ServiceStore, ServiceAction> implements NavigationAdapter.OnSelectItemListener {
 
     @BindView(R2.id.mapView)
     MapView mMapView;
@@ -73,6 +81,20 @@ public class NavigationActivity extends BaseFluxActivity {
     TextView tvProvince;
     @BindView(R2.id.tv_city)
     TextView tvCity;
+    @BindView(R2.id.rl_detail_info)
+    RelativeLayout rlDetailInfo;
+    @BindView(R2.id.tv_name)
+    TextView tvName;
+    @BindView(R2.id.tv_detail)
+    TextView tvDetail;
+    @BindView(R2.id.tv_call)
+    TextView tvCall;
+    @BindView(R2.id.tv_distance)
+    TextView tvDistance;
+    @BindView(R2.id.tv_repair)
+    TextView tvRepair;
+    @BindView(R2.id.tv_keep)
+    TextView tvKeep;
 
     private PoiSearch mPoiSearch;
     private BaiduMap mBaiduMap;
@@ -82,6 +104,7 @@ public class NavigationActivity extends BaseFluxActivity {
     private boolean isFirstLoc = true;
     private LocationClient mClient;
     private MapLocationListener myLocationListener = new MapLocationListener();
+    private List<ServiceDealers> mList = new ArrayList<>();
 
     // 一定要有值
     private String selectWord = "银行";
@@ -91,7 +114,9 @@ public class NavigationActivity extends BaseFluxActivity {
 
     @Override
     public void initData(Bundle savedInstanceState) {
-        mAdapter = new NavigationAdapter(this);
+        mAdapter = new NavigationAdapter(this, mList);
+        LinearLayoutManager llm = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(llm);
         recyclerView.setAdapter(mAdapter);
 
         mBaiduMap = mMapView.getMap();
@@ -114,6 +139,7 @@ public class NavigationActivity extends BaseFluxActivity {
         requestPermission();
 
         initPOI();
+        request();
     }
 
     private void initPOI() {
@@ -155,6 +181,37 @@ public class NavigationActivity extends BaseFluxActivity {
         });
     }
 
+    private int pageNo = 1;
+    private double longitude;
+    private double latidude;
+    private String cityName = "杭州市";
+    private String keyword = "";
+
+    private void request() {
+        actionsCreator().getServiceDealers(this, pageNo, mCurrentLon, mCurrentLat, cityName, keyword);
+    }
+
+    @Override
+    protected void updateView(Store.StoreChangeEvent event) {
+        super.updateView(event);
+        switch (event.url) {
+            case ReqTag.Service.SERVICE_DEALERS:
+                LogUtil.e("event.data:" + event.data);
+                SuperServiceBean<ServiceDealers> bean1 = (SuperServiceBean<ServiceDealers>) event.data;
+                List<ServiceDealers> serviceDealersList = bean1.getList();
+
+                mList.clear();
+                mList.addAll(serviceDealersList);
+                mAdapter.notifyDataSetChanged();
+                break;
+        }
+    }
+
+    @Override
+    protected boolean flux() {
+        return true;
+    }
+
     private void search() {
         /**
          *  PoiCiySearchOption 设置检索属性
@@ -188,6 +245,8 @@ public class NavigationActivity extends BaseFluxActivity {
 
     @Override
     public void setListener() {
+        mAdapter.setOnSelectItemListener(this);
+
         iv1.setOnClickListener(v -> {
             // 移到定位位置
             LatLng lat = new LatLng(mCurrentLat, mCurrentLon);
@@ -202,6 +261,7 @@ public class NavigationActivity extends BaseFluxActivity {
         });
         iv2.setOnClickListener(v -> {
             // 搜索维修站
+            request();
         });
         iv3.setOnClickListener(v -> {
             // 搜索停车场
@@ -218,6 +278,19 @@ public class NavigationActivity extends BaseFluxActivity {
                 initCity();
             }
             pickerView.show();
+        });
+
+        rlDetailInfo.setOnClickListener(v -> {
+            recyclerView.setVisibility(View.VISIBLE);
+            rlDetailInfo.setVisibility(View.GONE);
+        });
+
+        tvRepair.setOnClickListener(v -> {
+            // 去维修
+        });
+
+        tvKeep.setOnClickListener(v -> {
+            // 去保养
         });
     }
 
@@ -247,6 +320,17 @@ public class NavigationActivity extends BaseFluxActivity {
     @Override
     public int getLayoutId() {
         return R.layout.service_activity_navigation;
+    }
+
+    @Override
+    public void onSelectItemClick(ServiceDealers item) {
+        tvName.setText(item.getTitle());
+        tvDetail.setText(item.getFullTitle());
+        tvCall.setText(item.getTelphone());
+        tvDistance.setText(item.getDistance());
+
+        recyclerView.setVisibility(View.INVISIBLE);
+        rlDetailInfo.setVisibility(View.VISIBLE);
     }
 
 

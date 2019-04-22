@@ -14,6 +14,52 @@
         android:layout_height="match_parent"
         android:layout_below="@id/mapView" />
 
+    <RelativeLayout
+        android:id="@+id/rl_detail_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mapView"
+        android:visibility="gone">
+
+        <include
+            android:id="@+id/rl_include"
+            layout="@layout/service_include_map_item" />
+
+        <LinearLayout
+            android:id="@+id/ll_function"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/rl_include"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <TextView
+                android:id="@+id/tv_keep"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/res_follow_start"
+                android:gravity="center"
+                android:text="去保养"
+                android:textColor="@color/res_black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_repair"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_weight="1"
+                android:background="@color/res_follow_start"
+                android:gravity="center"
+                android:text="去维修"
+                android:textColor="@color/res_black"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,14 +98,14 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/rl_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rl_select"
-        android:background="@color/white"
-        android:padding="10dp"
         android:layout_above="@id/recyclerView"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
+        android:padding="10dp">
 
         <TextView
             android:id="@+id/tv_province"
