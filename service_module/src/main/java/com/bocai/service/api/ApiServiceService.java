@@ -6,7 +6,11 @@ import com.bocai.service.bean.SuperServiceBean;
 import com.njh.network.bean.ResponseBean;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -41,6 +45,118 @@ public interface ApiServiceService {
     @GET("v1/service/package")
     Observable<ResponseBean<SuperServiceBean<ServicePackage>>>
     getServicePackage(@Query("pageNo") String pageNo, @Query("limit") String limit, @Query("type") String type);
+
+    /**
+     * 获取维修类型
+     */
+    @GET("v1/service/repair_type")
+    Observable<ResponseBean<SuperServiceBean<Object>>> getServicePackage();
+
+    /**
+     * 预约维修提交的订单
+     *
+     * @param phone         送修人手机号
+     * @param serviceId     服务站id
+     * @param realname      送修人姓名
+     * @param cityName      城市名字
+     * @param timeline      时间
+     * @param startTime     开始时间段
+     * @param endTime       结束时间段
+     * @param repairId      维修类型
+     * @param repairContent 故障现象描述
+     * @param repairPhotos  图片
+     */
+    @POST("v1/repair_order")
+    @FormUrlEncoded
+    Observable<ResponseBean<SuperServiceBean<ServicePackage>>>
+    postRepairOrder(@Field("phone") String phone, @Field("serviceId") String serviceId,
+                    @Field("realname") String realname, @Field("cityName") String cityName,
+                    @Field("timeline") String timeline, @Field("startTime") String startTime,
+                    @Field("endTime") String endTime, @Field("repairId") String repairId,
+                    @Field("repairContent") String repairContent, @Field("repairPhotos") String repairPhotos);
+
+
+    /**
+     * 预约维修提交的订单  二次修改该订单 @PATCH
+     *
+     * @param phone         送修人手机号
+     * @param serviceId     服务站id
+     * @param realname      送修人姓名
+     * @param cityName      城市名字
+     * @param timeline      时间
+     * @param startTime     开始时间段
+     * @param endTime       结束时间段
+     * @param repairId      维修类型
+     * @param repairContent 故障现象描述
+     * @param repairPhotos  图片
+     */
+    @PATCH("v1/repair_order/info")
+    @FormUrlEncoded
+    Observable<ResponseBean<SuperServiceBean<ServicePackage>>>
+    patchRepairOrder(@Field("phone") String phone, @Field("serviceId") String serviceId,
+                     @Field("realname") String realname, @Field("cityName") String cityName,
+                     @Field("timeline") String timeline, @Field("startTime") String startTime,
+                     @Field("endTime") String endTime, @Field("repairId") String repairId,
+                     @Field("repairContent") String repairContent, @Field("repairPhotos") String repairPhotos);
+
+    /**
+     * 预约维修订单详情
+     *
+     * @param id
+     * @return
+     */
+    @GET("v1/repair_order/info")
+    Observable<ResponseBean<SuperServiceBean<ServicePackage>>> getRepairOrderInfo(@Query("id") String id);
+
+    /**
+     * 预约保养提交的订单
+     *
+     * @param phone     送修人手机号
+     * @param serviceId 服务站id
+     * @param realname  送修人姓名
+     * @param cityName  城市名字
+     * @param timeline  时间
+     * @param startTime 开始时间段
+     * @param endTime   结束时间段
+     * @param packageId 保养套餐id
+     */
+    @POST("v1/repair_order")
+    @FormUrlEncoded
+    Observable<ResponseBean<SuperServiceBean<ServicePackage>>>
+    postKeepOrder(@Field("phone") String phone, @Field("serviceId") String serviceId,
+                  @Field("realname") String realname, @Field("cityName") String cityName,
+                  @Field("timeline") String timeline, @Field("startTime") String startTime,
+                  @Field("endTime") String endTime, @Field("packageId") String packageId);
+
+    /**
+     * 预约保养提交的订单 二次修改该订单 @PATCH
+     *
+     * @param id        订单id
+     * @param phone     送修人手机号
+     * @param serviceId 服务站id
+     * @param realname  送修人姓名
+     * @param cityName  城市名字
+     * @param timeline  时间
+     * @param startTime 开始时间段
+     * @param endTime   结束时间段
+     * @param packageId 保养套餐id
+     */
+    @POST("v1/maintain_order/info")
+    @FormUrlEncoded
+    Observable<ResponseBean<SuperServiceBean<ServicePackage>>>
+    patchKeepOrder(@Field("id") String id, @Field("phone") String phone, @Field("serviceId") String serviceId,
+                   @Field("realname") String realname, @Field("cityName") String cityName,
+                   @Field("timeline") String timeline, @Field("startTime") String startTime,
+                   @Field("endTime") String endTime, @Field("packageId") String packageId);
+
+    /**
+     * 预约保养订单详情
+     *
+     * @param id 预约保养订单id
+     */
+    @GET("v1/maintain_order/info")
+    Observable<ResponseBean<SuperServiceBean<Object>>> getKeepOrderInfo(@Query("id") String id);
+
 }
 
 

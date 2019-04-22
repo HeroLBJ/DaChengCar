@@ -20,10 +20,18 @@ public interface ReqTag {
     String REQ_TAG_POST_HOME_ACTIVITY_PREVIEWS_ZAN = "REQ_TAG_POST_HOME_ACTIVITY_PREVIEWS_ZAN";
 
     interface Service {
-        // v1/service/dealers
         String SERVICE_DEALERS = "SERVICE_DEALERS";
-        // v1/service/package
         String SERVICE_PACKAGE = "SERVICE_PACKAGE";
+        String SERVICE_REPAIR_TYPE = "SERVICE_REPAIR_TYPE";
+        String SERVICE_REPAIR_ORDER = "SERVICE_REPAIR_ORDER";
+        String SERVICE_REPAIR_ORDER_INFO = "SERVICE_REPAIR_ORDER_INFO";
+        String SERVICE_REPAIR_ORDER_INFO_PATCH = "SERVICE_REPAIR_ORDER_INFO_PATCH";
+    }
+
+    interface Mine{
+        String MINE_LOGIN_REGISTER = "MINE_LOGIN_REGISTER";
+        String MINE_LOGIN_REGISTER_CODE = "MINE_LOGIN_REGISTER_CODE";
+        String MINE_LOGIN_LOGIN = "MINE_LOGIN_LOGIN";
     }
 
 }

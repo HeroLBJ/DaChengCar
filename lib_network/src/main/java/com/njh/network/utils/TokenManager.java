@@ -50,7 +50,7 @@ public class TokenManager {
     }
 
     public String getToken() {
-        return mToken;
+        return Hawk.get(SP_TOKEN,"");
     }
 
     public void setToken(String token,Context context) {

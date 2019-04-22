@@ -82,11 +82,13 @@ public interface RouterHub {
         String KEEP = SERVICE + "Keep";
         String KEEP_FREE = SERVICE + "KeepFree";
         String KEEP_MONEY = SERVICE + "KeepMoney";
+        String KEEP_DETAIL = SERVICE + "KeepDetail";
     }
 
 
     interface Mine {
         String MINE = "/mine/";//MINE
+        String LOGIN = MINE + "Login";
         String FANS = MINE + "Fans";
         String FOLLOW = MINE + "Follow";
         String SCORE = MINE + "Score";

@@ -9,6 +9,7 @@ import com.bocai.service.R2;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;
 import com.njh.common.utils.CustomSlidingTablayout;
+import com.njh.common.utils.arouter.ArouterUtils;
 
 import androidx.viewpager.widget.ViewPager;
 import butterknife.BindView;
@@ -39,6 +40,7 @@ public class KeepActivity extends BaseFluxActivity {
     public void setListener() {
         tvNext.setOnClickListener(v -> {
             // 选择完下一步
+            ArouterUtils.getInstance().navigation(this, RouterHub.Service.KEEP_DETAIL);
         });
     }
 

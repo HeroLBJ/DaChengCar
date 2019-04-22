@@ -101,7 +101,7 @@ public class MineFmt extends BaseFluxFragment {
     }
 
     private void onSignUp() {
-
+        ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.LOGIN);
     }
 
     @Override
