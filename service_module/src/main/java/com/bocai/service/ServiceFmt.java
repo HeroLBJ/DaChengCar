@@ -77,6 +77,7 @@ public class ServiceFmt extends BaseFluxFragment {
         fabCall3.setOnClickListener(v -> call.show());
         cvCall110.setOnClickListener(v -> {
             // 去一键报案页面
+            ArouterUtils.getInstance().navigation(getContext(),RouterHub.Service.CALL_POLICE);
         });
         tvMap.setOnClickListener(v -> {
             // 去一键导航页面
@@ -102,9 +103,11 @@ public class ServiceFmt extends BaseFluxFragment {
                 break;
             case call2:
                 // 去一键救援页面
+                ArouterUtils.getInstance().navigation(getContext(), RouterHub.Service.NAVIGATION);
                 break;
             case select:
                 // 去配件查询页面
+                ArouterUtils.getInstance().navigation(getContext(), RouterHub.Service.SELECT);
                 break;
             case feedback:
                 // 去投诉意见页面

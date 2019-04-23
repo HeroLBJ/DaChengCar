@@ -1,5 +1,7 @@
 package com.bocai.service.api;
 
+import com.bocai.service.bean.CallPolice;
+import com.bocai.service.bean.Select;
 import com.bocai.service.bean.ServiceDealers;
 import com.bocai.service.bean.ServicePackage;
 import com.bocai.service.bean.SuperServiceBean;
@@ -50,7 +52,7 @@ public interface ApiServiceService {
      * 获取维修类型
      */
     @GET("v1/service/repair_type")
-    Observable<ResponseBean<SuperServiceBean<Object>>>  getServicePackage();
+    Observable<ResponseBean<SuperServiceBean<Object>>> getServicePackage();
 
     /**
      * 预约维修提交的订单
@@ -157,6 +159,27 @@ public interface ApiServiceService {
     @GET("v1/maintain_order/info")
     Observable<ResponseBean<SuperServiceBean<Object>>> getKeepOrderInfo(@Query("id") String id);
 
+    /**
+     * 一键报案
+     *
+     * @param pageNo 页码
+     * @param limit  每页数量
+     */
+    @GET("v1/service/report")
+    Observable<ResponseBean<SuperServiceBean<CallPolice>>> getServiceReport(@Query("pageNo") String pageNo, @Query("limit") String limit);
+
+    /**
+     * 配件列表
+     *
+     * @param pageNo  页码
+     * @param limit   每页数量
+     * @param keyword 关键字
+     * @param carId   汽车id 传0表示搜索全部
+     */
+    @GET("v1/service/parts")
+    Observable<ResponseBean<SuperServiceBean<Select>>>
+    getServiceParts(@Query("pageNo") String pageNo, @Query("limit") String limit,
+                    @Query("keyword") String keyword, @Query("carId") String carId);
 }
 
 

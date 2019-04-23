@@ -86,6 +86,8 @@ public interface RouterHub {
         String SELECT_SHOP = SERVICE + "SelectShop";
         String REPAIR = SERVICE + "Repair";
         String SUBMIT_SUCCESS = SERVICE + "SubmitSuccess";
+        String CALL_POLICE = SERVICE + "CallPolice";
+        String SELECT = SERVICE + "Select";
     }
 
 

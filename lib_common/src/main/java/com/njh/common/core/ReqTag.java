@@ -31,10 +31,12 @@ public interface ReqTag {
         String SERVICE_KEEP_ORDER = "SERVICE_KEEP_ORDER";
         String SERVICE_KEEP_ORDER_PATCH = "SERVICE_KEEP_ORDER_PATCH";
         String SERVICE_KEEP_ORDER_INFO = "SERVICE_KEEP_ORDER_INFO";
+        String SERVICE_REPORT = "SERVICE_REPORT";
+        String SERVICE_PARTS = "SERVICE_PARTS";
 
     }
 
-    interface Mine{
+    interface Mine {
         String MINE_LOGIN_REGISTER = "MINE_LOGIN_REGISTER";
         String MINE_LOGIN_REGISTER_CODE = "MINE_LOGIN_REGISTER_CODE";
         String MINE_LOGIN_LOGIN = "MINE_LOGIN_LOGIN";

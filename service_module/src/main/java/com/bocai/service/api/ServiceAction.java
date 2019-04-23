@@ -36,4 +36,14 @@ public class ServiceAction extends ActionsCreator {
         reqDate(ServiceManager.create(ApiServiceService.class).getServicePackage(),
                 act, false, ReqTag.Service.SERVICE_REPAIR_TYPE);
     }
+
+    public void getServiceReport(BaseFluxActivity act) {
+        reqDate(ServiceManager.create(ApiServiceService.class).getServiceReport("1", "30"),
+                act, false, ReqTag.Service.SERVICE_REPORT);
+    }
+
+    public void getServiceParts(BaseFluxActivity act, int pageNo, String keyword, String carId) {
+        reqDate(ServiceManager.create(ApiServiceService.class).getServiceParts(pageNo + "", "10", keyword, carId),
+                act, false, ReqTag.Service.SERVICE_PARTS);
+    }
 }

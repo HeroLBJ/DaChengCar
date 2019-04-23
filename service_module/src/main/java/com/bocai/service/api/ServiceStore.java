@@ -36,5 +36,13 @@ public class ServiceStore extends Store {
         emitStoreChange(ReqTag.Service.SERVICE_REPAIR_TYPE, data);
     }
 
+    @BindAction(ReqTag.Service.SERVICE_REPORT)
+    public void getServiceReport(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Service.SERVICE_REPORT, data);
+    }
 
+    @BindAction(ReqTag.Service.SERVICE_PARTS)
+    public void getServiceParts(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Service.SERVICE_PARTS, data);
+    }
 }
