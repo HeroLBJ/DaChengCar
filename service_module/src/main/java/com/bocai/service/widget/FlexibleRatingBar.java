@@ -12,8 +12,10 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 import com.bocai.service.R;
+import com.njh.common.utils.LogUtil;
 
 import androidx.appcompat.widget.AppCompatRatingBar;
 
@@ -62,6 +64,7 @@ public class FlexibleRatingBar extends AppCompatRatingBar {
         paintOutline.setStyle(Paint.Style.STROKE);
         paintOutline.setStrokeJoin(Paint.Join.ROUND); //Remove this line to create pointy stars
         paintOutline.setAntiAlias(true);
+        setEnabled(false);
     }
 
     @Override
@@ -258,5 +261,4 @@ public class FlexibleRatingBar extends AppCompatRatingBar {
     public void setInteriorAngleModifier(float interiorAngleModifier) {
         this.interiorAngleModifier = interiorAngleModifier;
     }
-
 }

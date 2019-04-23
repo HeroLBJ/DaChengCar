@@ -1,9 +1,8 @@
 /**
   * Copyright 2019 bejson.com 
   */
-package com.njh.common.city;
-
-import java.io.Serializable;
+package com.njh.common.picker.city;
+import java.util.List;
 
 /**
  * Auto-generated: 2019-04-14 9:38:57
@@ -11,26 +10,30 @@ import java.io.Serializable;
  * @author bejson.com (i@bejson.com)
  * @website http://www.bejson.com/java2pojo/
  */
-public class Area implements Serializable {
+public class JsonRootBean {
 
-    public Area() {
+    private String name;
+    private String code;
+    private List<City> city;
+
+    public JsonRootBean() {
+    }
+
+    public JsonRootBean(String name, String code, List<City> city) {
+        this.name = name;
+        this.code = code;
+        this.city = city;
     }
 
     @Override
     public String toString() {
-        return "Area{" +
+        return "JsonRootBean{" +
                 "name='" + name + '\'' +
                 ", code='" + code + '\'' +
+                ", city=" + city +
                 '}';
     }
 
-    public Area(String name, String code) {
-        this.name = name;
-        this.code = code;
-    }
-
-    private String name;
-    private String code;
     public void setName(String name) {
          this.name = name;
      }
@@ -43,6 +46,13 @@ public class Area implements Serializable {
      }
      public String getCode() {
          return code;
+     }
+
+    public void setCity(List<City> city) {
+         this.city = city;
+     }
+     public List<City> getCity() {
+         return city;
      }
 
 }

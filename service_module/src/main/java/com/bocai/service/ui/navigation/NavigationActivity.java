@@ -39,7 +39,7 @@ import com.bocai.service.api.ServiceAction;
 import com.bocai.service.api.ServiceStore;
 import com.bocai.service.bean.ServiceDealers;
 import com.bocai.service.bean.SuperServiceBean;
-import com.njh.common.city.CityHelper;
+import com.njh.common.picker.city.CityHelper;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;

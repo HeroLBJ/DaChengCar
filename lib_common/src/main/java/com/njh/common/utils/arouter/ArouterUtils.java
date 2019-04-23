@@ -47,6 +47,7 @@ public class ArouterUtils {
      * @param path
      */
     public  void navigation(Context context, String path) {
+
         ARouter.getInstance().build(path).navigation(context, new NavigationCallback() {
             @Override
             public void onFound(Postcard postcard) {

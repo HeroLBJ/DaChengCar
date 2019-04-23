@@ -25,4 +25,11 @@ public class ServiceStore extends Store {
     public void getServicePackage(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.Service.SERVICE_PACKAGE, data);
     }
+
+    @BindAction(ReqTag.Service.SERVICE_KEEP_ORDER)
+    public void postServiceKeepOrder(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Service.SERVICE_KEEP_ORDER, data);
+    }
+
+
 }

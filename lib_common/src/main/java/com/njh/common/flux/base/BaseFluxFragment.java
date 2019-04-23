@@ -8,6 +8,7 @@ import com.njh.common.flux.actions.ActionsCreator;
 import com.njh.common.flux.annotation.BindEvent;
 import com.njh.common.flux.dispatcher.Dispatcher;
 import com.njh.common.flux.stores.Store;
+import com.njh.common.widget.CustomToast;
 
 
 import org.greenrobot.eventbus.EventBus;
@@ -51,9 +52,14 @@ public abstract class BaseFluxFragment<STORE extends Store, CREATER extends Acti
     public void setListener() {
     }
 
+    public void toast(Object obj) {
+        CustomToast.getInstance().showToast(obj.toString());
+    }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
+        CustomToast.getInstance().cancelToast();
         EventBus.getDefault().unregister(this);
         if (flux() && store() != null) {
             dispatcher.stop();

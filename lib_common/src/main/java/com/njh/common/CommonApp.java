@@ -1,5 +1,6 @@
 package com.njh.common;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.baidu.mapapi.SDKInitializer;
@@ -15,11 +16,17 @@ import com.tencent.smtt.sdk.QbSdk;
 public class CommonApp extends BaseApp {
 
     public LocationService locationService;
+    private static Context context;
+
+    public static Context getContext() {
+        return context;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
         //数据库初始化
+        context = getApplicationContext();
         GreenDaoManager.getInstance().init(this);
         Hawk.init(this).build();
         setInitUIStutas();

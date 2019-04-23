@@ -1,7 +1,7 @@
 /**
   * Copyright 2019 bejson.com 
   */
-package com.njh.common.city;
+package com.njh.common.picker.city;
 import java.util.List;
 
 /**

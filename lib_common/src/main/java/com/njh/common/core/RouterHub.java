@@ -83,6 +83,7 @@ public interface RouterHub {
         String KEEP_FREE = SERVICE + "KeepFree";
         String KEEP_MONEY = SERVICE + "KeepMoney";
         String KEEP_DETAIL = SERVICE + "KeepDetail";
+        String SELECT_SHOP = SERVICE + "SelectShop";
     }
 
 

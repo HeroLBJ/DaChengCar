@@ -26,4 +26,9 @@ public class ServiceAction extends ActionsCreator {
         reqDate(ServiceManager.create(ApiServiceService.class).getServicePackage(pageNo + "", "10", type),
                 act, false, ReqTag.Service.SERVICE_PACKAGE);
     }
+
+    public void postServiceKeepOrder(BaseFluxActivity act, String phone, String serviceId, String realname, String cityName, String timeline, String startTime, String endTime, String packageId) {
+        reqDate(ServiceManager.create(ApiServiceService.class).postKeepOrder(phone, serviceId, realname, cityName, timeline, startTime, endTime, packageId),
+                act, false, ReqTag.Service.SERVICE_KEEP_ORDER);
+    }
 }

@@ -2,8 +2,10 @@ package com.njh.common.utils.time;
 
 import android.text.TextUtils;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -39,19 +41,60 @@ public final class TimeUtil {
     }
 
 
-    public static String dateToStamp(String s) throws ParseException {
+    public static String dateToStamp(String s) {
         return dateToStamp(s, PATTERN_DEFAULT);
     }
 
     /*
-     * 将时间转换为时间戳
+     * 将时间转换为时间戳 10位
      */
-    public static String dateToStamp(String s, String pattern) throws ParseException {
+    public static String dateToStamp(String s, String pattern)  {
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        Date date = simpleDateFormat.parse(s+"000");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         long ts = date.getTime();
         res = String.valueOf(ts);
         return res;
     }
+
+    /**
+     * 获取某日期的年份
+     */
+    public static Integer getYear(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal.get(Calendar.YEAR);
+    }
+
+    /**
+     * 获取某日期的月份
+     */
+    public static Integer getMonth(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal.get(Calendar.MONTH) + 1;
+    }
+
+    /**
+     * 获取某日期的日数
+     */
+    public static Integer getDay(Date date){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        return cal.get(Calendar.DATE);//获取日
+    }
+
+    /**
+     * 格式化Date时间
+     */
+    public static String parseDateToStr(Date time, String timeFromat){
+        DateFormat dateFormat=new SimpleDateFormat(timeFromat);
+        return dateFormat.format(time);
+    }
+
 }
