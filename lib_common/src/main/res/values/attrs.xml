@@ -70,4 +70,5 @@
         <attr name="tl_custom_layout" />
         <attr name="tl_custom_layout_id" />
     </declare-styleable>
+
 </resources>

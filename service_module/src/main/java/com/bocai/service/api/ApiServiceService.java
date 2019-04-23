@@ -50,7 +50,7 @@ public interface ApiServiceService {
      * 获取维修类型
      */
     @GET("v1/service/repair_type")
-    Observable<ResponseBean<SuperServiceBean<Object>>> getServicePackage();
+    Observable<ResponseBean<SuperServiceBean<Object>>>  getServicePackage();
 
     /**
      * 预约维修提交的订单

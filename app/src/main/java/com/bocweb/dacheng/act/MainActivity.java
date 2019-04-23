@@ -1,7 +1,5 @@
 package com.bocweb.dacheng.act;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.SparseArray;
 import android.view.KeyEvent;
@@ -19,8 +17,6 @@ import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.stores.Store;
-import com.njh.common.utils.LogUtil;
-import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

@@ -98,6 +98,7 @@ public class ServiceFmt extends BaseFluxFragment {
                 break;
             case repair:
                 // 去预约维修页面
+                ArouterUtils.getInstance().navigation(getContext(), RouterHub.Service.REPAIR);
                 break;
             case call2:
                 // 去一键救援页面

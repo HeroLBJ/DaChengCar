@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="73dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="82dp"
+        android:background="@drawable/res_icn_right_arrow" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:text="提交预约成功！"
+        android:textColor="@color/res_black"
+        android:textSize="28sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="68dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginRight="68dp"
+        android:gravity="center"
+        android:text="您已成功提交预约订单，稍后客服将会与您电话联系，请保持手机通畅。"
+        android:textColor="@color/res_gray_999" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp"
+        android:layout_marginTop="47dp"
+        app:cardElevation="10dp">
+
+        <TextView
+            android:id="@+id/tv_look"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/service_bg_submit_success"
+            android:paddingLeft="83dp"
+            android:paddingTop="14dp"
+            android:paddingRight="83dp"
+            android:paddingBottom="14dp"
+            android:text="查看预约订单"
+            android:textColor="@color/res_follow_end"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/service_bg_submit_success"
+            android:paddingLeft="83dp"
+            android:paddingTop="14dp"
+            android:id="@+id/tv_main"
+            android:paddingRight="83dp"
+            android:paddingBottom="14dp"
+            android:text="去首页逛逛"
+            android:textColor="@color/res_follow_end"
+            android:textSize="16sp" />
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
