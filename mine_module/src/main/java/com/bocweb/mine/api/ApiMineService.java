@@ -63,13 +63,72 @@ public interface ApiMineService {
     @FormUrlEncoded
     Observable<ResponseBean<LoginInfo>> login(@Field("phone") String phone, @Field("password") String password);
 
+    /**
+     * 更新手机
+     *
+     * @param phone 手机号码
+     * @param code  验证码
+     * @param type  2：修改为新手机 4：绑定手机
+     * @param lat   type=4时，传维度
+     * @param lng   type=4时，传经度
+     */
+    @POST("v1/member/update_newPhone")
+    @FormUrlEncoded
+    Observable<ResponseBean<Object>>
+    updateNewPhone(@Field("phone") String phone, @Field("code") String code,
+                   @Field("type") String type, @Field("lat") String lat, @Field("lng") String lng);
 
-//
-//
-//    @Headers({DOMAIN_NAME_HEADER + GITHUB_DOMAIN_NAME})
-//    @FormUrlEncoded
-//    @POST()
-//    Observable<ResultBean> post(@Url() String url, @FieldMap Map<String, Object> maps);
+    /**
+     * 忘记密码发送验证码
+     *
+     * @param phone 手机号
+     */
+    @POST("v3/login/password_code")
+    @FormUrlEncoded
+    Observable<ResponseBean<Object>> forgetPwdCode(@Field("phone") String phone);
 
+    /**
+     * 找回密码 第一步 验证手机号
+     *
+     * @param phone 手机号
+     * @param code  验证码
+     */
+    @POST("v3/login/check_phone")
+    @FormUrlEncoded
+    Observable<ResponseBean<Object>> checkPhone(@Field("phone") String phone, @Field("code") String code);
 
+    /**
+     * 找回密码 第一步 验证手机号
+     *
+     * @param phone    手机号
+     * @param password 新密码 （必须包含数字和字母8-16位）
+     */
+    @POST("v3/login/password")
+    @FormUrlEncoded
+    Observable<ResponseBean<Object>> setNewPwd(@Field("phone") String phone, @Field("password") String password);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

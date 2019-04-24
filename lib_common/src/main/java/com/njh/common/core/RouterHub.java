@@ -110,6 +110,7 @@ public interface RouterHub {
         String COMPLAIN = MINE + "Complain";
         String MY_CAR = MINE + "MyCar";
         String USER_CENTER = MINE + "UserCenter";
+        String BIND_PHONE = MINE + "BindPhone";
 
         /**
          * 用户登录
@@ -135,6 +136,9 @@ public interface RouterHub {
          * 个人中心
          */
         String MINE_FMT = MINE + "mineFmt";
+
+        String FIND_PWD = MINE + "FindPwd";
+        String SET_NEW_PWD = MINE + "SetNewPwd";
     }
 
     interface Photo {

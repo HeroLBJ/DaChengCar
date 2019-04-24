@@ -42,4 +42,24 @@ public class MineAction extends ActionsCreator {
         reqDate(ServiceManager.create(ApiMineService.class).login(phone, password),
                 act, false, ReqTag.Mine.MINE_LOGIN_LOGIN);
     }
+
+    public void updateNewPhone(BaseFluxActivity act, String phone, String code, String type, String lat, String lng) {
+        reqDate(ServiceManager.create(ApiMineService.class).updateNewPhone(phone, code, type, lat, lng),
+                act, false, ReqTag.Mine.MINE_UPLOAD_NEW_PHONE);
+    }
+
+    public void forgetPwdCode(BaseFluxActivity act, String phone) {
+        reqDate(ServiceManager.create(ApiMineService.class).forgetPwdCode(phone),
+                act, false, ReqTag.Mine.MINE_FORGET_PWD_CODE);
+    }
+
+    public void checkPhone(BaseFluxActivity act, String phone, String code) {
+        reqDate(ServiceManager.create(ApiMineService.class).checkPhone(phone, code),
+                act, false, ReqTag.Mine.MINE_CHECK_PHONE);
+    }
+
+    public void setNewPwd(BaseFluxActivity act, String phone, String password) {
+        reqDate(ServiceManager.create(ApiMineService.class).setNewPwd(phone, password),
+                act, false, ReqTag.Mine.MINE_SET_NEW_PWD);
+    }
 }

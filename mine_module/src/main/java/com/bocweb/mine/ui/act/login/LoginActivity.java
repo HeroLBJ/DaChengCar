@@ -56,6 +56,8 @@ public class LoginActivity extends BaseFluxActivity<MineStore, MineAction> {
     LinearLayout llThree;
     @BindView(R2.id.tv_info)
     TextView tvInfo;
+    @BindView(R2.id.tv_forget_pwd)
+    TextView tvForgetPwd;
 
     private TimeCountUtil countUtil;
 
@@ -116,7 +118,8 @@ public class LoginActivity extends BaseFluxActivity<MineStore, MineAction> {
         tvCode.setVisibility(View.VISIBLE);
         llThree.setVisibility(View.GONE);
         rlInfo.setVisibility(View.VISIBLE);
-        etCode.setInputType(InputType.TYPE_CLASS_TEXT);
+        etCode.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        tvForgetPwd.setVisibility(View.INVISIBLE);
     }
 
     private void onSelectPhoneLogin() {
@@ -127,7 +130,8 @@ public class LoginActivity extends BaseFluxActivity<MineStore, MineAction> {
         tvCode.setVisibility(View.GONE);
         llThree.setVisibility(View.VISIBLE);
         rlInfo.setVisibility(View.GONE);
-        etCode.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        etCode.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD|InputType.TYPE_CLASS_TEXT);
+        tvForgetPwd.setVisibility(View.VISIBLE);
     }
 
     public void onLogin(View view) {

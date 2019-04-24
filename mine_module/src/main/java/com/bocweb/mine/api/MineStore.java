@@ -34,4 +34,24 @@ public class MineStore extends Store {
     public void login(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.Mine.MINE_LOGIN_LOGIN, data);
     }
+
+    @BindAction(ReqTag.Mine.MINE_UPLOAD_NEW_PHONE)
+    public void uploadNewPhone(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_UPLOAD_NEW_PHONE, data);
+    }
+
+    @BindAction(ReqTag.Mine.MINE_FORGET_PWD_CODE)
+    public void forgetPwdCode(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_FORGET_PWD_CODE, data);
+    }
+
+    @BindAction(ReqTag.Mine.MINE_CHECK_PHONE)
+    public void checkPhone(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_CHECK_PHONE, data);
+    }
+
+    @BindAction(ReqTag.Mine.MINE_SET_NEW_PWD)
+    public void setNewPwd(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_SET_NEW_PWD, data);
+    }
 }
