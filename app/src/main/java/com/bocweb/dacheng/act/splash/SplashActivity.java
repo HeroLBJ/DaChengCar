@@ -1,18 +1,3 @@
-/*
- * Copyright 2018 JessYan
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.bocweb.dacheng.act.splash;
 
 import android.graphics.drawable.Drawable;
@@ -34,14 +19,16 @@ import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;
 import com.njh.common.utils.arouter.ArouterUtils;
 import com.njh.common.utils.common.TimeCountUtil;
+import com.njh.network.utils.TokenManager;
+import com.orhanobut.hawk.Hawk;
 
 import androidx.annotation.Nullable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 /**
  * 启动界面
+ *
  * @author niejiahuan
  */
 @Route(path = RouterHub.APP_SPLASHACTIVITY)
@@ -57,13 +44,16 @@ public class SplashActivity extends BaseFluxActivity {
 
     public void loadAdv(String imgPath) {
         if (null == imgPath || TextUtils.isEmpty(imgPath)) {
-            countUtil = new TimeCountUtil(4000, 1000);
+            countUtil = new TimeCountUtil(2000, 1000);
             countUtil.setOnTimeCountListenerUtil(new TimeCountUtil.OnTimeCountListenerUtil() {
                 @Override
-                public void onfinishListener() {
+                public void onFinishListener() {
                     tvCountDown.setText(skipAdv);
-                ArouterUtils.getInstance().navigation(SplashActivity.this,
-                        RouterHub.APP_MAINACTIVITY);
+                    if (TextUtils.isEmpty(Hawk.get(TokenManager.SP_TOKEN))) {
+                        ArouterUtils.getInstance().navigation(SplashActivity.this, RouterHub.Mine.LOGIN);
+                    } else {
+                        ArouterUtils.getInstance().navigation(SplashActivity.this, RouterHub.APP_MAINACTIVITY);
+                    }
                     finish();
                 }
 
@@ -76,13 +66,16 @@ public class SplashActivity extends BaseFluxActivity {
             return;
         }
         imgAdv.setVisibility(View.VISIBLE);
-        countUtil = new TimeCountUtil(4000, 1000);
+        countUtil = new TimeCountUtil(2000, 1000);
         countUtil.setOnTimeCountListenerUtil(new TimeCountUtil.OnTimeCountListenerUtil() {
             @Override
-            public void onfinishListener() {
+            public void onFinishListener() {
                 tvCountDown.setText(skipAdv);
-                ArouterUtils.getInstance().navigation(SplashActivity.this,
-                        RouterHub.APP_MAINACTIVITY);
+                if (TextUtils.isEmpty(Hawk.get(TokenManager.SP_TOKEN))) {
+                    ArouterUtils.getInstance().navigation(SplashActivity.this, RouterHub.Mine.LOGIN);
+                } else {
+                    ArouterUtils.getInstance().navigation(SplashActivity.this, RouterHub.APP_MAINACTIVITY);
+                }
                 finish();
             }
 
@@ -142,9 +135,9 @@ public class SplashActivity extends BaseFluxActivity {
 //            startActivity(new Intent(this,AppIntroAct.class));
 //            finish();
 //        }else {
-            setListener();
-            skipAdv = getResources().getString(R.string.skip_adv);
-            loadAdv("");
+        setListener();
+        skipAdv = getResources().getString(R.string.skip_adv);
+        loadAdv("");
 //            loadAdv("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1535369533321&di=2d87700061bab4a993e4068dc2e5871a&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01978b58072c1aa84a0d304f2f4706.png");
 //            SPUtils.getInstance(Constants.SP_APP_STATE, this).put(Constants.SP_APP_START_STATISTICS,anInt+1);
 //        }

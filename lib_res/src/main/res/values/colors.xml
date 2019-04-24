@@ -39,10 +39,12 @@
     <color name="res_gray_c2">#C2C2C2</color>
     <color name="res_blue_97">#0097FF</color>
     <color name="res_red_277">#ffff3227</color>
-    
+
     <color name="res_red_selected">#FF5900</color>
     <color name="res_follow_start">#FFFF8340</color>
     <color name="res_follow_end">#FFFF5900</color>
 
     <color name="res_no_follow_bg">#FFF8F8F9</color>
+
+    <color name="res_login_select_color">#FFFE752C</color>
 </resources>

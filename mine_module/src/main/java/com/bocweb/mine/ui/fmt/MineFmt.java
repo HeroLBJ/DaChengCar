@@ -1,6 +1,11 @@
 package com.bocweb.mine.ui.fmt;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -12,9 +17,12 @@ import com.bocweb.mine.R;
 import com.bocweb.mine.R2;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
+import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.arouter.ArouterUtils;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 
+import androidx.annotation.RequiresApi;
+import androidx.core.widget.NestedScrollView;
 import butterknife.BindView;
 
 /**
@@ -51,8 +59,6 @@ public class MineFmt extends BaseFluxFragment {
     RelativeLayout rlFollow;
     @BindView(R2.id.rl_grow)
     RelativeLayout rlGrow;
-    @BindView(R2.id.scrollView)
-    ScrollView scrollView;
     @BindView(R2.id.rl_activity)
     RelativeLayout rlActivity;
     @BindView(R2.id.rl_release)
@@ -73,10 +79,24 @@ public class MineFmt extends BaseFluxFragment {
     TextView tvComplain;
     @BindView(R2.id.tv_support)
     TextView tvSupport;
+    @BindView(R2.id.scrollView)
+    NestedScrollView scrollView;
 
+
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void initData(Bundle savedInstanceState) {
 
+
+        rlMyCar.setPadding(0, 200, 0, 0);
+
+        scrollView.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                LogUtil.e(scrollY + " - " + oldScrollY);
+            }
+        });
     }
 
     @Override

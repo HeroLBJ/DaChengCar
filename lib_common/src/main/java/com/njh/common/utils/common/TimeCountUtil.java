@@ -34,14 +34,14 @@ public class TimeCountUtil extends CountDownTimer {
     public void onFinish() {
         this.cancel();
         if (null!=getOnTimeCountListenerUtil()){
-            getOnTimeCountListenerUtil().onfinishListener(); 
+            getOnTimeCountListenerUtil().onFinishListener();
         }
     }
   public interface  OnTimeCountListenerUtil{
       /**
        * 计时器完成
        */
-      void onfinishListener();
+      void onFinishListener();
 
       /**
        * 计时器计时中

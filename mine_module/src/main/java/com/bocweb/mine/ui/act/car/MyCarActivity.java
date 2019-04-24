@@ -27,9 +27,4 @@ public class MyCarActivity extends BaseFluxActivity {
     public int getLayoutId() {
         return R.layout.mine_activity_my_car;
     }
-
-    @Override
-    protected boolean flux() {
-        return true;
-    }
 }
