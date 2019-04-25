@@ -49,7 +49,12 @@ public class ServiceStore extends Store {
     }
 
     @BindAction(ReqTag.Service.SERVICE_FEEDBACK_TYPE)
-    public void getFeedbackType(HashMap<String,Object> data){
+    public void getFeedbackType(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.Service.SERVICE_FEEDBACK_TYPE, data);
+    }
+
+    @BindAction(ReqTag.Service.SERVICE_SELECT_CITY)
+    public void selectCity(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Service.SERVICE_SELECT_CITY, data);
     }
 }

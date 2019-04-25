@@ -2,11 +2,14 @@ package com.bocweb.mine.api;
 
 
 import com.bocweb.mine.bean.LoginInfo;
+import com.bocweb.mine.bean.MemberCenter;
+import com.bocweb.mine.bean.MyScore;
 import com.njh.network.bean.ResponseBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 
@@ -106,6 +109,18 @@ public interface ApiMineService {
     @POST("v3/login/password")
     @FormUrlEncoded
     Observable<ResponseBean<Object>> setNewPwd(@Field("phone") String phone, @Field("password") String password);
+
+    /**
+     * 我的信息
+     */
+    @GET("v1/moment/memberCenter")
+    Observable<ResponseBean<MemberCenter>> getMemberCenter();
+
+    /**
+     * 我的积分
+     */
+    @GET("v3/member/integral_info")
+    Observable<ResponseBean<MyScore>> getIntegralInfo();
 }
 
 

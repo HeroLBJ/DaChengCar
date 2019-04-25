@@ -35,6 +35,7 @@ public interface ReqTag {
         String SERVICE_PARTS = "SERVICE_PARTS";
         String SERVICE_FEEDBACK = "SERVICE_FEEDBACK";
         String SERVICE_FEEDBACK_TYPE = "SERVICE_FEEDBACK_TYPE";
+        String SERVICE_SELECT_CITY = "SERVICE_SELECT_CITY";
     }
 
     interface Mine {
@@ -46,6 +47,8 @@ public interface ReqTag {
         String MINE_FORGET_PWD_CODE = "MINE_FORGET_PWD_CODE";
         String MINE_CHECK_PHONE = "MINE_CHECK_PHONE";
         String MINE_SET_NEW_PWD = "MINE_SET_NEW_PWD";
+        String MINE_MEMBER_CENTER = "MINE_MEMBER_CENTER";
+        String MINE_INTEGRAL_INFO = "MINE_INTEGRAL_INFO";
     }
 
 }

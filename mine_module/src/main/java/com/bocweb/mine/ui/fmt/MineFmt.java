@@ -1,22 +1,23 @@
 package com.bocweb.mine.ui.fmt;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.allen.library.CircleImageView;
 import com.bocweb.mine.R;
 import com.bocweb.mine.R2;
+import com.bocweb.mine.api.MineAction;
+import com.bocweb.mine.api.MineStore;
+import com.bocweb.mine.bean.MemberCenter;
+import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
+import com.njh.common.flux.stores.Store;
 import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.arouter.ArouterUtils;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
@@ -31,7 +32,7 @@ import butterknife.BindView;
  * @author niejiahuan
  */
 @Route(path = RouterHub.Mine.MINE_FMT)
-public class MineFmt extends BaseFluxFragment {
+public class MineFmt extends BaseFluxFragment<MineStore, MineAction> {
 
     @BindView(R2.id.titleBar)
     CommonTitleBar titleBar;
@@ -82,8 +83,6 @@ public class MineFmt extends BaseFluxFragment {
     @BindView(R2.id.scrollView)
     NestedScrollView scrollView;
 
-
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void initData(Bundle savedInstanceState) {
@@ -97,6 +96,24 @@ public class MineFmt extends BaseFluxFragment {
                 LogUtil.e(scrollY + " - " + oldScrollY);
             }
         });
+
+        request();
+    }
+
+    private void request() {
+        showLoading();
+        actionsCreator().getMemberCenter(this);
+    }
+
+    @Override
+    protected void updateView(Store.StoreChangeEvent event) {
+        super.updateView(event);
+        hideLoading();
+        switch (event.url) {
+            case ReqTag.Mine.MINE_MEMBER_CENTER:
+                MemberCenter bean1 = (MemberCenter) event.data;
+                break;
+        }
     }
 
     @Override
@@ -127,5 +144,10 @@ public class MineFmt extends BaseFluxFragment {
     @Override
     public int getLayoutId() {
         return R.layout.mine_fmt_mine;
+    }
+
+    @Override
+    protected boolean flux() {
+        return true;
     }
 }

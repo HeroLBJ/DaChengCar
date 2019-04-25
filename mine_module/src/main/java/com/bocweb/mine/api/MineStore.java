@@ -54,4 +54,14 @@ public class MineStore extends Store {
     public void setNewPwd(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.Mine.MINE_SET_NEW_PWD, data);
     }
+
+    @BindAction(ReqTag.Mine.MINE_MEMBER_CENTER)
+    public void getMemberCenter(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_MEMBER_CENTER, data);
+    }
+
+    @BindAction(ReqTag.Mine.MINE_INTEGRAL_INFO)
+    public void getIntegralInfo(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_INTEGRAL_INFO, data);
+    }
 }

@@ -1,12 +1,15 @@
 package com.bocai.service.api;
 
 import com.bocai.service.bean.CallPolice;
+import com.bocai.service.bean.FeedbackProvince;
 import com.bocai.service.bean.FeedbackType;
 import com.bocai.service.bean.Select;
 import com.bocai.service.bean.ServiceDealers;
 import com.bocai.service.bean.ServicePackage;
 import com.bocai.service.bean.SuperServiceBean;
 import com.njh.network.bean.ResponseBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -190,6 +193,14 @@ public interface ApiServiceService {
      */
     @GET("v1/service/complain_type")
     Observable<ResponseBean<SuperServiceBean<FeedbackType>>> getFeedbackType(@Query("pageNo") String pageNo, @Query("limit") String limit);
+
+    /**
+     * 选择省市
+     *
+     * @param type 类型 1:经销商 2:服务站
+     */
+    @GET(" v1/service/service_provinces")
+    Observable<ResponseBean<List<FeedbackProvince>>> selectCity(@Query("type") String type);
 }
 
 

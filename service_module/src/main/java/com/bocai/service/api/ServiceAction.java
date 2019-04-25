@@ -51,4 +51,9 @@ public class ServiceAction extends ActionsCreator {
         reqDate(ServiceManager.create(ApiServiceService.class).getFeedbackType("1", "10"),
                 act, false, ReqTag.Service.SERVICE_FEEDBACK_TYPE);
     }
+
+    public void selectCity(BaseFluxActivity act, String type) {
+        reqDate(ServiceManager.create(ApiServiceService.class).selectCity(type),
+                act, false, ReqTag.Service.SERVICE_SELECT_CITY);
+    }
 }

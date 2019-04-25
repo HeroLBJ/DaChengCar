@@ -4,6 +4,7 @@ import com.njh.base.ui.view.BaseView;
 import com.njh.common.core.ReqTag;
 import com.njh.common.flux.actions.ActionsCreator;
 import com.njh.common.flux.base.BaseFluxActivity;
+import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.dispatcher.Dispatcher;
 import com.njh.network.api.ServiceManager;
 
@@ -61,5 +62,15 @@ public class MineAction extends ActionsCreator {
     public void setNewPwd(BaseFluxActivity act, String phone, String password) {
         reqDate(ServiceManager.create(ApiMineService.class).setNewPwd(phone, password),
                 act, false, ReqTag.Mine.MINE_SET_NEW_PWD);
+    }
+
+    public void getMemberCenter(BaseFluxFragment act) {
+        reqDate(ServiceManager.create(ApiMineService.class).getMemberCenter(),
+                act, false, ReqTag.Mine.MINE_MEMBER_CENTER);
+    }
+
+    public void getIntegralInfo(BaseFluxActivity act) {
+        reqDate(ServiceManager.create(ApiMineService.class).getIntegralInfo(),
+                act, false, ReqTag.Mine.MINE_INTEGRAL_INFO);
     }
 }
