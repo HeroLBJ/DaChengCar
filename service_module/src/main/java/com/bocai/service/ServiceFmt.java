@@ -6,8 +6,6 @@ import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 
-
-import com.bocai.service.ui.navigation.NavigationActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
@@ -20,6 +18,7 @@ import butterknife.BindView;
 
 /**
  * @author libingjun
+ * @version 服务的root Fragment
  * @date 2019/4/8
  */
 @Route(path = RouterHub.Service.ROOT)
@@ -77,7 +76,7 @@ public class ServiceFmt extends BaseFluxFragment {
         fabCall3.setOnClickListener(v -> call.show());
         cvCall110.setOnClickListener(v -> {
             // 去一键报案页面
-            ArouterUtils.getInstance().navigation(getContext(),RouterHub.Service.CALL_POLICE);
+            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Service.CALL_POLICE);
         });
         tvMap.setOnClickListener(v -> {
             // 去一键导航页面
@@ -110,7 +109,8 @@ public class ServiceFmt extends BaseFluxFragment {
                 ArouterUtils.getInstance().navigation(getContext(), RouterHub.Service.SELECT);
                 break;
             case feedback:
-                // 去投诉意见页面
+                // 去投诉意见列表页面
+                ArouterUtils.getInstance().navigation(getContext(), RouterHub.Service.FEEDBACK_TYPE);
                 break;
         }
     }

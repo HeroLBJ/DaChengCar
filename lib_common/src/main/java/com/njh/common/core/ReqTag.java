@@ -33,7 +33,8 @@ public interface ReqTag {
         String SERVICE_KEEP_ORDER_INFO = "SERVICE_KEEP_ORDER_INFO";
         String SERVICE_REPORT = "SERVICE_REPORT";
         String SERVICE_PARTS = "SERVICE_PARTS";
-
+        String SERVICE_FEEDBACK = "SERVICE_FEEDBACK";
+        String SERVICE_FEEDBACK_TYPE = "SERVICE_FEEDBACK_TYPE";
     }
 
     interface Mine {

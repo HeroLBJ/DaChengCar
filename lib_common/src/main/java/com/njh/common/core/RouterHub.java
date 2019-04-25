@@ -88,6 +88,8 @@ public interface RouterHub {
         String SUBMIT_SUCCESS = SERVICE + "SubmitSuccess";
         String CALL_POLICE = SERVICE + "CallPolice";
         String SELECT = SERVICE + "Select";
+        String FEEDBACK = SERVICE + "Feedback";
+        String FEEDBACK_TYPE = SERVICE + "FeedbackType";
     }
 
 

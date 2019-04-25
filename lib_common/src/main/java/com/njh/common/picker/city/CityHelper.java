@@ -48,40 +48,40 @@ public class CityHelper {
 
         InputStream inputStream = null;
         try {
-            inputStream = BaseApp.getAppInstance().getAssets().open("city_code.json");
+            inputStream = BaseApp.getAppInstance().getAssets().open("city.json");
             int size = inputStream.available();
             int len = -1;
             byte[] bytes = new byte[size];
             inputStream.read(bytes);
             inputStream.close();
             String string = new String(bytes);
-            List<JsonRootBean> beanList = JSON.parseArray(string, JsonRootBean.class);
+            List<Province> beanList = JSON.parseArray(string, Province.class);
             add(beanList);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private static void add(List<JsonRootBean> shengList) {
+    private static void add(List<Province> provinceList) {
         //     把解析后的数据组装成想要的list
 //     遍历省
-        for (int i = 0; i < shengList.size(); i++) {
-            options1Items.add(shengList.get(i).getName());
+        for (int i = 0; i < provinceList.size(); i++) {
+            options1Items.add(provinceList.get(i).getAreaName());
 //         存放城市
             List<String> cityList = new ArrayList<>();
 //         存放区
             List<List<String>> province_AreaList = new ArrayList<>();
 //         遍历市
-            JsonRootBean jsonRootBean = shengList.get(i);
-            for (int c = 0; c < shengList.get(i).getCity().size(); c++) {
+            Province province = provinceList.get(i);
+            for (int c = 0; c < provinceList.get(i).getCities().size(); c++) {
 //        拿到城市名称
-                String cityName = shengList.get(i).getCity().get(c).getName();
+                String cityName = provinceList.get(i).getCities().get(c).getAreaName();
                 cityList.add(cityName);
 
                 List<String> city_AreaList = new ArrayList<>();//该城市的所有地区列表
-                List<Area> areaList = shengList.get(i).getCity().get(c).getArea();
+                List<County> areaList = provinceList.get(i).getCities().get(c).getCities();
                 for (int x = 0; x < areaList.size(); x++) {
-                    city_AreaList.add(areaList.get(x).getName());
+                    city_AreaList.add(areaList.get(x).getAreaName());
                 }
                 province_AreaList.add(city_AreaList);
             }

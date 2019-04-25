@@ -6,7 +6,11 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="vdpM5QLG8hXgQQ0RNECAwc5z1Keg5Pma"></meta-data>
-        <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote"> </service>
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"></service>
+
         <activity
             android:name=".ui.navigation.NavigationActivity"
             android:launchMode="singleTask"
@@ -51,6 +55,18 @@
 
         <activity
             android:name=".ui.select.SelectActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
+            android:name=".ui.feedback.FeedbackTypeActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+
+        <activity
+            android:name=".ui.feedback.FeedbackActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />

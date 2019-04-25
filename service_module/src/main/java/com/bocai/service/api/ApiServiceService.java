@@ -1,6 +1,7 @@
 package com.bocai.service.api;
 
 import com.bocai.service.bean.CallPolice;
+import com.bocai.service.bean.FeedbackType;
 import com.bocai.service.bean.Select;
 import com.bocai.service.bean.ServiceDealers;
 import com.bocai.service.bean.ServicePackage;
@@ -180,6 +181,15 @@ public interface ApiServiceService {
     Observable<ResponseBean<SuperServiceBean<Select>>>
     getServiceParts(@Query("pageNo") String pageNo, @Query("limit") String limit,
                     @Query("keyword") String keyword, @Query("carId") String carId);
+
+    /**
+     * 获取投诉意见的类型
+     *
+     * @param pageNo 页码
+     * @param limit  每页数量
+     */
+    @GET("v1/service/complain_type")
+    Observable<ResponseBean<SuperServiceBean<FeedbackType>>> getFeedbackType(@Query("pageNo") String pageNo, @Query("limit") String limit);
 }
 
 

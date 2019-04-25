@@ -46,4 +46,9 @@ public class ServiceAction extends ActionsCreator {
         reqDate(ServiceManager.create(ApiServiceService.class).getServiceParts(pageNo + "", "10", keyword, carId),
                 act, false, ReqTag.Service.SERVICE_PARTS);
     }
+
+    public void getFeedbackType(BaseFluxActivity act) {
+        reqDate(ServiceManager.create(ApiServiceService.class).getFeedbackType("1", "10"),
+                act, false, ReqTag.Service.SERVICE_FEEDBACK_TYPE);
+    }
 }

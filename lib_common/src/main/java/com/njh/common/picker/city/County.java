@@ -1,29 +1,25 @@
-
 package com.njh.common.picker.city;
-import java.io.Serializable;
-import java.util.List;
 
-public class City implements Serializable {
+import java.io.Serializable;
+
+public class County implements Serializable {
 
     private String AreaId;
     private String AreaName;
-    private List<County> Cities;
 
-    public City() {
+    public County() {
     }
 
-    public City(String areaId, String areaName, List<County> cities) {
+    public County(String areaId, String areaName) {
         AreaId = areaId;
         AreaName = areaName;
-        Cities = cities;
     }
 
     @Override
     public String toString() {
-        return "City{" +
+        return "County{" +
                 "AreaId='" + AreaId + '\'' +
                 ", AreaName='" + AreaName + '\'' +
-                ", Cities=" + Cities +
                 '}';
     }
 
@@ -41,13 +37,5 @@ public class City implements Serializable {
 
     public void setAreaName(String areaName) {
         AreaName = areaName;
-    }
-
-    public List<County> getCities() {
-        return Cities;
-    }
-
-    public void setCities(List<County> cities) {
-        Cities = cities;
     }
 }
