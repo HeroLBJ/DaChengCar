@@ -15,6 +15,7 @@ import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;
 import com.njh.common.flux.stores.Store;
+import com.njh.common.utils.arouter.ArouterUtils;
 
 import androidx.core.content.ContextCompat;
 import butterknife.BindView;
@@ -222,6 +223,13 @@ public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> {
      */
     public void onKeep2(View view) {
 
+    }
+
+    /**
+     * 积分明细
+     */
+    public void goDetail(View view) {
+        ArouterUtils.getInstance().navigation(this, RouterHub.Mine.SCORE_DETAIL);
     }
 
     @Override

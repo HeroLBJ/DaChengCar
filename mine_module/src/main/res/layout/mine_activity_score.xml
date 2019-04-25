@@ -62,7 +62,7 @@
                     android:paddingBottom="20dp">
 
                     <RelativeLayout
-                        android:id="@+id/rl_detail"
+                        android:onClick="goDetail"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
