@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.njh.common.utils.CustomSlidingTablayout
+        android:id="@+id/sliding_tab_layout"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="50dp"
+        app:tl_divider_padding="15dp"
+        app:tl_indicator_bounce_enable="true"
+        app:tl_indicator_color="@color/res_red_selected"
+        app:tl_indicator_height="2.5dp"
+        app:tl_indicator_width="18dp"
+        app:tl_tab_padding="15dp"
+        app:tl_textSelectColor="@color/res_red_selected"
+        app:tl_textUnselectColor="@color/res_gray_888"
+        app:tl_text_select_size="20sp"
+        app:tl_textsize="13sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@id/sliding_tab_layout"
+        android:background="@color/res_line_bg" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sliding_tab_layout" />
 
 </LinearLayout>

@@ -142,6 +142,8 @@ public interface RouterHub {
         String FIND_PWD = MINE + "FindPwd";
         String SET_NEW_PWD = MINE + "SetNewPwd";
         String SCORE_DETAIL = MINE + "ScoreDetail";
+        String SCORE_GET = MINE + "ScoreGet";
+        String SCORE_PAY = MINE + "ScorePay";
     }
 
     interface Photo {

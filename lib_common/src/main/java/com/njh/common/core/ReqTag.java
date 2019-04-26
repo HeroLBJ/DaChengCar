@@ -49,6 +49,8 @@ public interface ReqTag {
         String MINE_SET_NEW_PWD = "MINE_SET_NEW_PWD";
         String MINE_MEMBER_CENTER = "MINE_MEMBER_CENTER";
         String MINE_INTEGRAL_INFO = "MINE_INTEGRAL_INFO";
+        String MINE_SCORE_GET = "MINE_SCORE_GET";
+        String MINE_SCORE_PAY = "MINE_SCORE_PAY";
     }
 
 }

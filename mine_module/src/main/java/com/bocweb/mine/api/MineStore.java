@@ -64,4 +64,14 @@ public class MineStore extends Store {
     public void getIntegralInfo(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.Mine.MINE_INTEGRAL_INFO, data);
     }
+
+    @BindAction(ReqTag.Mine.MINE_SCORE_GET)
+    public void getScoreGet(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_SCORE_GET, data);
+    }
+
+    @BindAction(ReqTag.Mine.MINE_SCORE_PAY)
+    public void getScorePay(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_SCORE_PAY, data);
+    }
 }

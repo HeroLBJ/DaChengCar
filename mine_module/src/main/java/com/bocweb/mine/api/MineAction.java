@@ -17,13 +17,6 @@ public class MineAction extends ActionsCreator {
         super(dispatcher, view);
     }
 
-    /**
-     * 登录
-     *
-     * @param act
-     * @param phone
-     * @param password
-     */
     public void signin(BaseFluxActivity act, String phone, String password) {
         reqDate(ServiceManager.create(ApiMineService.class).signin(phone, password),
                 act, false, ReqTag.REQ_TAG_POST_SIGNIN);
@@ -72,5 +65,15 @@ public class MineAction extends ActionsCreator {
     public void getIntegralInfo(BaseFluxActivity act) {
         reqDate(ServiceManager.create(ApiMineService.class).getIntegralInfo(),
                 act, false, ReqTag.Mine.MINE_INTEGRAL_INFO);
+    }
+
+    public void getScoreGetList(BaseFluxFragment act, int page) {
+        reqDate(ServiceManager.create(ApiMineService.class).getRecordList("10", page + "", "1"),
+                act, false, ReqTag.Mine.MINE_SCORE_GET);
+    }
+
+    public void getScorePayList(BaseFluxFragment act, int page) {
+        reqDate(ServiceManager.create(ApiMineService.class).getRecordList("10", page + "", "2"),
+                act, false, ReqTag.Mine.MINE_SCORE_PAY);
     }
 }

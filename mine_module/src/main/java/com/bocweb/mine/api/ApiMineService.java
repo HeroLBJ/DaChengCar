@@ -4,6 +4,7 @@ package com.bocweb.mine.api;
 import com.bocweb.mine.bean.LoginInfo;
 import com.bocweb.mine.bean.MemberCenter;
 import com.bocweb.mine.bean.MyScore;
+import com.bocweb.mine.bean.ScoreDetail;
 import com.njh.network.bean.ResponseBean;
 
 import io.reactivex.Observable;
@@ -12,6 +13,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 import static me.jessyan.retrofiturlmanager.RetrofitUrlManager.DOMAIN_NAME_HEADER;
 
@@ -121,6 +123,13 @@ public interface ApiMineService {
      */
     @GET("v3/member/integral_info")
     Observable<ResponseBean<MyScore>> getIntegralInfo();
+
+    /**
+     * 积分收入支出明细
+     */
+    @GET("v1/member/record_list")
+    Observable<ResponseBean<ScoreDetail>>
+    getRecordList(@Query("limit") String limit, @Query("page") String page, @Query("type") String type);
 }
 
 
