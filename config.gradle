@@ -83,8 +83,8 @@ ext {
             "versionchecklib"              : "com.allenliu.versionchecklib:library:2.1.9",
             "hawk"                         : "com.orhanobut:hawk:2.0.1",
             // 下拉刷新上拉加载
-            "SmartRefreshLayout"           : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-4",
-            "SmartRefreshHeader"           : "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-4",
+            "SmartRefreshLayout"           : "com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-5",
+            "SmartRefreshHeader"           : "com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-5",
             "PhotoView"                    : "com.github.chrisbanes:PhotoView:2.0.0",
             "PickerView"                   : "com.contrarywind:Android-PickerView:4.1.7",
             "rxpermission"                 : "com.github.tbruyelle:rxpermissions:0.10.2",

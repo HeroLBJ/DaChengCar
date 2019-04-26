@@ -8,16 +8,19 @@ import com.bocweb.mine.R2;
 import com.bocweb.mine.api.MineAction;
 import com.bocweb.mine.api.MineStore;
 import com.bocweb.mine.bean.ScoreDetail;
+import com.njh.common.constant.Constant;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.stores.Store;
-import com.njh.common.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -28,7 +31,8 @@ import butterknife.BindView;
  * @date 2019/4/26
  */
 @Route(path = RouterHub.Mine.SCORE_GET)
-public class ScoreGetFragment extends BaseFluxFragment<MineStore, MineAction> {
+public class ScoreGetFragment extends BaseFluxFragment<MineStore, MineAction>
+        implements OnRefreshLoadMoreListener {
 
     @BindView(R2.id.refresh_layout)
     SmartRefreshLayout mRefresh;
@@ -47,14 +51,16 @@ public class ScoreGetFragment extends BaseFluxFragment<MineStore, MineAction> {
     }
 
     private void request() {
-        showLoading();
-        actionsCreator().getScoreGetList(this, 1);
+        mRefresh.autoRefresh();
+        actionsCreator().getScoreGetList(this, currentPage);
     }
 
     @Override
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
         hideLoading();
+        mRefresh.finishRefresh();
+        mRefresh.finishLoadMore();
         switch (event.url) {
             case ReqTag.Mine.MINE_SCORE_GET:
                 ScoreDetail bean1 = (ScoreDetail) event.data;
@@ -63,9 +69,34 @@ public class ScoreGetFragment extends BaseFluxFragment<MineStore, MineAction> {
                     List<ScoreDetail.ScoreDetailList> list1 = list.getList();
                     mList.addAll(list1);
                     mAdapter.notifyDataSetChanged();
+                    maxNum = list.getCount();
                 }
                 break;
         }
+    }
+
+    private int currentPage = Constant.Num.NUM_1;
+    private int maxNum;
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        if (maxNum > currentPage * Constant.Num.NUM_10) {
+            currentPage++;
+            request();
+        } else {
+            mRefresh.finishLoadMore();
+        }
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        currentPage = Constant.Num.NUM_1;
+        request();
+    }
+
+    @Override
+    public void setListener() {
+        mRefresh.setOnRefreshLoadMoreListener(this);
     }
 
     @Override

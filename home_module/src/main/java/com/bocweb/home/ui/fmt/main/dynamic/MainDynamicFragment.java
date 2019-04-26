@@ -14,6 +14,7 @@ import com.bocweb.home.ui.bean.TargetInfo;
 import com.bocweb.home.ui.bean.UserInfo;
 import com.bocweb.home.ui.util.TopSmoothScroller;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.njh.common.constant.Constant;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
@@ -45,7 +46,7 @@ public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
     @BindView(R2.id.refresh_layout)
-    SmartRefreshLayout mRefreshLayout;
+    SmartRefreshLayout mRefresh;
     @BindView(R2.id.fab_top)
     FloatingActionButton fabTop;
 
@@ -91,7 +92,7 @@ public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
     }
 
     private void initRequest() {
-        showLoading();
+        mRefresh.autoRefresh();
         actionsCreator().getMomentList(this, "1");
     }
 
@@ -99,12 +100,15 @@ public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
         hideLoading();
+        mRefresh.finishRefresh();
+        mRefresh.finishLoadMore();
         switch (event.url) {
             case ReqTag.REQ_TAG_GET_HOME_MOMENT_LIST:
                 MainComentList item = (MainComentList) event.data;
                 mMainSelectedItemList.clear();
                 mMainSelectedItemList.addAll(item.getList());
                 mSuperAdapter.notifyDataSetChanged();
+                maxNum = item.getCount();
                 break;
             case ReqTag.REQ_TAG_POST_HOME_MOMENT_FOLLOW:
                 StatusResponse statusResponse = (StatusResponse) event.data;
@@ -146,7 +150,7 @@ public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
 
     @Override
     public void setListener() {
-        mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        mRefresh.setOnRefreshLoadMoreListener(this);
         fabTop.setOnClickListener(v -> onTop());
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -179,14 +183,23 @@ public class MainDynamicFragment extends BaseFluxFragment<MainStore, MainAction>
         return R.layout.home_fragment_dynamic;
     }
 
+    private int currentPage = Constant.Num.NUM_1;
+    private int maxNum;
+
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+        if (maxNum > currentPage * Constant.Num.NUM_10) {
+            currentPage++;
+            initRequest();
+        } else {
+            mRefresh.finishLoadMore();
+        }
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
+        currentPage = Constant.Num.NUM_1;
+        initRequest();
     }
 
     private String followId;

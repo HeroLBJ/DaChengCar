@@ -5,8 +5,8 @@ apply from: "config.gradle"
 buildscript {
 
     repositories {
-        maven { url "https://jitpack.io" }
         maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "https://jitpack.io" }
         maven { url 'http://maven.oschina.net/content/groups/public/' }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         jcenter()
@@ -27,8 +27,8 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "https://jitpack.io" }
         maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        maven { url "https://jitpack.io" }
         maven { url 'http://maven.oschina.net/content/groups/public/' }
         maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
         jcenter()

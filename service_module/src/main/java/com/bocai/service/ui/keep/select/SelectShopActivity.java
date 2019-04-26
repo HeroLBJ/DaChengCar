@@ -11,6 +11,7 @@ import com.bocai.service.api.ServiceAction;
 import com.bocai.service.api.ServiceStore;
 import com.bocai.service.bean.ServiceDealers;
 import com.bocai.service.bean.SuperServiceBean;
+import com.njh.common.constant.Constant;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;
@@ -18,10 +19,13 @@ import com.njh.common.flux.stores.Store;
 import com.njh.common.simple.SimpleRecyclerItemListener;
 import com.njh.common.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -32,7 +36,7 @@ import butterknife.BindView;
  */
 @Route(path = RouterHub.Service.SELECT_SHOP)
 public class SelectShopActivity extends BaseFluxActivity<ServiceStore, ServiceAction>
-        implements SelectShopAdapter.OnSelectListener {
+        implements SelectShopAdapter.OnSelectListener, OnRefreshLoadMoreListener {
 
     @BindView(R2.id.et_search)
     EditText etSearch;
@@ -43,7 +47,6 @@ public class SelectShopActivity extends BaseFluxActivity<ServiceStore, ServiceAc
 
     private SelectShopAdapter mAdapter;
     private List<ServiceDealers> mList = new ArrayList<>();
-    private int pageNo;
     private double mCurrentLon, mCurrentLat;
     private String cityName, keyword;
 
@@ -58,22 +61,24 @@ public class SelectShopActivity extends BaseFluxActivity<ServiceStore, ServiceAc
     }
 
     private void request() {
-        pageNo = 1;
-        actionsCreator().getServiceDealers(this, pageNo, mCurrentLon, mCurrentLat, cityName, keyword);
+        mRefresh.autoRefresh();
+        actionsCreator().getServiceDealers(this, currentPage, mCurrentLon, mCurrentLat, cityName, keyword);
     }
 
     @Override
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
+        mRefresh.finishRefresh();
+        mRefresh.finishLoadMore();
         switch (event.url) {
             case ReqTag.Service.SERVICE_DEALERS:
-                LogUtil.e("event.data:" + event.data);
                 SuperServiceBean<ServiceDealers> bean1 = (SuperServiceBean<ServiceDealers>) event.data;
                 List<ServiceDealers> serviceDealersList = bean1.getList();
 
                 mList.clear();
                 mList.addAll(serviceDealersList);
                 mAdapter.notifyDataSetChanged();
+                maxNum = bean1.getCount();
                 break;
         }
     }
@@ -81,6 +86,7 @@ public class SelectShopActivity extends BaseFluxActivity<ServiceStore, ServiceAc
     @Override
     public void setListener() {
         mAdapter.setOnSelectListener(this);
+        mRefresh.setOnRefreshLoadMoreListener(this);
     }
 
     @Override
@@ -100,5 +106,24 @@ public class SelectShopActivity extends BaseFluxActivity<ServiceStore, ServiceAc
         intent.putExtra("serviceName", title);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    private int currentPage = Constant.Num.NUM_1;
+    private int maxNum;
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        if (maxNum > currentPage * Constant.Num.NUM_10) {
+            currentPage++;
+            request();
+        } else {
+            mRefresh.finishLoadMore();
+        }
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        currentPage = Constant.Num.NUM_1;
+        request();
     }
 }

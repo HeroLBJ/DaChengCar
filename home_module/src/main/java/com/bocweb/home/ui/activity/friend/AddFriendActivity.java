@@ -42,7 +42,7 @@ public class AddFriendActivity extends BaseFluxActivity<MainStore, MainAction>
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
     @BindView(R2.id.refresh_layout)
-    SmartRefreshLayout mRefreshLayout;
+    SmartRefreshLayout mRefresh;
     @BindView(R2.id.et_search)
     EditText etSearch;
 
@@ -67,7 +67,7 @@ public class AddFriendActivity extends BaseFluxActivity<MainStore, MainAction>
 
     private void initRequest() {
         keyword = etSearch.getText().toString().trim();
-        showLoading();
+        mRefresh.autoRefresh();
         actionsCreator().getMomentMemberSearch(this, currentPage, keyword);
     }
 
@@ -75,6 +75,9 @@ public class AddFriendActivity extends BaseFluxActivity<MainStore, MainAction>
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
         hideLoading();
+        mRefresh.finishRefresh();
+        mRefresh.finishLoadMore();
+
         if (event.url.equals(ReqTag.REQ_TAG_GET_HOME_MOMENT_MEMBER_SEARCH)) {
             CustomData<Friend> result = (CustomData<Friend>) event.data;
             mList.clear();
@@ -87,7 +90,7 @@ public class AddFriendActivity extends BaseFluxActivity<MainStore, MainAction>
 
     @Override
     public void setListener() {
-        mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        mRefresh.setOnRefreshLoadMoreListener(this);
         etSearch.setOnClickListener(v -> etSearch.setCursorVisible(true));
         etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

@@ -39,6 +39,7 @@ import com.bocai.service.api.ServiceAction;
 import com.bocai.service.api.ServiceStore;
 import com.bocai.service.bean.ServiceDealers;
 import com.bocai.service.bean.SuperServiceBean;
+import com.njh.common.constant.Constant;
 import com.njh.common.picker.city.CityHelper;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
@@ -47,11 +48,15 @@ import com.njh.common.flux.stores.Store;
 import com.njh.common.location.LocationService;
 import com.njh.common.simple.SimplePoiSearchListener;
 import com.njh.common.utils.LogUtil;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
@@ -61,7 +66,8 @@ import butterknife.BindView;
  * @date 2019/4/19
  */
 @Route(path = RouterHub.Service.NAVIGATION)
-public class NavigationActivity extends BaseFluxActivity<ServiceStore, ServiceAction> implements NavigationAdapter.OnSelectItemListener {
+public class NavigationActivity extends BaseFluxActivity<ServiceStore, ServiceAction>
+        implements NavigationAdapter.OnSelectItemListener, OnRefreshLoadMoreListener {
 
     @BindView(R2.id.mapView)
     MapView mMapView;
@@ -73,6 +79,8 @@ public class NavigationActivity extends BaseFluxActivity<ServiceStore, ServiceAc
     CircleImageView iv3;
     @BindView(R2.id.iv4)
     CircleImageView iv4;
+    @BindView(R2.id.refresh_layout)
+    SmartRefreshLayout mRefresh;
     @BindView(R2.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R2.id.rl_select)
@@ -181,28 +189,30 @@ public class NavigationActivity extends BaseFluxActivity<ServiceStore, ServiceAc
         });
     }
 
-    private int pageNo = 1;
     private double longitude;
     private double latidude;
     private String cityName = "杭州市";
     private String keyword = "";
 
     private void request() {
-        actionsCreator().getServiceDealers(this, pageNo, mCurrentLon, mCurrentLat, cityName, keyword);
+        showLoading();
+        actionsCreator().getServiceDealers(this, currentPage, mCurrentLon, mCurrentLat, cityName, keyword);
     }
 
     @Override
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
+        hideLoading();
+        mRefresh.finishRefresh();
+        mRefresh.finishLoadMore();
         switch (event.url) {
             case ReqTag.Service.SERVICE_DEALERS:
-                LogUtil.e("event.data:" + event.data);
                 SuperServiceBean<ServiceDealers> bean1 = (SuperServiceBean<ServiceDealers>) event.data;
                 List<ServiceDealers> serviceDealersList = bean1.getList();
-
                 mList.clear();
                 mList.addAll(serviceDealersList);
                 mAdapter.notifyDataSetChanged();
+                maxNum = bean1.getCount();
                 break;
         }
     }
@@ -246,6 +256,7 @@ public class NavigationActivity extends BaseFluxActivity<ServiceStore, ServiceAc
     @Override
     public void setListener() {
         mAdapter.setOnSelectItemListener(this);
+        mRefresh.setOnRefreshLoadMoreListener(this);
 
         iv1.setOnClickListener(v -> {
             // 移到定位位置
@@ -302,8 +313,6 @@ public class NavigationActivity extends BaseFluxActivity<ServiceStore, ServiceAc
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
-//                String tx = CityHelper.getProvinceList().get(options1) +
-//                        CityHelper.getCityList().get(options1).get(options2);
                 String cityName = CityHelper.getCityList().get(options1).get(options2);
                 selectProvince = CityHelper.getProvinceList().get(options1);
                 selectCity = cityName;
@@ -333,16 +342,13 @@ public class NavigationActivity extends BaseFluxActivity<ServiceStore, ServiceAc
         rlDetailInfo.setVisibility(View.VISIBLE);
     }
 
-
     class MapLocationListener extends BDAbstractLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
             if (bdLocation == null || mBaiduMap == null) {
-                LogUtil.e("bdLocation:null");
                 return;
             }
-            LogUtil.e("bdLocation:" + bdLocation.getCity());
 
             MyLocationData locData = new MyLocationData.Builder().accuracy(bdLocation.getRadius())
                     // 此处设置开发者获取到的方向信息，顺时针0-360
@@ -380,5 +386,24 @@ public class NavigationActivity extends BaseFluxActivity<ServiceStore, ServiceAc
         mClient.disableLocInForeground(true);
         mClient.unRegisterLocationListener(myLocationListener);
         mClient.stop();
+    }
+
+    private int currentPage = Constant.Num.NUM_1;
+    private int maxNum;
+
+    @Override
+    public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+        if (maxNum > currentPage * Constant.Num.NUM_10) {
+            currentPage++;
+            request();
+        } else {
+            mRefresh.finishLoadMore();
+        }
+    }
+
+    @Override
+    public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+        currentPage = Constant.Num.NUM_1;
+        request();
     }
 }

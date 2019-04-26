@@ -12,6 +12,7 @@ import com.bocweb.home.ui.bean.Previews;
 import com.bocweb.home.ui.bean.PreviewsItem;
 import com.bocweb.home.ui.util.TopSmoothScroller;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.njh.common.constant.Constant;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
@@ -41,7 +42,7 @@ public class MainInfoFragment extends BaseFluxFragment<MainStore, MainAction>
     @BindView(R2.id.recycler_view)
     RecyclerView mRecyclerView;
     @BindView(R2.id.refresh_layout)
-    SmartRefreshLayout mRefreshLayout;
+    SmartRefreshLayout mRefresh;
     @BindView(R2.id.fab_top)
     FloatingActionButton fabTop;
 
@@ -61,7 +62,7 @@ public class MainInfoFragment extends BaseFluxFragment<MainStore, MainAction>
     }
 
     private void initRequest() {
-        showLoading();
+        mRefresh.autoRefresh();
         actionsCreator().getPreviewsList(this, "1", "");
     }
 
@@ -69,15 +70,17 @@ public class MainInfoFragment extends BaseFluxFragment<MainStore, MainAction>
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
         hideLoading();
+        mRefresh.finishRefresh();
+        mRefresh.finishLoadMore();
         if (event.url.equals(ReqTag.REQ_TAG_GET_HOME_ACTIVITY_PREVIEWS_LIST)) {
             ActivityPreviewsList item = (ActivityPreviewsList) event.data;
-
             PreviewsItem data = item.getData();
             if (data != null) {
                 mList.clear();
                 mList.addAll(item.getData().getList());
                 mAdapter = new PreviewsRecyclerAdapter(getContext(), data.getList(), item.getFlag().getList());
                 mRecyclerView.setAdapter(mAdapter);
+                maxNum = item.getFlag().getCount();
             }
         }
     }
@@ -91,7 +94,7 @@ public class MainInfoFragment extends BaseFluxFragment<MainStore, MainAction>
 
     @Override
     public void setListener() {
-        mRefreshLayout.setOnRefreshLoadMoreListener(this);
+        mRefresh.setOnRefreshLoadMoreListener(this);
         fabTop.setOnClickListener(v -> onTop());
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -119,13 +122,22 @@ public class MainInfoFragment extends BaseFluxFragment<MainStore, MainAction>
         return true;
     }
 
+    private int currentPage = Constant.Num.NUM_1;
+    private int maxNum;
+
     @Override
     public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
-
+        if (maxNum > currentPage * Constant.Num.NUM_10) {
+            currentPage++;
+            initRequest();
+        } else {
+            mRefresh.finishLoadMore();
+        }
     }
 
     @Override
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
-
+        currentPage = Constant.Num.NUM_1;
+        initRequest();
     }
 }

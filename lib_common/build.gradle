@@ -63,6 +63,7 @@ dependencies {
     api rootProject.ext.dependencies["PhotoView"]
     api rootProject.ext.dependencies["FlycoTabLayout_Lib"]
     api rootProject.ext.dependencies["SmartRefreshLayout"]
+    api rootProject.ext.dependencies["SmartRefreshHeader"]
 
     // 腾讯x5内核
     api files('libs/tbs_sdk_thirdapp_v4.3.0.1020.jar')
