@@ -20,7 +20,6 @@ import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.stores.Store;
 import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.arouter.ArouterUtils;
-import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.widget.NestedScrollView;
@@ -34,8 +33,6 @@ import butterknife.BindView;
 @Route(path = RouterHub.Mine.MINE_FMT)
 public class MineFmt extends BaseFluxFragment<MineStore, MineAction> {
 
-    @BindView(R2.id.titleBar)
-    CommonTitleBar titleBar;
     @BindView(R2.id.tv_car)
     TextView tvCar;
     @BindView(R2.id.tv_go)

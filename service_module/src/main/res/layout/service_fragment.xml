@@ -2,25 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
-
-
-    <com.wuhenzhizao.titlebar.widget.CommonTitleBar
-        android:id="@+id/titleBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="13dp"
-        android:paddingBottom="13dp"
-        app:centerText="大乘服务"
-        app:centerTextColor="@color/res_black"
-        app:centerTextSize="18sp"
-        app:centerType="textView"
-        app:showBottomLine="false" />
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:paddingTop="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +29,14 @@
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:layout_weight="1"
-                    android:background="#FFF74043">
+                    android:background="@drawable/service_maintain_bg">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="19dp"
+                        android:layout_marginTop="22dp"
+                        android:background="@drawable/service_ic_keep" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -59,7 +56,14 @@
                     android:layout_height="120dp"
                     android:layout_marginLeft="6dp"
                     android:layout_weight="1"
-                    android:background="#FFFF5900">
+                    android:background="@drawable/service_repair_bg">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="36dp"
+                        android:layout_marginLeft="19dp"
+                        android:layout_marginTop="22dp"
+                        android:background="@drawable/service_ic_repair" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -91,6 +95,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="21dp"
+                    android:drawableLeft="@drawable/service_help"
+                    android:drawablePadding="10dp"
                     android:text="一键救援"
                     android:textColor="@color/res_black"
                     android:textSize="16sp" />
@@ -105,27 +111,36 @@
                     android:textColor="#FFBEBEBE"
                     android:textSize="13sp" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_call1"
+                <RelativeLayout
+                    android:id="@+id/rl_call1"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center|right"
                     android:layout_marginRight="67dp"
-                    app:backgroundTint="#FF00E18F"
-                    app:elevation="5dp"
-                    app:pressedTranslationZ="10dp"
-                    app:rippleColor="#4D00D084" />
+                    android:background="@drawable/service_shape_green_circle">
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_call2"
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/service_fab_call" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center|right"
                     android:layout_marginRight="13dp"
-                    android:backgroundTint="#FFFF5900"
-                    app:elevation="5dp"
-                    app:pressedTranslationZ="10dp"
-                    app:rippleColor="#4DFF5900" />
+                    android:background="@drawable/service_shape_red_circle">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="16dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/service_fab_right" />
+
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -145,6 +160,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
                     android:layout_marginTop="21dp"
+                    android:drawableLeft="@drawable/service_110"
+                    android:drawablePadding="10dp"
                     android:text="一键报案"
                     android:textColor="@color/res_black"
                     android:textSize="16sp" />
@@ -159,39 +176,67 @@
                     android:textColor="#FFBEBEBE"
                     android:textSize="13sp" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                <RelativeLayout
+                    android:id="@+id/rl_call3"
                     android:layout_width="40dp"
-                    android:id="@+id/fab_call3"
                     android:layout_height="40dp"
                     android:layout_gravity="center|right"
                     android:layout_marginRight="67dp"
-                    app:backgroundTint="#FF00E18F"
-                    app:elevation="5dp"
-                    app:pressedTranslationZ="10dp"
-                    app:rippleColor="#4D00D084" />
+                    android:background="@drawable/service_shape_green_circle">
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/service_fab_call" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_call4"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center|right"
                     android:layout_marginRight="13dp"
-                    android:backgroundTint="#FFFF5900"
-                    app:elevation="5dp"
-                    app:pressedTranslationZ="10dp"
-                    app:rippleColor="#4DFF5900" />
+                    android:background="@drawable/service_shape_red_circle">
+
+                    <ImageView
+                        android:layout_width="10dp"
+                        android:layout_height="16dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/service_fab_right" />
+
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/tv_map"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="39dp"
-                android:paddingTop="31dp"
-                android:paddingBottom="17dp"
-                android:text="一键导航"
-                android:textColor="@color/res_gray_333"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_map"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/service_map"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="39dp"
+                    android:paddingTop="31dp"
+                    android:paddingBottom="17dp"
+                    android:text="一键导航"
+                    android:textColor="@color/res_gray_333"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="31dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/service_icon_arrow_right_999" />
+            </RelativeLayout>
+
 
             <View
                 android:layout_width="match_parent"
@@ -200,16 +245,34 @@
                 android:layout_marginRight="20dp"
                 android:background="@color/res_gray_main_text" />
 
-            <TextView
-                android:id="@+id/tv_select"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="39dp"
-                android:paddingTop="26dp"
-                android:paddingBottom="22dp"
-                android:text="配件查询"
-                android:textColor="@color/res_gray_333"
-                android:textSize="14sp" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_select"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/service_tool"
+                    android:drawablePadding="10dp"
+                    android:paddingLeft="39dp"
+                    android:paddingTop="26dp"
+                    android:paddingRight="30dp"
+                    android:paddingBottom="22dp"
+                    android:text="配件查询"
+                    android:textColor="@color/res_gray_333"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="31dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/service_icon_arrow_right_999" />
+            </RelativeLayout>
+
 
             <View
                 android:layout_width="match_parent"
@@ -218,16 +281,35 @@
                 android:layout_marginRight="20dp"
                 android:background="@color/res_gray_main_text" />
 
-            <TextView
-                android:id="@+id/tv_feedback"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="39dp"
-                android:paddingTop="26dp"
-                android:paddingBottom="22dp"
-                android:text="投诉建议"
-                android:textColor="@color/res_gray_333"
-                android:textSize="14sp" />
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/service_feedback"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="39dp"
+                    android:paddingTop="26dp"
+                    android:paddingRight="30dp"
+                    android:paddingBottom="22dp"
+                    android:text="投诉建议"
+                    android:textColor="@color/res_gray_333"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="31dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/service_icon_arrow_right_999" />
+
+            </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"

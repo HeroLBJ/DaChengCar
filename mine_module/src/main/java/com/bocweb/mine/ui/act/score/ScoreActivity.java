@@ -3,6 +3,7 @@ package com.bocweb.mine.ui.act.score;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -16,6 +17,7 @@ import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;
 import com.njh.common.flux.stores.Store;
 import com.njh.common.utils.arouter.ArouterUtils;
+import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 
 import androidx.core.content.ContextCompat;
 import butterknife.BindView;
@@ -26,7 +28,7 @@ import butterknife.BindView;
  * @date 2019/4/12
  */
 @Route(path = RouterHub.Mine.SCORE)
-public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> {
+public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> implements CommonTitleBar.OnTitleBarListener {
 
     @BindView(R2.id.tv_total_score)
     TextView tvTotalScore;
@@ -58,10 +60,20 @@ public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> {
     TextView tv8Score;
     @BindView(R2.id.tv8_click)
     TextView tv8Click;
+    @BindView(R2.id.toolbar_title)
+    TextView toolbarTitle;
+    @BindView(R2.id.toolbar_back)
+    ImageButton toolbarBack;
 
     @Override
     public void initData(Bundle savedInstanceState) {
+        initTitle();
         request();
+    }
+
+    private void initTitle() {
+        toolbarTitle.setText("积分");
+        toolbarBack.setOnClickListener(v -> finish());
     }
 
     private void request() {
@@ -245,5 +257,10 @@ public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> {
     @Override
     protected boolean flux() {
         return true;
+    }
+
+    @Override
+    public void onClicked(View v, int action, String extra) {
+
     }
 }

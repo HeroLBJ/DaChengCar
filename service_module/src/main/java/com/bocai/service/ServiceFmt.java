@@ -11,7 +11,6 @@ import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.helper.CallHelper;
 import com.njh.common.utils.arouter.ArouterUtils;
-import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 
 import androidx.cardview.widget.CardView;
 import butterknife.BindView;
@@ -24,16 +23,12 @@ import butterknife.BindView;
 @Route(path = RouterHub.Service.ROOT)
 public class ServiceFmt extends BaseFluxFragment {
 
-    @BindView(R2.id.titleBar)
-    CommonTitleBar titleBar;
     @BindView(R2.id.rl_maintain)
     RelativeLayout rlMaintain;
     @BindView(R2.id.rl_repair)
     RelativeLayout rlRepair;
-    @BindView(R2.id.fab_call1)
-    FloatingActionButton fabCall1;
-    @BindView(R2.id.fab_call2)
-    FloatingActionButton fabCall2;
+    @BindView(R2.id.rl_call1)
+    RelativeLayout rlCall1;
     @BindView(R2.id.cv_call_rescue)
     CardView cvCallRescue;
     @BindView(R2.id.cv_call_110)
@@ -44,8 +39,8 @@ public class ServiceFmt extends BaseFluxFragment {
     TextView tvSelect;
     @BindView(R2.id.tv_feedback)
     TextView tvFeedback;
-    @BindView(R2.id.fab_call3)
-    FloatingActionButton fabCall3;
+    @BindView(R2.id.rl_call3)
+    RelativeLayout rlCall3;
 
     private CallHelper call;
 
@@ -72,8 +67,8 @@ public class ServiceFmt extends BaseFluxFragment {
         cvCallRescue.setOnClickListener(v -> onCheck(call2));
         tvSelect.setOnClickListener(v -> onCheck(select));
         tvFeedback.setOnClickListener(v -> onCheck(feedback));
-        fabCall1.setOnClickListener(v -> call.show());
-        fabCall3.setOnClickListener(v -> call.show());
+        rlCall1.setOnClickListener(v -> call.show());
+        rlCall3.setOnClickListener(v -> call.show());
         cvCall110.setOnClickListener(v -> {
             // 去一键报案页面
             ArouterUtils.getInstance().navigation(getContext(), RouterHub.Service.CALL_POLICE);

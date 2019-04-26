@@ -1,6 +1,5 @@
 package com.bocweb.mine.api;
 
-
 import com.bocweb.mine.bean.LoginInfo;
 import com.bocweb.mine.bean.MemberCenter;
 import com.bocweb.mine.bean.MyScore;
