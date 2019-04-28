@@ -8,27 +8,30 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.allen.library.CircleImageView;
 import com.bocweb.mine.R;
 import com.bocweb.mine.R2;
 import com.bocweb.mine.api.MineAction;
 import com.bocweb.mine.api.MineStore;
-import com.bocweb.mine.bean.MemberCenter;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.stores.Store;
+import com.njh.common.sp.user.UserHelper;
+import com.njh.common.sp.user.UserInfo;
 import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.arouter.ArouterUtils;
+import com.njh.common.utils.img.GlideUtils;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.widget.NestedScrollView;
 import butterknife.BindView;
 
 /**
- * 个人中心
- *
- * @author niejiahuan
+ * @author libingjun
+ * @version 用户 root fragment
+ * @date 2019/4/28
  */
 @Route(path = RouterHub.Mine.MINE_FMT)
 public class MineFmt extends BaseFluxFragment<MineStore, MineAction> {
@@ -79,11 +82,20 @@ public class MineFmt extends BaseFluxFragment<MineStore, MineAction> {
     TextView tvSupport;
     @BindView(R2.id.scrollView)
     NestedScrollView scrollView;
+    @BindView(R2.id.tv_score_grow)
+    TextView tvScoreGrow;
+    @BindView(R2.id.tv_score_score)
+    TextView tvScoreScore;
+    @BindView(R2.id.tv_score_follow)
+    TextView tvScoreFollow;
+    @BindView(R2.id.tv_score_fans)
+    TextView tvScoreFans;
+    @BindView(R2.id.tv_user_say)
+    TextView tvUserSay;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void initData(Bundle savedInstanceState) {
-
 
         rlMyCar.setPadding(0, 200, 0, 0);
 
@@ -93,8 +105,20 @@ public class MineFmt extends BaseFluxFragment<MineStore, MineAction> {
                 LogUtil.e(scrollY + " - " + oldScrollY);
             }
         });
-
         request();
+    }
+
+    private void initUserInfo() {
+        UserHelper.putUserInfo(userInfo);
+
+        GlideUtils.getInstance().loadImg(getActivity(), userInfo.getAvatar(), civUserPhoto);
+        tvUserSay.setText(userInfo.getSightml());
+        tvScoreGrow.setText(userInfo.getGrowthValue());
+        tvScoreScore.setText(userInfo.getIntegral());
+        tvScoreFollow.setText(userInfo.getFocus());
+        tvScoreFans.setText(userInfo.getFans());
+        LogUtil.e(userInfo.getAvatar());
+        LogUtil.e(userInfo.getWxxAvatarurl());
     }
 
     private void request() {
@@ -102,13 +126,16 @@ public class MineFmt extends BaseFluxFragment<MineStore, MineAction> {
         actionsCreator().getMemberCenter(this);
     }
 
+    private UserInfo userInfo;
+
     @Override
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
         hideLoading();
         switch (event.url) {
             case ReqTag.Mine.MINE_MEMBER_CENTER:
-                MemberCenter bean1 = (MemberCenter) event.data;
+                userInfo = (UserInfo) event.data;
+                initUserInfo();
                 break;
         }
     }
@@ -116,7 +143,12 @@ public class MineFmt extends BaseFluxFragment<MineStore, MineAction> {
     @Override
     public void setListener() {
         rlMyCar.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.MY_CAR));
-        civUserPhoto.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.USER_CENTER));
+        civUserPhoto.setOnClickListener(v -> {
+            ARouter.getInstance().build(RouterHub.Mine.USER_CENTER)
+                    .withSerializable("UserInfo", userInfo)
+                    .withBoolean("self", true)
+                    .navigation();
+        });
         tvSign.setOnClickListener(v -> onSignUp());
         rlFans.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.FANS));
         rlScore.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.SCORE));

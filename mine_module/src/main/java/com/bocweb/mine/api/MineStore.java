@@ -74,4 +74,19 @@ public class MineStore extends Store {
     public void getScorePay(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.Mine.MINE_SCORE_PAY, data);
     }
+
+    @BindAction(ReqTag.Mine.MINE_PHOTO)
+    public void getPhoto(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_PHOTO, data);
+    }
+
+    @BindAction(ReqTag.Mine.MINE_UPLOAD_USER)
+    public void uploadUser(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_UPLOAD_USER, data);
+    }
+
+    @BindAction(ReqTag.Mine.MINE_UPLOAD_USER_SIGN)
+    public void uploadUserSign(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_UPLOAD_USER_SIGN, data);
+    }
 }

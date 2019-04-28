@@ -48,9 +48,9 @@
         android:layout_centerVertical="true"
         android:background="@drawable/home_follow_bg"
         android:paddingLeft="12dp"
-        android:paddingTop="6dp"
+        android:paddingTop="4dp"
         android:paddingRight="12dp"
-        android:paddingBottom="6dp"
+        android:paddingBottom="4dp"
         android:text="+ 关注"
         android:textColor="@color/res_white"
         android:textSize="@dimen/sp_12" />

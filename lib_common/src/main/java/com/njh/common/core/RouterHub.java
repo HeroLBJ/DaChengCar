@@ -144,6 +144,8 @@ public interface RouterHub {
         String SCORE_DETAIL = MINE + "ScoreDetail";
         String SCORE_GET = MINE + "ScoreGet";
         String SCORE_PAY = MINE + "ScorePay";
+        String USER_EDIT = MINE + "UserEdit";
+        String SIGN = MINE + "Sign";
     }
 
     interface Photo {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_include_head_bar" />
+
+    <EditText
+        android:id="@+id/et_sign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@null"
+        android:gravity="left"
+        android:maxLines="8"
+        android:minLines="8"
+        android:textColor="@color/res_black_00" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/mine_follow_color_radius_17dp"
+        android:gravity="center"
+        android:onClick="onSubmit"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="提交"
+        android:textColor="@color/white" />
+
+</LinearLayout>

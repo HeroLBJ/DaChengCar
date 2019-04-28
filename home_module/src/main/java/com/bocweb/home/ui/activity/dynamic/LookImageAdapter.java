@@ -67,7 +67,6 @@ public class LookImageAdapter extends RecyclerView.Adapter<LookImageAdapter.View
     }
 
     private void onOpenPhoto() {
-        Toast.makeText(mContext, "打开相册", Toast.LENGTH_SHORT).show();
         ImageSelector.builder()
                 .useCamera(true)
                 .setSingle(false)

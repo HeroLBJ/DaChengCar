@@ -51,6 +51,9 @@ public interface ReqTag {
         String MINE_INTEGRAL_INFO = "MINE_INTEGRAL_INFO";
         String MINE_SCORE_GET = "MINE_SCORE_GET";
         String MINE_SCORE_PAY = "MINE_SCORE_PAY";
+        String MINE_PHOTO = "MINE_PHOTO";
+        String MINE_UPLOAD_USER = "MINE_UPLOAD_USER";
+        String MINE_UPLOAD_USER_SIGN = "MINE_UPLOAD_USER_SIGN";
     }
 
 }

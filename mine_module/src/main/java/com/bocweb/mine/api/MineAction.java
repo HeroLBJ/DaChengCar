@@ -8,6 +8,12 @@ import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.dispatcher.Dispatcher;
 import com.njh.network.api.ServiceManager;
 
+import java.io.File;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
 /**
  * @author niejiahuan
  */
@@ -58,7 +64,7 @@ public class MineAction extends ActionsCreator {
     }
 
     public void getMemberCenter(BaseFluxFragment act) {
-        reqDate(ServiceManager.create(ApiMineService.class).getMemberCenter(),
+        reqDate(ServiceManager.create(ApiMineService.class).getUserInfo("1"),
                 act, false, ReqTag.Mine.MINE_MEMBER_CENTER);
     }
 
@@ -75,5 +81,24 @@ public class MineAction extends ActionsCreator {
     public void getScorePayList(BaseFluxFragment act, int page) {
         reqDate(ServiceManager.create(ApiMineService.class).getRecordList("10", page + "", "2"),
                 act, false, ReqTag.Mine.MINE_SCORE_PAY);
+    }
+
+    public void uploadUser(BaseFluxActivity act, String nickname, String name, String gender, String year,
+                           String month, String day, String provinceName, String cityName, String sightml) {
+        reqDate(ServiceManager.create(ApiMineService.class).updateUser(nickname, name, gender, year,month, day, provinceName, cityName, sightml),
+                act, false, ReqTag.Mine.MINE_UPLOAD_USER);
+    }
+
+    public void uploadUserSign(BaseFluxActivity act, String sightml) {
+        reqDate(ServiceManager.create(ApiMineService.class).updateUser("", "", "", "","", "", "", "", sightml),
+                act, false, ReqTag.Mine.MINE_UPLOAD_USER_SIGN);
+    }
+
+
+    public void getPhoto(BaseFluxActivity act, File file) {
+        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("uploadFile", file.getName(), requestFile);
+        reqDate(ServiceManager.create(ApiMineService.class).getPhoto(body),
+                act, false, ReqTag.Mine.MINE_PHOTO);
     }
 }

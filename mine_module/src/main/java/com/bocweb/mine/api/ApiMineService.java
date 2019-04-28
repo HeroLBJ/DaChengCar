@@ -1,17 +1,21 @@
 package com.bocweb.mine.api;
 
 import com.bocweb.mine.bean.LoginInfo;
-import com.bocweb.mine.bean.MemberCenter;
 import com.bocweb.mine.bean.MyScore;
 import com.bocweb.mine.bean.ScoreDetail;
+import com.njh.common.sp.user.UserInfo;
 import com.njh.network.bean.ResponseBean;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 import static me.jessyan.retrofiturlmanager.RetrofitUrlManager.DOMAIN_NAME_HEADER;
@@ -112,10 +116,10 @@ public interface ApiMineService {
     Observable<ResponseBean<Object>> setNewPwd(@Field("phone") String phone, @Field("password") String password);
 
     /**
-     * 我的信息
+     * 会员信息
      */
-    @GET("v1/moment/memberCenter")
-    Observable<ResponseBean<MemberCenter>> getMemberCenter();
+    @GET("v3/member/info")
+    Observable<ResponseBean<UserInfo>> getUserInfo(@Query("isuser") String isuser);
 
     /**
      * 我的积分
@@ -129,6 +133,22 @@ public interface ApiMineService {
     @GET("v1/member/record_list")
     Observable<ResponseBean<ScoreDetail>>
     getRecordList(@Query("limit") String limit, @Query("page") String page, @Query("type") String type);
+
+    @POST("v1/member/update_user")
+    @FormUrlEncoded
+    Observable<ResponseBean<String>>
+    updateUser(@Field("nickname") String nickname, @Field("name") String name,
+               @Field("gender") String gender, @Field("year") String year,
+               @Field("month") String monty, @Field("day") String day,
+               @Field("provinceName") String provinceName,
+               @Field("cityName") String cityName, @Field("sightml") String sightml);
+
+    /**
+     * 图片上传
+     */
+    @Multipart
+    @POST("v1/picupload/photo")
+    Observable<ResponseBean<Object>> getPhoto(@Part MultipartBody.Part uploadFile);
 }
 
 

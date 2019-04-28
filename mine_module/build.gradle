@@ -6,4 +6,6 @@ android {
 
 dependencies {
 
+    api project(path: ':lib_select_photo')
+    api rootProject.ext.dependencies["Luban"]
 }
