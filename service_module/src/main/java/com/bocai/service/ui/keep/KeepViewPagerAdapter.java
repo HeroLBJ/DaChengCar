@@ -24,14 +24,9 @@ public class KeepViewPagerAdapter extends FragmentStatePagerAdapter {
     private List<BaseFluxFragment> fmtList = new ArrayList<>();
     private final String[] mTitles = {"免费项目", "自费项目"};
 
-    public KeepViewPagerAdapter(FragmentManager fm) {
+    public KeepViewPagerAdapter(FragmentManager fm, List<BaseFluxFragment> fmtList) {
         super(fm);
-        fmtList.add((KeepFreeFragment) ARouter.getInstance()
-                .build(RouterHub.Service.KEEP_FREE)
-                .navigation());
-        fmtList.add((KeepMoneyFragment) ARouter.getInstance()
-                .build(RouterHub.Service.KEEP_MONEY)
-                .navigation());
+        this.fmtList = fmtList;
     }
 
     @Override

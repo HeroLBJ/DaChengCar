@@ -8,28 +8,22 @@ import java.util.List;
  * @date 2019/4/22
  */
 public class ServicePackage implements Serializable {
-    /**
-     * "id": "1",
-     * 			"title": "首保",
-     * 			"photo": "",
-     * 			"price": "0.00",
-     * 			"type": "1",
-     * 			"details": [{
-     * 				"id": "2",
-     * 				"title": "机滤",
-     * 				"price": "0.00"
-     *                        }, {
-     * 				"id": "1",
-     * 				"title": "机油",
-     * 				"price": "0.00"
-     *            }]* 		}]
-     */
     private String id;
     private String title;
     private String photo;
     private String price;
     private String type;
     private List<ServicePackageDetail> details;
+
+    private boolean isSelect;
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 
     public ServicePackage() {
     }

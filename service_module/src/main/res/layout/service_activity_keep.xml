@@ -5,15 +5,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/title"
+        layout="@layout/common_include_head_bar" />
+
+
     <com.njh.common.utils.CustomSlidingTablayout
         android:id="@+id/sliding_tab_layout"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
+        android:layout_below="@id/title"
         android:layout_centerHorizontal="true"
         app:tl_divider_padding="15dp"
         app:tl_indicator_bounce_enable="true"
-        app:tl_indicator_color="@color/res_red_selected"
-        app:tl_indicator_height="2.5dp"
         app:tl_indicator_width="18dp"
         app:tl_tab_padding="15dp"
         app:tl_textSelectColor="@color/res_red_selected"
@@ -21,9 +25,20 @@
         app:tl_text_select_size="16sp"
         app:tl_textsize="16sp" />
 
-    <TextView
+    <View
+        android:layout_below="@id/sliding_tab_layout"
+        android:id="@+id/toolbar_divider"
         android:layout_width="match_parent"
-        android:layout_height="3dp"
+        android:layout_height="6dp"
+        android:background="@drawable/toolbar_shadow" />
+
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:gravity="center"
+        android:paddingRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/sliding_tab_layout"
         android:background="#FFEBEBEB"
         android:paddingLeft="20dp"
@@ -37,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/rl_bottom"
-        android:layout_below="@id/sliding_tab_layout" />
+        android:layout_below="@id/tv_desc" />
 
     <RelativeLayout
         android:id="@+id/rl_bottom"

@@ -14,6 +14,7 @@ import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.stores.Store;
+import com.njh.common.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -32,7 +33,7 @@ import butterknife.BindView;
  */
 @Route(path = RouterHub.Service.KEEP_MONEY)
 public class KeepMoneyFragment extends BaseFluxFragment<ServiceStore, ServiceAction>
-        implements OnRefreshLoadMoreListener {
+        implements OnRefreshLoadMoreListener, FreeAdapter.OnSelectOneListener {
 
     @BindView(R2.id.refresh_layout)
     SmartRefreshLayout mRefresh;
@@ -83,6 +84,11 @@ public class KeepMoneyFragment extends BaseFluxFragment<ServiceStore, ServiceAct
         return true;
     }
 
+    @Override
+    public void setListener() {
+        mAdapter.setOnSelectOneListener(this);
+    }
+
     private int currentPage = Constant.Num.NUM_1;
     private int maxNum;
 
@@ -100,5 +106,41 @@ public class KeepMoneyFragment extends BaseFluxFragment<ServiceStore, ServiceAct
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         currentPage = Constant.Num.NUM_1;
         request();
+    }
+
+    private int selectMoreCount;
+
+    @Override
+    public void onSelectOneClick(ServicePackage item, boolean select, boolean isOne) {
+        if (isOne) {
+            return;
+        }
+        for (ServicePackage pack : mList) {
+            if (item.getId().equals(pack.getId())) {
+                pack.setSelect(!select);
+            }
+        }
+        mAdapter.notifyDataSetChanged();
+
+        if (select) {
+            selectMoreCount--;
+        } else {
+            selectMoreCount++;
+        }
+
+        LogUtil.e("selectMoreCount = " + selectMoreCount);
+        if (onKeepMoneyListener != null) {
+            onKeepMoneyListener.onKeepMoneyClick(item, select);
+        }
+    }
+
+    private OnKeepMoneyListener onKeepMoneyListener;
+
+    public void setOnKeepMoneyListener(OnKeepMoneyListener onKeepMoneyListener) {
+        this.onKeepMoneyListener = onKeepMoneyListener;
+    }
+
+    public interface OnKeepMoneyListener {
+        void onKeepMoneyClick(ServicePackage item, boolean select);
     }
 }

@@ -14,6 +14,7 @@ import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
 import com.njh.common.flux.stores.Store;
+import com.njh.common.utils.LogUtil;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
@@ -32,7 +33,7 @@ import butterknife.BindView;
  */
 @Route(path = RouterHub.Service.KEEP_FREE)
 public class KeepFreeFragment extends BaseFluxFragment<ServiceStore, ServiceAction>
-    implements OnRefreshLoadMoreListener {
+        implements OnRefreshLoadMoreListener, FreeAdapter.OnSelectOneListener {
 
     @BindView(R2.id.refresh_layout)
     SmartRefreshLayout mRefresh;
@@ -70,7 +71,9 @@ public class KeepFreeFragment extends BaseFluxFragment<ServiceStore, ServiceActi
             case ReqTag.Service.SERVICE_PACKAGE:
                 SuperServiceBean<ServicePackage> bean1 = (SuperServiceBean<ServicePackage>) event.data;
                 List<ServicePackage> list = bean1.getList();
-                mList.clear();
+                if (currentPage == 1) {
+                    mList.clear();
+                }
                 mList.addAll(list);
                 mAdapter.notifyDataSetChanged();
                 maxNum = bean1.getCount();
@@ -81,6 +84,11 @@ public class KeepFreeFragment extends BaseFluxFragment<ServiceStore, ServiceActi
     @Override
     protected boolean flux() {
         return true;
+    }
+
+    @Override
+    public void setListener() {
+        mAdapter.setOnSelectOneListener(this);
     }
 
     private int currentPage = Constant.Num.NUM_1;
@@ -100,5 +108,46 @@ public class KeepFreeFragment extends BaseFluxFragment<ServiceStore, ServiceActi
     public void onRefresh(@NonNull RefreshLayout refreshLayout) {
         currentPage = Constant.Num.NUM_1;
         request();
+    }
+
+    private int selectOneCount = 0;
+    private int selectMoreCount = 0;
+
+    @Override
+    public void onSelectOneClick(ServicePackage item, boolean select, boolean isOne) {
+        if (!isOne) {
+            return;
+        }
+        for (ServicePackage pack : mList) {
+            if (item.getId().equals(pack.getId())) {
+                pack.setSelect(!select);
+            } else {
+                pack.setSelect(false);
+            }
+        }
+        mAdapter.notifyDataSetChanged();
+
+        if (select) {
+            selectOneCount = 0;
+        } else {
+            selectOneCount = 1;
+        }
+
+        LogUtil.e("selectCount = " + selectOneCount);
+
+        if (onKeepFreeListener != null) {
+            LogUtil.e("=========================");
+            onKeepFreeListener.onKeepFreeClick(item, select);
+        }
+    }
+
+    private OnKeepFreeListener onKeepFreeListener;
+
+    public void setOnKeepFreeListener(OnKeepFreeListener onKeepFreeListener) {
+        this.onKeepFreeListener = onKeepFreeListener;
+    }
+
+    public interface OnKeepFreeListener {
+        void onKeepFreeClick(ServicePackage item, boolean select);
     }
 }
