@@ -94,6 +94,14 @@ public class MyScore implements Serializable {
         private String todaySign; // 0：未签到 1：已签到
         private String integral; // 签到赠送的积分
 
+        @Override
+        public String toString() {
+            return "DaySign{" +
+                    "todaySign='" + todaySign + '\'' +
+                    ", integral='" + integral + '\'' +
+                    '}';
+        }
+
         public String getTodaySign() {
             return todaySign;
         }

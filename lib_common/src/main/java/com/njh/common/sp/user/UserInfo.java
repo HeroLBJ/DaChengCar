@@ -42,7 +42,7 @@ public class UserInfo implements Serializable {
     private String token;
     private String focus;
     private String fans;
-    private String todaySign;
+    private String todaySign; // 是否签到 1：已签到
     private String isMybirth;
     private String unRead;
     private String unDeal;

@@ -94,4 +94,9 @@ public class MineStore extends Store {
     public void getUserMomentList(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.Mine.MINE_USER_MOMENT_LIST, data);
     }
+
+    @BindAction(ReqTag.Mine.MINE_USER_SIGN_UP)
+    public void getSignUp(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_USER_SIGN_UP, data);
+    }
 }

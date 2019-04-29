@@ -206,7 +206,6 @@
                     android:layout_toRightOf="@id/tv1"
                     android:paddingTop="25dp"
                     android:paddingBottom="25dp"
-                    android:text="+20"
                     android:textColor="@color/res_gray_999"
                     android:textSize="15sp" />
 
@@ -257,7 +256,6 @@
                     android:layout_toRightOf="@id/tv2"
                     android:paddingTop="25dp"
                     android:paddingBottom="25dp"
-                    android:text="+20"
                     android:textColor="@color/res_gray_999"
                     android:textSize="15sp" />
 
@@ -315,7 +313,6 @@
                     android:layout_toRightOf="@id/tv3"
                     android:paddingTop="25dp"
                     android:paddingBottom="25dp"
-                    android:text="+20"
                     android:textColor="@color/res_gray_999"
                     android:textSize="15sp" />
 
@@ -363,7 +360,6 @@
                     android:layout_toRightOf="@id/tv4"
                     android:paddingTop="25dp"
                     android:paddingBottom="25dp"
-                    android:text="+20"
                     android:textColor="@color/res_gray_999"
                     android:textSize="15sp" />
 
@@ -414,7 +410,6 @@
                     android:onClick="onKeep"
                     android:paddingTop="25dp"
                     android:paddingBottom="25dp"
-                    android:text="+20"
                     android:textColor="@color/res_follow_end"
                     android:textSize="15sp" />
 
@@ -473,7 +468,6 @@
                     android:layout_toRightOf="@id/tv6"
                     android:paddingTop="25dp"
                     android:paddingBottom="25dp"
-                    android:text="+20"
                     android:textColor="@color/res_gray_999"
                     android:textSize="15sp" />
 
@@ -522,7 +516,6 @@
                     android:layout_toRightOf="@id/tv7"
                     android:paddingTop="25dp"
                     android:paddingBottom="25dp"
-                    android:text="+20"
                     android:textColor="@color/res_gray_999"
                     android:textSize="15sp" />
 
@@ -572,7 +565,6 @@
                     android:layout_toRightOf="@id/tv8"
                     android:paddingTop="25dp"
                     android:paddingBottom="25dp"
-                    android:text="+20"
                     android:textColor="@color/res_gray_999"
                     android:textSize="15sp" />
 

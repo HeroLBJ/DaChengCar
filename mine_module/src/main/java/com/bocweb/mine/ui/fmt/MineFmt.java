@@ -2,6 +2,11 @@ package com.bocweb.mine.ui.fmt;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -14,6 +19,7 @@ import com.bocweb.mine.R;
 import com.bocweb.mine.R2;
 import com.bocweb.mine.api.MineAction;
 import com.bocweb.mine.api.MineStore;
+import com.bocweb.mine.bean.SignUp;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxFragment;
@@ -23,8 +29,10 @@ import com.njh.common.sp.user.UserInfo;
 import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.arouter.ArouterUtils;
 import com.njh.common.utils.img.GlideUtils;
+import com.njh.common.widget.CustomPopWindow;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import butterknife.BindView;
 
@@ -52,14 +60,6 @@ public class MineFmt extends BaseFluxFragment<MineStore, MineAction> {
     ImageView ivUserSex;
     @BindView(R2.id.rl_my_car)
     RelativeLayout rlMyCar;
-    @BindView(R2.id.rl_fans)
-    RelativeLayout rlFans;
-    @BindView(R2.id.rl_score)
-    RelativeLayout rlScore;
-    @BindView(R2.id.rl_follow)
-    RelativeLayout rlFollow;
-    @BindView(R2.id.rl_grow)
-    RelativeLayout rlGrow;
     @BindView(R2.id.rl_activity)
     RelativeLayout rlActivity;
     @BindView(R2.id.rl_release)
@@ -117,8 +117,29 @@ public class MineFmt extends BaseFluxFragment<MineStore, MineAction> {
         tvScoreScore.setText(userInfo.getIntegral());
         tvScoreFollow.setText(userInfo.getFocus());
         tvScoreFans.setText(userInfo.getFans());
-        LogUtil.e(userInfo.getAvatar());
-        LogUtil.e(userInfo.getWxxAvatarurl());
+
+        // 签到按钮
+        if ("1".equals(userInfo.getTodaySign())) {
+            tvSign.setEnabled(false);
+        } else {
+            tvSign.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (!isVisibleToUser || userInfo == null) {
+            return;
+        }
+
+        initUserInfo();
+
+
+        // 头像
+        // 签名
+        // 性别
+        // 座驾号
     }
 
     private void request() {
@@ -137,7 +158,31 @@ public class MineFmt extends BaseFluxFragment<MineStore, MineAction> {
                 userInfo = (UserInfo) event.data;
                 initUserInfo();
                 break;
+            case ReqTag.Mine.MINE_USER_SIGN_UP:
+                SignUp signUp = (SignUp) event.data;
+                uploadSignUp(signUp);
+                break;
         }
+    }
+
+    private void uploadSignUp(SignUp signUp) {
+        tvSign.setEnabled(false);
+        View layout = LayoutInflater.from(getContext()).inflate(R.layout.mine_pop_sign_up, null);
+        TextView tvDay = layout.findViewById(R.id.tv_day);
+        TextView tvScore = layout.findViewById(R.id.tv_score);
+
+        tvDay.setText("连续签到" + signUp.getSignDay() + "天");
+        SpannableString ss1 = new SpannableString(signUp.getForward());
+        ForegroundColorSpan span = new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.res_follow_end));
+
+        ss1.setSpan(span, 0, signUp.getForward().length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        tvScore.setText("获得奖励 " + ss1 + " 积分");
+
+        new CustomPopWindow.PopupWindowBuilder(getContext())
+                .setView(layout)
+                .create()
+                .showAtLocation(tvSign, Gravity.CENTER, 0, 0);
+        // TODO 缺少过3s后自动消失
     }
 
     @Override
@@ -149,25 +194,82 @@ public class MineFmt extends BaseFluxFragment<MineStore, MineAction> {
                     .withBoolean("self", true)
                     .navigation();
         });
+
+        // 签到
         tvSign.setOnClickListener(v -> onSignUp());
-        rlFans.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.FANS));
-        rlScore.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.SCORE));
-        rlFollow.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.FOLLOW));
-        rlGrow.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.GROW));
-        rlActivity.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.ACTIVITY));
-        rlRelease.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.RELEASE));
-        rlInfo.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.INFO));
-        rlCollect.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.INFO));
-        rlScoreBill.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.SCORE_BILL));
-        rlCarBill.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.CAR_BILL));
-        rlServiceBill.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.SERVICE_BILL));
-        rlComment.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.COMMENT));
+
+        // 成长值
+        tvScoreGrow.setOnClickListener(v -> {
+            toast("敬请期待");
+            // ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.GROW)
+        });
+
+        // 积分
+        tvScoreScore.setOnClickListener(v -> {
+            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.SCORE);
+        });
+
+        // 关注与粉丝
+        tvScoreFollow.setOnClickListener(v -> {
+            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.FOLLOW);
+        });
+        // 关注与粉丝
+        tvScoreFans.setOnClickListener(v -> {
+            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.FOLLOW);
+        });
+
+        //我的活动
+        rlActivity.setOnClickListener(v -> {
+            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.ACTIVITY);
+        });
+
+        // 我的发布
+        rlRelease.setOnClickListener(v -> {
+            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.RELEASE);
+        });
+
+        // 我的消息
+        rlInfo.setOnClickListener(v -> {
+            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.INFO);
+        });
+
+        // 我的收藏
+        rlCollect.setOnClickListener(v -> {
+            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.INFO);
+        });
+
+        // 积分账单
+        rlScoreBill.setOnClickListener(v -> {
+            toast("敬请期待");
+//            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.SCORE_BILL);
+        });
+
+        // 车辆订单
+        rlCarBill.setOnClickListener(v -> {
+            toast("敬请期待");
+//            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.CAR_BILL);
+        });
+
+        // 服务订单
+        rlServiceBill.setOnClickListener(v -> {
+            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.SERVICE_BILL);
+        });
+
+        // 我的评论
+        rlComment.setOnClickListener(v -> {
+            ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.COMMENT);
+        });
+
+        // 投诉意见
         tvComplain.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.COMPLAIN));
+
+        // 积分商城
         tvSupport.setOnClickListener(v -> ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.SUPPORT));
     }
 
     private void onSignUp() {
-        ArouterUtils.getInstance().navigation(getContext(), RouterHub.Mine.BIND_PHONE);
+        showLoading();
+        actionsCreator().getSignUp(this);
     }
 
     @Override

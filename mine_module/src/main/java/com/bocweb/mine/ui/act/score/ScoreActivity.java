@@ -1,7 +1,12 @@
 package com.bocweb.mine.ui.act.score;
 
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -12,11 +17,14 @@ import com.bocweb.mine.R2;
 import com.bocweb.mine.api.MineAction;
 import com.bocweb.mine.api.MineStore;
 import com.bocweb.mine.bean.MyScore;
+import com.bocweb.mine.bean.SignUp;
 import com.njh.common.core.ReqTag;
 import com.njh.common.core.RouterHub;
 import com.njh.common.flux.base.BaseFluxActivity;
 import com.njh.common.flux.stores.Store;
+import com.njh.common.utils.LogUtil;
 import com.njh.common.utils.arouter.ArouterUtils;
+import com.njh.common.widget.CustomPopWindow;
 import com.wuhenzhizao.titlebar.widget.CommonTitleBar;
 
 import androidx.core.content.ContextCompat;
@@ -81,21 +89,48 @@ public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> imple
         actionsCreator().getIntegralInfo(this);
     }
 
+    private MyScore mScore;
+
     @Override
     protected void updateView(Store.StoreChangeEvent event) {
         super.updateView(event);
         hideLoading();
         switch (event.url) {
             case ReqTag.Mine.MINE_INTEGRAL_INFO:
-                MyScore bean1 = (MyScore) event.data;
-                uploadView(bean1);
+                mScore = (MyScore) event.data;
+                uploadView();
+                break;
+            case ReqTag.Mine.MINE_USER_SIGN_UP:
+
+                SignUp signUp = (SignUp) event.data;
+                uploadSign(signUp);
                 break;
         }
     }
 
-    private void uploadView(MyScore score) {
-        tvTotalScore.setText(score.getIntegral());
-        MyScore.DaySign daySign = score.getDaySign();
+    private void uploadSign(SignUp signUp) {
+        tv1Click.setEnabled(false);
+        View layout = LayoutInflater.from(getContext()).inflate(R.layout.mine_pop_sign_up, null);
+        TextView tvDay = layout.findViewById(R.id.tv_day);
+        TextView tvScore = layout.findViewById(R.id.tv_score);
+
+        tvDay.setText("连续签到" + signUp.getSignDay() + "天");
+        SpannableString ss1 = new SpannableString(signUp.getForward());
+        ForegroundColorSpan span = new ForegroundColorSpan(ContextCompat.getColor(getContext(), R.color.res_follow_end));
+
+        ss1.setSpan(span, 0, signUp.getForward().length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        tvScore.setText("获得奖励 " + ss1 + " 积分");
+
+        new CustomPopWindow.PopupWindowBuilder(getContext())
+                .setView(layout)
+                .create()
+                .showAtLocation(tv1Click, Gravity.CENTER, 0, 0);
+        // TODO 缺少过3s后自动消失
+    }
+
+    private void uploadView() {
+        tvTotalScore.setText(mScore.getIntegral());
+        MyScore.DaySign daySign = mScore.getDaySign();
         if (daySign != null) {
             if ("1".equals(daySign.getTodaySign())) {
                 tv1Score.setTextColor(ContextCompat.getColor(this, R.color.res_gray_999));
@@ -105,15 +140,16 @@ public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> imple
                 tv1Click.setTextColor(ContextCompat.getColor(this, R.color.res_gray_999));
             } else {
                 tv1Score.setTextColor(ContextCompat.getColor(this, R.color.res_follow_end));
-                tv1Click.setText("未签到");
+                tv1Click.setText("签到");
                 tv1Click.setEnabled(true);
                 tv1Click.setBackgroundResource(R.drawable.mine_score_btn_select);
                 tv1Click.setTextColor(ContextCompat.getColor(this, R.color.res_follow_end));
             }
+            LogUtil.e("daysign:" + daySign.toString());
             tv1Score.setText("+" + daySign.getIntegral());
         }
 
-        MyScore.DayForward dayForward = score.getDayForward();
+        MyScore.DayForward dayForward = mScore.getDayForward();
         if (dayForward != null) {
             if ("1".equals(dayForward.getMax())) {
                 tv2Score.setTextColor(ContextCompat.getColor(this, R.color.res_gray_999));
@@ -128,10 +164,10 @@ public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> imple
                 tv2Click.setBackgroundResource(R.drawable.mine_score_btn_select);
                 tv2Click.setTextColor(ContextCompat.getColor(this, R.color.res_follow_end));
             }
-            tv1Score.setText("+" + dayForward.getIntegral());
+            tv2Score.setText("+" + dayForward.getIntegral());
         }
 
-        String birth = score.getBirth();
+        String birth = mScore.getBirth();
         if (TextUtils.isEmpty(birth)) {
             tv3Score.setVisibility(View.INVISIBLE);
         } else {
@@ -139,7 +175,7 @@ public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> imple
             tv3Score.setText("+" + birth);
         }
 
-        MyScore.FirstService firstService = score.getFirstService();
+        MyScore.FirstService firstService = mScore.getFirstService();
         if (firstService != null) {
             if ("1".equals(firstService.getComplete())) {
                 tv4Score.setTextColor(ContextCompat.getColor(this, R.color.res_gray_999));
@@ -154,10 +190,10 @@ public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> imple
                 tv4Click.setBackgroundResource(R.drawable.mine_score_btn_select);
                 tv4Click.setTextColor(ContextCompat.getColor(this, R.color.res_follow_end));
             }
-            tv1Score.setText("+" + firstService.getIntegral());
+            tv4Score.setText("+" + firstService.getIntegral());
         }
 
-        MyScore.FiveStart fiveStart = score.getFiveStart();
+        MyScore.FiveStart fiveStart = mScore.getFiveStart();
         if (fiveStart != null) {
             if ("1".equals(fiveStart.getExist())) {
                 tv5Click.setText("去评价");
@@ -167,12 +203,12 @@ public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> imple
             tv5Score.setText("+" + fiveStart.getIntegral());
         }
 
-        String register = score.getRegister();
+        String register = mScore.getRegister();
         if (!TextUtils.isEmpty(register)) {
             tv6Score.setText("+" + register);
         }
 
-        MyScore.MemberInfo memberInfo = score.getMemberInfo();
+        MyScore.MemberInfo memberInfo = mScore.getMemberInfo();
         if (memberInfo != null) {
             if ("1".equals(memberInfo.getIsUpdate())) {
                 tv7Score.setTextColor(ContextCompat.getColor(this, R.color.res_gray_999));
@@ -190,7 +226,7 @@ public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> imple
             tv7Score.setText("+" + memberInfo.getIntegral());
         }
 
-        MyScore.CarOwner carOwner = score.getCarOwner();
+        MyScore.CarOwner carOwner = mScore.getCarOwner();
         if (carOwner != null) {
             if ("1".equals(carOwner.getIsCarOwner())) {
                 tv8Score.setTextColor(ContextCompat.getColor(this, R.color.res_gray_999));
@@ -213,7 +249,8 @@ public class ScoreActivity extends BaseFluxActivity<MineStore, MineAction> imple
      * 去签到
      */
     public void onSignUp(View view) {
-
+        showLoading();
+        actionsCreator().getSignUp(this);
     }
 
     /**

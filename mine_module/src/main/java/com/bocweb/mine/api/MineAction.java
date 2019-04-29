@@ -112,4 +112,14 @@ public class MineAction extends ActionsCreator {
         reqDate(ServiceManager.create(ApiMineService.class).getMemberMomentList(Constant.Num.NUM_10 + "", page + ""),
                 act, false, ReqTag.Mine.MINE_USER_MOMENT_LIST);
     }
+
+    public void getSignUp(BaseFluxActivity act) {
+        reqDate(ServiceManager.create(ApiMineService.class).getSignUp(),
+                act, false, ReqTag.Mine.MINE_USER_SIGN_UP);
+    }
+
+    public void getSignUp(BaseFluxFragment act) {
+        reqDate(ServiceManager.create(ApiMineService.class).getSignUp(),
+                act, false, ReqTag.Mine.MINE_USER_SIGN_UP);
+    }
 }

@@ -3,6 +3,7 @@ package com.bocweb.mine.api;
 import com.bocweb.mine.bean.LoginInfo;
 import com.bocweb.mine.bean.MyScore;
 import com.bocweb.mine.bean.ScoreDetail;
+import com.bocweb.mine.bean.SignUp;
 import com.bocweb.mine.bean.SuperMineBean;
 import com.bocweb.mine.bean.TargetInfo;
 import com.njh.common.sp.user.UserInfo;
@@ -158,6 +159,15 @@ public interface ApiMineService {
 
     @GET("v2/member/moment_list")
     Observable<ResponseBean<SuperMineBean<TargetInfo>>> getMemberMomentList(@Query("limit") String limit, @Query("page") String page);
+
+    /**
+     * 签到
+     */
+    @GET("v2/member/day_sign")
+    Observable<ResponseBean<SignUp>> getSignUp();
+
+    @GET("v2/member/focus_list")
+    Observable<ResponseBean<Object>> getMyFollow(@Query("limit") String limit, @Query("page") String page);
 }
 
 

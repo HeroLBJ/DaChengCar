@@ -15,7 +15,7 @@
         <TextView
             android:id="@+id/tv_sign"
             android:layout_width="68dp"
-            android:layout_height="33dp"
+            android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_marginTop="15dp"
             android:background="@drawable/mine_ic_flower_bg"
@@ -482,7 +482,7 @@
             android:paddingTop="22dp"
             android:paddingRight="21dp"
             android:paddingBottom="18dp"
-            android:text="在线支持"
+            android:text="积分商城"
             android:textColor="@color/res_gray_333"
             android:textSize="13sp" />
 
