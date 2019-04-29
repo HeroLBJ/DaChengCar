@@ -111,7 +111,7 @@ public class UserInfoEditActivity extends BaseFluxActivity<MineStore, MineAction
             tvMan.setTextColor(ContextCompat.getColor(this, R.color.white));
             tvWoman.setTextColor(ContextCompat.getColor(this, R.color.res_gray_888));
             llMan.setBackgroundResource(R.drawable.mine_follow_color_radius_17dp);
-            tvWoman.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
+            llWoman.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
         }
         if (!TextUtils.isEmpty(userInfo.getBirthYear())
                 && !TextUtils.isEmpty(userInfo.getBirthMonth())
@@ -160,7 +160,10 @@ public class UserInfoEditActivity extends BaseFluxActivity<MineStore, MineAction
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0 && data != null) {
+        if (data == null) {
+            return;
+        }
+        if (requestCode == 0) {
             mImages = data.getStringArrayListExtra(ImageSelector.SELECT_RESULT);
             compress();
         } else if (requestCode == 1) {

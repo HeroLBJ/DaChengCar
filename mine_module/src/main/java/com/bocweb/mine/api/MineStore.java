@@ -89,4 +89,9 @@ public class MineStore extends Store {
     public void uploadUserSign(HashMap<String, Object> data) {
         emitStoreChange(ReqTag.Mine.MINE_UPLOAD_USER_SIGN, data);
     }
+
+    @BindAction(ReqTag.Mine.MINE_USER_MOMENT_LIST)
+    public void getUserMomentList(HashMap<String, Object> data) {
+        emitStoreChange(ReqTag.Mine.MINE_USER_MOMENT_LIST, data);
+    }
 }

@@ -54,6 +54,8 @@ public interface ReqTag {
         String MINE_PHOTO = "MINE_PHOTO";
         String MINE_UPLOAD_USER = "MINE_UPLOAD_USER";
         String MINE_UPLOAD_USER_SIGN = "MINE_UPLOAD_USER_SIGN";
+        String MINE_USER_CENTER_BG = "MINE_USER_CENTER_BG";
+        String MINE_USER_MOMENT_LIST = "MINE_USER_MOMENT_LIST";
     }
 
 }

@@ -3,6 +3,8 @@ package com.bocweb.mine.api;
 import com.bocweb.mine.bean.LoginInfo;
 import com.bocweb.mine.bean.MyScore;
 import com.bocweb.mine.bean.ScoreDetail;
+import com.bocweb.mine.bean.SuperMineBean;
+import com.bocweb.mine.bean.TargetInfo;
 import com.njh.common.sp.user.UserInfo;
 import com.njh.network.bean.ResponseBean;
 
@@ -143,12 +145,19 @@ public interface ApiMineService {
                @Field("provinceName") String provinceName,
                @Field("cityName") String cityName, @Field("sightml") String sightml);
 
+    @POST("v2/moment/memberBackimg")
+    @FormUrlEncoded
+    Observable<ResponseBean<String>> updateUserCenterBg(@Field("img") String nickname);
+
     /**
      * 图片上传
      */
     @Multipart
     @POST("v1/picupload/photo")
     Observable<ResponseBean<Object>> getPhoto(@Part MultipartBody.Part uploadFile);
+
+    @GET("v2/member/moment_list")
+    Observable<ResponseBean<SuperMineBean<TargetInfo>>> getMemberMomentList(@Query("limit") String limit, @Query("page") String page);
 }
 
 

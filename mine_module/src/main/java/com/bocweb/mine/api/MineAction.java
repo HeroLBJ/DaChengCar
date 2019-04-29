@@ -1,6 +1,7 @@
 package com.bocweb.mine.api;
 
 import com.njh.base.ui.view.BaseView;
+import com.njh.common.constant.Constant;
 import com.njh.common.core.ReqTag;
 import com.njh.common.flux.actions.ActionsCreator;
 import com.njh.common.flux.base.BaseFluxActivity;
@@ -85,12 +86,12 @@ public class MineAction extends ActionsCreator {
 
     public void uploadUser(BaseFluxActivity act, String nickname, String name, String gender, String year,
                            String month, String day, String provinceName, String cityName, String sightml) {
-        reqDate(ServiceManager.create(ApiMineService.class).updateUser(nickname, name, gender, year,month, day, provinceName, cityName, sightml),
+        reqDate(ServiceManager.create(ApiMineService.class).updateUser(nickname, name, gender, year, month, day, provinceName, cityName, sightml),
                 act, false, ReqTag.Mine.MINE_UPLOAD_USER);
     }
 
     public void uploadUserSign(BaseFluxActivity act, String sightml) {
-        reqDate(ServiceManager.create(ApiMineService.class).updateUser("", "", "", "","", "", "", "", sightml),
+        reqDate(ServiceManager.create(ApiMineService.class).updateUser("", "", "", "", "", "", "", "", sightml),
                 act, false, ReqTag.Mine.MINE_UPLOAD_USER_SIGN);
     }
 
@@ -100,5 +101,15 @@ public class MineAction extends ActionsCreator {
         MultipartBody.Part body = MultipartBody.Part.createFormData("uploadFile", file.getName(), requestFile);
         reqDate(ServiceManager.create(ApiMineService.class).getPhoto(body),
                 act, false, ReqTag.Mine.MINE_PHOTO);
+    }
+
+    public void uploadUserCenterBg(BaseFluxActivity act, String img) {
+        reqDate(ServiceManager.create(ApiMineService.class).updateUserCenterBg(img),
+                act, false, ReqTag.Mine.MINE_USER_CENTER_BG);
+    }
+
+    public void getUserMomentList(BaseFluxActivity act, int page) {
+        reqDate(ServiceManager.create(ApiMineService.class).getMemberMomentList(Constant.Num.NUM_10 + "", page + ""),
+                act, false, ReqTag.Mine.MINE_USER_MOMENT_LIST);
     }
 }

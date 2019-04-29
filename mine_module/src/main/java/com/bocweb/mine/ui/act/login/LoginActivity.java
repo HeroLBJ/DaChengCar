@@ -161,7 +161,7 @@ public class LoginActivity extends BaseFluxActivity<MineStore, MineAction> {
             case ReqTag.Mine.MINE_LOGIN_REGISTER:
                 LoginInfo bean1 = (LoginInfo) event.data;
                 Hawk.put(TokenManager.SP_TOKEN, bean1.getToken());
-
+                // TODO 登录成功跳转到首页
                 break;
             case ReqTag.Mine.MINE_LOGIN_REGISTER_CODE:
 

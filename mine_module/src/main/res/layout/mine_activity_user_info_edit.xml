@@ -278,7 +278,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="18dp"
-                    android:paddingBottom="18dp"
                     android:text="收货地址"
                     android:textColor="@color/res_black_00" />
 
@@ -312,7 +311,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="18dp"
-                    android:paddingBottom="18dp"
                     android:text="修改绑定手机号"
                     android:textColor="@color/res_black_00" />
 
@@ -346,7 +344,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="18dp"
-                    android:paddingBottom="18dp"
                     android:text="修改绑定邮箱"
                     android:textColor="@color/res_black_00" />
 
